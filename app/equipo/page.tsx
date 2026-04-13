@@ -8,13 +8,13 @@ import { useTranslation } from "@/lib/i18n"
 import images from "@/content/images.json"
 
 const teamImages: Record<string, string> = {
-  "member-1": "https://lh3.googleusercontent.com/aida-public/AB6AXuDP_DU_Agxl1eALPp7pagu4vFfEZD0A81lHWAQJqr_-eldvXL280znmgMB1yJg8c8GPuJZJJUh7pe7AP27ekQXQm9wOygVx_aIPU1oqtFwlf7UcNjrezWeNvsnIgQ6ZnG-6rizbny8EvgU_AbihWjiDHPwzd5hL4DXbVh1ZTynlxrE3Zk9QFMHZAkPXR1xNXwujJLCEUq739zQz5xQtcLezABqKFlrsOmAOGiD_sBJYs_mwWCQyLAhWulz3EKmS945VWbU9zz09qxk",
-  "member-2": "https://lh3.googleusercontent.com/aida-public/AB6AXuCMNQZebS9yV3tpI1_Xcm-vK2rkRLDkD5Hv1XKhfgzfFaGxIh3vGZ47Yp8kms-To9o1sXb99-YQDdFJQR8iTmLy8AnlCgH_A_NtEDDXPFznXJ5vPPrpy9QFiOnFAnivV6mGoYPPz16TWK1kuB0p1mDMMHBjrQH4nrbpKqodySUUj7gDGk4Vq5SPOHAu9qGZ4mcu3YJSfnjenfxqwIoRKXguzNtWlgD-74cFpY4WTLipQGmdg6exQOHIgqJjYyKVQo1VDed2EqI52gg",
-  "member-3": "https://lh3.googleusercontent.com/aida-public/AB6AXuBV86W-qurU0MSba_qln94ihwe9x6uc0jFyAygDvWUhUUVzHLc0d4cSB_71yKF1ZY5JpGWzbR0k1bHezaIkTLb_DAMyGEzk-FfURU5MMbPDlM3_Kje4tf62NBFnUV5WKzLwe1n7QkQErxQeqZIcv3sF3kB49pl6Xg0Z6TEH59FP02NWlrgH9aEgzR1vRHL_0XEIFdoLK73FXEvCn-lBgun3gfg5Oa5HhXa0f-pvRUyRj1eM6UZdSsHUxlqcJxF7ZDhimN2l14OW-mw",
-  "member-4": "https://lh3.googleusercontent.com/aida-public/AB6AXuCidyFbSeI-sIPsOPmLKxGY7OnP6lG4MNc1YFqTodTJwmrwX9SxDIDSlreE7n-0DFcXx0Ke93TUEoCzCJluqb5GaAmDqlTop7NHKJPH5QKSJm0-2yXDE7dMbUWGre6Y10HUOrMQqAyIER2p-RfflK9NuaKqyjoIbdvGsr52OvXGnJhJbh3RpTIhRjKg1oX2ik9haBH7-_Ops9kq_uwP17RxIAU2aitFWDKyCmM95EkWblL5Nd9h_gBVGst8Tn9BinUA1i64iYMlH0s",
-  "member-5": "https://lh3.googleusercontent.com/aida-public/AB6AXuDZ-WFvfNQI5KLCTFQ8ISDy30pfhlMMsz4AL0bXDmEaRGX6UeOBifVwuX2_7EiBq77FbsyLZ_BGN0csRmXQ7fdSuEg0EvQ4-Ml-6mK4lgo0u-MF6M8ztk67252Bu9o1MMWsrt9ZcskSAQzhrY1eMN5UQ7A2kuK7A-1nObimsa65X-7iE9eglWwZ8V1-E0KT135x-ZmvonTMhDFlFAfPVmSABsMk_jwOKDDymO0zEF3xfi1xkS6Xy4v6oGaHJwQ4-dqT1upk_b4NLow",
-  "member-6": "https://lh3.googleusercontent.com/aida-public/AB6AXuC68YAdnMWMHCB9JuDhqYhqS5S2g4C7rnjOhqf7whtK8pg8M_X1cUnyUh9eqznLsc1AlDrlLhVb1CXEr-AsGNjHG7eyl6oFZzSJOy7DpFPtA_2InOeXfX3HziN57fz68zsvMrsV0Jq-Ln7twKc5RExxD4p-0eXEEFCUWtt7o0_Qhttq2Cm-MzT1j7XyYPjLHhJkcuvkR2wCupaQZxSAqWLvZmlw6vJ0NUH5BqHjAeUfrejKEwLF7XfeghS0MFqOXMwyjavH4Na9FEc",
-  "member-7": "https://lh3.googleusercontent.com/aida-public/AB6AXuB1uYe2mfHQjKrAlwLuqqbO5rFw13tJGh7qQQtdfeV5IC28gjblgP4OdqHwtw8NwaycHeBSeO71cUtSR7BJ2MkOwb5edlRx4HsMU0kYEPq-tXXOb8dskZHfuQltQmDEph1G9r2dDAm_F21qOLd3v2HM521AOzC1BrNWrP9p479nx8GKYlxD1fG6MVi7iPNgSDrz5Nqslq5MNyYNXjt6FnPhweOG3OKw8HACN-joyysy9rFRfidlM8LIJhrx-ktW-rwOYS3KJ1XpJ1M",
+  "member-1": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AM-1gk2YUUURNiduPzgv81xntVDxqse6e.png",
+  "member-2": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/VC-Af4SdOCYx5iEhk3KmUTuh0xYyQcWtE.png",
+  "member-3": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/RS-i2nXSjJNbiYIbLUHHfHNOVzgVyAEbs.png",
+  "member-4": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MJF-iJAlkgKjqM0QX754t6EJsgIb2D4AcY.png",
+  "member-5": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/JLK-2DvmgjvE4S0sfSr51GsAgYrv7rJ8d3.png",
+  "member-6": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KE-iwe1nzdlk9lLQyBVuxlwsk9QbQAdKq.png",
+  "member-7": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ALVME-9xkXBWw9CEHWvPC5uz9abLz1ZONB3q.png",
 }
 
 interface TeamMember {
