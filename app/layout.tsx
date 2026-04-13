@@ -43,7 +43,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" className={`${newsreader.variable} ${manrope.variable} scroll-smooth bg-surface`}>
+    <html lang="es" data-scroll-behavior="smooth" className={`${newsreader.variable} ${manrope.variable} scroll-smooth bg-surface`}>
       <body className="font-body antialiased bg-surface text-on-surface">
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
