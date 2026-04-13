@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Newsreader, Manrope } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { I18nProvider } from '@/lib/i18n'
 import './globals.css'
 
 const newsreader = Newsreader({ 
@@ -45,7 +46,9 @@ export default function RootLayout({
   return (
     <html lang="es" data-scroll-behavior="smooth" className={`${newsreader.variable} ${manrope.variable} scroll-smooth bg-surface`}>
       <body className="font-body antialiased bg-surface text-on-surface">
-        {children}
+        <I18nProvider>
+          {children}
+        </I18nProvider>
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>
     </html>

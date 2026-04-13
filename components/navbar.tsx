@@ -3,15 +3,18 @@
 import { useState } from "react"
 import Link from "next/link"
 import { Menu, X } from "lucide-react"
+import { useI18n, useTranslation } from "@/lib/i18n"
 
 export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const { locale, setLocale } = useI18n()
+  const t = useTranslation('navbar')
 
   return (
     <nav className="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md">
       <div className="flex justify-between items-center w-full px-8 py-6 max-w-full">
         <Link 
-          href="#" 
+          href="/" 
           className="text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50"
         >
           Thinko Consulting
@@ -22,35 +25,49 @@ export function Navbar() {
             href="/#philosophy" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
-            Philosophy
+            {t.links.philosophy}
           </Link>
           <Link 
             href="/#services" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
-            Services
+            {t.links.services}
           </Link>
           <Link 
             href="/equipo" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
-            Team
+            {t.links.team}
           </Link>
           <Link 
             href="/#insights" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
-            Insights
+            {t.links.insights}
           </Link>
           <Link 
             href="/#contact" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
-            Contact
+            {t.links.contact}
           </Link>
-          <button className="bg-primary text-on-primary px-6 py-2 text-xs font-bold tracking-widest uppercase hover:opacity-80 transition-all duration-200">
-            Get Started
-          </button>
+          
+          {/* Language Switcher */}
+          <div className="flex items-center gap-1 text-sm font-medium">
+            <button
+              onClick={() => setLocale('es')}
+              className={`px-2 py-1 transition-colors ${locale === 'es' ? 'text-slate-900 dark:text-white' : 'text-slate-400 hover:text-slate-600'}`}
+            >
+              ES
+            </button>
+            <span className="text-slate-300">|</span>
+            <button
+              onClick={() => setLocale('en')}
+              className={`px-2 py-1 transition-colors ${locale === 'en' ? 'text-slate-900 dark:text-white' : 'text-slate-400 hover:text-slate-600'}`}
+            >
+              EN
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu Icon */}
@@ -76,39 +93,52 @@ export function Navbar() {
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Philosophy
+              {t.links.philosophy}
             </Link>
             <Link 
               href="/#services" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Services
+              {t.links.services}
             </Link>
             <Link 
               href="/equipo" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Team
+              {t.links.team}
             </Link>
             <Link 
               href="/#insights" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Insights
+              {t.links.insights}
             </Link>
             <Link 
               href="/#contact" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
-              Contact
+              {t.links.contact}
             </Link>
-            <button className="bg-primary text-on-primary px-6 py-3 text-xs font-bold tracking-widest uppercase hover:opacity-80 transition-all duration-200 w-full">
-              Get Started
-            </button>
+            
+            {/* Mobile Language Switcher */}
+            <div className="flex items-center gap-2 text-sm font-medium pt-4 border-t border-outline-variant/20">
+              <button
+                onClick={() => { setLocale('es'); setMobileMenuOpen(false); }}
+                className={`px-3 py-2 transition-colors ${locale === 'es' ? 'text-slate-900 dark:text-white bg-surface-container' : 'text-slate-400'}`}
+              >
+                ES
+              </button>
+              <button
+                onClick={() => { setLocale('en'); setMobileMenuOpen(false); }}
+                className={`px-3 py-2 transition-colors ${locale === 'en' ? 'text-slate-900 dark:text-white bg-surface-container' : 'text-slate-400'}`}
+              >
+                EN
+              </button>
+            </div>
           </div>
         </div>
       )}

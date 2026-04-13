@@ -1,0 +1,31 @@
+{
+  "label": "Contact",
+  "title": "Let's Talk",
+  "subtitle": "Every project starts with a conversation. Tell us about your strategic challenges.",
+  "form": {
+    "name": "Full name",
+    "email": "Corporate email",
+    "company": "Company / Organization",
+    "message": "Message",
+    "submit": "Send message",
+    "submitting": "Sending...",
+    "successTitle": "Message sent",
+    "successMessage": "Thank you for contacting us. We will get back to you soon.",
+    "errorTitle": "Error",
+    "errorMessage": "There was a problem sending the message. Please try again."
+  },
+  "info": {
+    "location": {
+      "label": "Location",
+      "value": "Santiago, Chile"
+    },
+    "email": {
+      "label": "Email",
+      "value": "contacto@thinko.cl"
+    },
+    "schedule": {
+      "label": "Hours",
+      "value": "Mon - Fri: 9:00 - 18:00"
+    }
+  }
+}

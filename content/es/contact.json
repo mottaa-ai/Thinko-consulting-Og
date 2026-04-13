@@ -1,0 +1,31 @@
+{
+  "label": "Contacto",
+  "title": "Conversemos",
+  "subtitle": "Cada proyecto comienza con una conversación. Cuéntenos sobre sus desafíos estratégicos.",
+  "form": {
+    "name": "Nombre completo",
+    "email": "Email corporativo",
+    "company": "Empresa / Organización",
+    "message": "Mensaje",
+    "submit": "Enviar mensaje",
+    "submitting": "Enviando...",
+    "successTitle": "Mensaje enviado",
+    "successMessage": "Gracias por contactarnos. Nos pondremos en contacto pronto.",
+    "errorTitle": "Error",
+    "errorMessage": "Hubo un problema al enviar el mensaje. Por favor intente nuevamente."
+  },
+  "info": {
+    "location": {
+      "label": "Ubicación",
+      "value": "Santiago, Chile"
+    },
+    "email": {
+      "label": "Email",
+      "value": "contacto@thinko.cl"
+    },
+    "schedule": {
+      "label": "Horario",
+      "value": "Lun - Vie: 9:00 - 18:00"
+    }
+  }
+}

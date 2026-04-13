@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "title": "Liderazgo y Capital Intelectual",
+    "quote": "La excelencia en consultoría nace de la combinación de rigor académico, experiencia práctica y una comprensión profunda de las dinámicas del poder."
+  },
+  "members": [
+    {
+      "id": "member-1",
+      "name": "Alejandro Méndez",
+      "role": "Director Ejecutivo",
+      "bio": "PhD en Ciencias Políticas, Harvard. Ex asesor presidencial con más de 20 años de experiencia en estrategia política."
+    },
+    {
+      "id": "member-2",
+      "name": "Carolina Vásquez",
+      "role": "Directora de Opinión Pública",
+      "bio": "Magíster en Estadística Aplicada, U. de Chile. Especialista en metodologías de investigación social y análisis de datos."
+    },
+    {
+      "id": "member-3",
+      "name": "Roberto Fuentes",
+      "role": "Director de Asuntos Públicos",
+      "bio": "Abogado, PUC. Ex subsecretario de gobierno con amplia red de contactos institucionales."
+    },
+    {
+      "id": "member-4",
+      "name": "María José Soto",
+      "role": "Directora de Consultoría",
+      "bio": "MBA, Wharton. Experiencia en banca de inversión y consultoría estratégica en McKinsey."
+    },
+    {
+      "id": "member-5",
+      "name": "Felipe Araya",
+      "role": "Director de Análisis",
+      "bio": "Economista, U. de Cambridge. Especialista en econometría y modelos predictivos."
+    },
+    {
+      "id": "member-6",
+      "name": "Valentina Reyes",
+      "role": "Directora de Comunicaciones",
+      "bio": "Periodista, U. de Columbia. Ex editora política en medios internacionales."
+    },
+    {
+      "id": "member-7",
+      "name": "Andrés Molina",
+      "role": "Director de Investigación",
+      "bio": "Sociólogo, Oxford. Investigador senior con publicaciones en journals académicos de alto impacto."
+    }
+  ],
+  "cta": {
+    "title": "Únete a nuestro equipo",
+    "description": "Buscamos profesionales excepcionales que compartan nuestra pasión por el análisis riguroso y la excelencia.",
+    "button": "Contáctanos"
+  }
+}

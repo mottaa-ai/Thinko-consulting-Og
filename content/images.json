@@ -1,0 +1,16 @@
+{
+  "hero": {
+    "background": "/images/hero-architecture.jpg",
+    "alt": "Modern architectural building"
+  },
+  "team": {
+    "member-1": "/images/team/member-1.jpg",
+    "member-2": "/images/team/member-2.jpg",
+    "member-3": "/images/team/member-3.jpg",
+    "member-4": "/images/team/member-4.jpg",
+    "member-5": "/images/team/member-5.jpg",
+    "member-6": "/images/team/member-6.jpg",
+    "member-7": "/images/team/member-7.jpg"
+  },
+  "logo": "/images/logo.svg"
+}

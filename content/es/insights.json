@@ -1,0 +1,34 @@
+{
+  "label": "Publicaciones",
+  "title": "Análisis y Perspectivas",
+  "articles": [
+    {
+      "id": "articulo-1",
+      "category": "Análisis Político",
+      "date": "15 Mar 2024",
+      "title": "El nuevo mapa electoral latinoamericano: tendencias y proyecciones",
+      "excerpt": "Un análisis profundo de las transformaciones políticas en la región y su impacto en los escenarios electorales futuros."
+    },
+    {
+      "id": "articulo-2",
+      "category": "Opinión Pública",
+      "date": "28 Feb 2024",
+      "title": "Metodologías de medición en tiempos de polarización",
+      "excerpt": "Cómo las encuestas tradicionales se adaptan a un panorama social cada vez más fragmentado y polarizado."
+    },
+    {
+      "id": "articulo-3",
+      "category": "Consultoría",
+      "date": "10 Feb 2024",
+      "title": "Gestión de riesgos políticos para inversores internacionales",
+      "excerpt": "Estrategias para evaluar y mitigar riesgos en mercados emergentes con alta volatilidad política."
+    },
+    {
+      "id": "articulo-4",
+      "category": "Tendencias",
+      "date": "25 Ene 2024",
+      "title": "El impacto de las redes sociales en la formación de opinión pública",
+      "excerpt": "Análisis del rol de las plataformas digitales en la construcción de narrativas políticas contemporáneas."
+    }
+  ]
+}

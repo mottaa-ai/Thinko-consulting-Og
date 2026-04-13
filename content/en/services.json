@@ -1,0 +1,39 @@
+{
+  "label": "Services",
+  "title": "Areas of Expertise",
+  "services": [
+    {
+      "id": "public-opinion",
+      "title": "Public Opinion",
+      "description": "Deep analysis of social trends, perception studies and political climate monitoring through cutting-edge quantitative and qualitative methodologies.",
+      "features": [
+        "Surveys and opinion studies",
+        "Social sentiment analysis",
+        "Political actor mapping",
+        "Public image studies"
+      ]
+    },
+    {
+      "id": "public-affairs",
+      "title": "Public Affairs",
+      "description": "Institutional relationship strategies, crisis management and positioning with governmental and regulatory stakeholders.",
+      "features": [
+        "Strategic lobbying",
+        "Reputational crisis management",
+        "Government relations",
+        "Regulatory analysis"
+      ]
+    },
+    {
+      "id": "business-consulting",
+      "title": "Business Consulting",
+      "description": "Strategic advice for corporate decision-making in complex political and social environments.",
+      "features": [
+        "Political due diligence",
+        "Country risk analysis",
+        "Corporate strategy",
+        "Competitive intelligence"
+      ]
+    }
+  ]
+}

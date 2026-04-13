@@ -1,0 +1,55 @@
+{
+  "hero": {
+    "title": "Leadership and Intellectual Capital",
+    "quote": "Excellence in consulting is born from the combination of academic rigor, practical experience and a deep understanding of power dynamics."
+  },
+  "members": [
+    {
+      "id": "member-1",
+      "name": "Alejandro Méndez",
+      "role": "Executive Director",
+      "bio": "PhD in Political Science, Harvard. Former presidential advisor with over 20 years of experience in political strategy."
+    },
+    {
+      "id": "member-2",
+      "name": "Carolina Vásquez",
+      "role": "Director of Public Opinion",
+      "bio": "Master in Applied Statistics, U. de Chile. Specialist in social research methodologies and data analysis."
+    },
+    {
+      "id": "member-3",
+      "name": "Roberto Fuentes",
+      "role": "Director of Public Affairs",
+      "bio": "Lawyer, PUC. Former government undersecretary with extensive network of institutional contacts."
+    },
+    {
+      "id": "member-4",
+      "name": "María José Soto",
+      "role": "Director of Consulting",
+      "bio": "MBA, Wharton. Experience in investment banking and strategic consulting at McKinsey."
+    },
+    {
+      "id": "member-5",
+      "name": "Felipe Araya",
+      "role": "Director of Analysis",
+      "bio": "Economist, U. of Cambridge. Specialist in econometrics and predictive models."
+    },
+    {
+      "id": "member-6",
+      "name": "Valentina Reyes",
+      "role": "Director of Communications",
+      "bio": "Journalist, Columbia U. Former political editor at international media outlets."
+    },
+    {
+      "id": "member-7",
+      "name": "Andrés Molina",
+      "role": "Director of Research",
+      "bio": "Sociologist, Oxford. Senior researcher with publications in high-impact academic journals."
+    }
+  ],
+  "cta": {
+    "title": "Join our team",
+    "description": "We are looking for exceptional professionals who share our passion for rigorous analysis and excellence.",
+    "button": "Contact us"
+  }
+}

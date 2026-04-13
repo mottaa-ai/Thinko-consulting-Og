@@ -1,0 +1,39 @@
+{
+  "label": "Servicios",
+  "title": "Áreas de Expertise",
+  "services": [
+    {
+      "id": "opinion-publica",
+      "title": "Opinión Pública",
+      "description": "Análisis profundo de tendencias sociales, estudios de percepción y monitoreo de clima político mediante metodologías cuantitativas y cualitativas de vanguardia.",
+      "features": [
+        "Encuestas y estudios de opinión",
+        "Análisis de sentiment social",
+        "Mapeo de actores políticos",
+        "Estudios de imagen pública"
+      ]
+    },
+    {
+      "id": "asuntos-publicos",
+      "title": "Asuntos Públicos",
+      "description": "Estrategias de relacionamiento institucional, gestión de crisis y posicionamiento ante stakeholders gubernamentales y regulatorios.",
+      "features": [
+        "Lobby estratégico",
+        "Gestión de crisis reputacional",
+        "Relaciones gubernamentales",
+        "Análisis regulatorio"
+      ]
+    },
+    {
+      "id": "consultoria-empresarial",
+      "title": "Consultoría Empresarial",
+      "description": "Asesoramiento estratégico para la toma de decisiones corporativas en entornos políticos y sociales complejos.",
+      "features": [
+        "Due diligence político",
+        "Análisis de riesgo país",
+        "Estrategia corporativa",
+        "Inteligencia competitiva"
+      ]
+    }
+  ]
+}

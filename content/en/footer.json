@@ -1,0 +1,40 @@
+{
+  "tagline": "Strategic intelligence for a complex world",
+  "sections": {
+    "navigation": {
+      "title": "Navigation",
+      "links": [
+        { "label": "Home", "href": "/" },
+        { "label": "Philosophy", "href": "/#philosophy" },
+        { "label": "Services", "href": "/#services" },
+        { "label": "Team", "href": "/equipo" },
+        { "label": "Insights", "href": "/#insights" },
+        { "label": "Contact", "href": "/#contact" }
+      ]
+    },
+    "services": {
+      "title": "Services",
+      "links": [
+        { "label": "Public Opinion", "href": "/#services" },
+        { "label": "Public Affairs", "href": "/#services" },
+        { "label": "Business Consulting", "href": "/#services" }
+      ]
+    },
+    "contact": {
+      "title": "Contact",
+      "email": "contacto@thinko.cl",
+      "location": "Santiago, Chile"
+    }
+  },
+  "legal": {
+    "copyright": "Thinko Consulting. All rights reserved.",
+    "links": [
+      { "label": "Privacy Policy", "href": "/privacy" },
+      { "label": "Terms of Use", "href": "/terms" }
+    ]
+  },
+  "social": {
+    "linkedin": "https://linkedin.com",
+    "twitter": "https://twitter.com"
+  }
+}

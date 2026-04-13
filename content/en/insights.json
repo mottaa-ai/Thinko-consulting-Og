@@ -1,0 +1,34 @@
+{
+  "label": "Insights",
+  "title": "Analysis and Perspectives",
+  "articles": [
+    {
+      "id": "article-1",
+      "category": "Political Analysis",
+      "date": "Mar 15, 2024",
+      "title": "The new Latin American electoral map: trends and projections",
+      "excerpt": "A deep analysis of political transformations in the region and their impact on future electoral scenarios."
+    },
+    {
+      "id": "article-2",
+      "category": "Public Opinion",
+      "date": "Feb 28, 2024",
+      "title": "Measurement methodologies in times of polarization",
+      "excerpt": "How traditional surveys adapt to an increasingly fragmented and polarized social landscape."
+    },
+    {
+      "id": "article-3",
+      "category": "Consulting",
+      "date": "Feb 10, 2024",
+      "title": "Political risk management for international investors",
+      "excerpt": "Strategies to evaluate and mitigate risks in emerging markets with high political volatility."
+    },
+    {
+      "id": "article-4",
+      "category": "Trends",
+      "date": "Jan 25, 2024",
+      "title": "The impact of social media on public opinion formation",
+      "excerpt": "Analysis of the role of digital platforms in the construction of contemporary political narratives."
+    }
+  ]
+}

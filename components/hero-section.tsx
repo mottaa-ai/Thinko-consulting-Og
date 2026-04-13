@@ -1,20 +1,24 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
+import { useTranslation } from "@/lib/i18n"
 
 export function HeroSection() {
+  const t = useTranslation('hero')
+
   return (
     <section className="relative min-h-screen flex items-center px-8 md:px-24 pt-20 overflow-hidden bg-surface">
       <div className="z-10 max-w-4xl">
         <span className="block text-xs uppercase tracking-[0.3em] text-on-surface-variant mb-6 font-semibold">
-          Alejandro Motta &bull; Estrategia &amp; Asuntos Públicos
+          {t.tagline}
         </span>
         <h1 className="font-serif text-6xl md:text-9xl font-light leading-[0.9] tracking-tight text-primary mb-12">
-          Trabajos <br /> <span className="italic font-normal">TaylorMade</span>
+          {t.title} <br /> <span className="italic font-normal">{t.titleHighlight}</span>
         </h1>
         <p className="text-lg md:text-xl text-on-surface-variant max-w-xl font-light leading-relaxed mb-12">
-          Consultoría de alta precisión en estrategia, opinión pública y análisis 
-          político para quienes exigen exclusividad y rigor metodológico.
+          {t.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-12">
           <Link 
