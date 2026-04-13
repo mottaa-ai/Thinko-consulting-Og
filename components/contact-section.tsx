@@ -4,7 +4,7 @@ import { useState } from "react"
 import Link from "next/link"
 import { Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
-import { submitContactForm } from "@/app/actions/contact"
+import { submitContactForm } from "@/actions/contact"
 
 type FormStatus = "idle" | "submitting" | "success" | "error"
 
