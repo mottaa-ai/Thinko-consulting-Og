@@ -1,0 +1,153 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Thinko Consulting Color System */
+  --surface: #f9f9ff;
+  --surface-container: #e7eeff;
+  --surface-container-low: #f0f3ff;
+  --surface-container-high: #dee8ff;
+  --surface-container-highest: #d8e3fb;
+  --surface-variant: #d8e3fb;
+  --surface-dim: #cfdaf2;
+  
+  --primary: #000000;
+  --on-primary: #ffffff;
+  --primary-container: #131b2e;
+  --on-primary-container: #7c839b;
+  
+  --on-surface: #111c2d;
+  --on-surface-variant: #45464d;
+  
+  --tertiary: #000000;
+  --tertiary-fixed-dim: #e9c176;
+  --on-tertiary-container: #a17f3b;
+  
+  --outline: #76777d;
+  --outline-variant: #c6c6cd;
+  
+  /* Shadcn compatibility */
+  --background: var(--surface);
+  --foreground: var(--on-surface);
+  --card: var(--surface-container);
+  --card-foreground: var(--on-surface);
+  --popover: var(--surface);
+  --popover-foreground: var(--on-surface);
+  --primary-foreground: var(--on-primary);
+  --secondary: #515f74;
+  --secondary-foreground: #ffffff;
+  --muted: var(--surface-container-low);
+  --muted-foreground: var(--on-surface-variant);
+  --accent: var(--tertiary-fixed-dim);
+  --accent-foreground: var(--primary);
+  --destructive: #ba1a1a;
+  --destructive-foreground: #ffffff;
+  --border: var(--outline-variant);
+  --input: var(--outline-variant);
+  --ring: var(--primary);
+  --radius: 0px;
+}
+
+.dark {
+  --surface: #111c2d;
+  --surface-container: #1a2538;
+  --surface-container-low: #151f30;
+  --surface-container-high: #222d3f;
+  --surface-container-highest: #2a3546;
+  --surface-variant: #2a3546;
+  --surface-dim: #0d1520;
+  
+  --primary: #ffffff;
+  --on-primary: #000000;
+  --primary-container: #bec6e0;
+  --on-primary-container: #3f465c;
+  
+  --on-surface: #ecf1ff;
+  --on-surface-variant: #c6c6cd;
+  
+  --tertiary-fixed-dim: #e9c176;
+  --on-tertiary-container: #ffdea5;
+  
+  --outline: #76777d;
+  --outline-variant: #45464d;
+  
+  --background: var(--surface);
+  --foreground: var(--on-surface);
+  --card: var(--surface-container);
+  --card-foreground: var(--on-surface);
+  --popover: var(--surface);
+  --popover-foreground: var(--on-surface);
+  --primary-foreground: var(--on-primary);
+  --muted: var(--surface-container-low);
+  --muted-foreground: var(--on-surface-variant);
+  --border: var(--outline-variant);
+  --input: var(--outline-variant);
+}
+
+@theme inline {
+  --font-body: var(--font-body), 'Manrope', sans-serif;
+  --font-headline: var(--font-headline), 'Newsreader', serif;
+  --font-sans: var(--font-body), 'Manrope', sans-serif;
+  --font-serif: var(--font-headline), 'Newsreader', serif;
+  
+  --color-surface: var(--surface);
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-surface-container-high: var(--surface-container-high);
+  --color-surface-container-highest: var(--surface-container-highest);
+  --color-surface-variant: var(--surface-variant);
+  --color-surface-dim: var(--surface-dim);
+  
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-container: var(--primary-container);
+  --color-on-primary-container: var(--on-primary-container);
+  
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  
+  --color-tertiary: var(--tertiary);
+  --color-tertiary-fixed-dim: var(--tertiary-fixed-dim);
+  --color-on-tertiary-container: var(--on-tertiary-container);
+  
+  --color-outline: var(--outline);
+  --color-outline-variant: var(--outline-variant);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-surface text-on-surface;
+  }
+  h1, h2, h3, blockquote {
+    font-family: var(--font-headline), 'Newsreader', serif;
+  }
+}
