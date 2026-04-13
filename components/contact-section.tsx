@@ -5,6 +5,8 @@ import Link from "next/link"
 import { Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 import { submitContactForm } from "@/actions/contact"
+import { db } from "@/lib/firebase"
+import { collection, addDoc } from "firebase/firestore"
 
 type FormStatus = "idle" | "submitting" | "success" | "error"
 
@@ -22,12 +24,22 @@ export function ContactSection() {
     e.preventDefault()
     setStatus("submitting")
     
-    const result = await submitContactForm(formData)
-    
-    if (result.success) {
+    try {
+      // Save to Firebase Firestore
+      await addDoc(collection(db, "contacts"), {
+        ...formData,
+        timestamp: new Date().toISOString(),
+        createdAt: new Date(),
+        source: "thinko-consulting-website",
+      })
+      
+      // Also send to webhook
+      await submitContactForm(formData)
+      
       setStatus("success")
       setFormData({ name: "", email: "", company: "", message: "" })
-    } else {
+    } catch (error) {
+      console.error("Error submitting form:", error)
       setStatus("error")
     }
   }
