@@ -19,25 +19,31 @@ export function Navbar() {
         
         <div className="hidden md:flex gap-10 items-center">
           <Link 
-            href="#philosophy" 
+            href="/#philosophy" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
             Philosophy
           </Link>
           <Link 
-            href="#services" 
+            href="/#services" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
             Services
           </Link>
           <Link 
-            href="#insights" 
+            href="/equipo" 
+            className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+          >
+            Team
+          </Link>
+          <Link 
+            href="/#insights" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
             Insights
           </Link>
           <Link 
-            href="#contact" 
+            href="/#contact" 
             className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
           >
             Contact
@@ -66,28 +72,35 @@ export function Navbar() {
         <div className="md:hidden absolute top-full left-0 right-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-outline-variant/20">
           <div className="flex flex-col px-8 py-6 gap-6">
             <Link 
-              href="#philosophy" 
+              href="/#philosophy" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
               Philosophy
             </Link>
             <Link 
-              href="#services" 
+              href="/#services" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
               Services
             </Link>
             <Link 
-              href="#insights" 
+              href="/equipo" 
+              className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+              onClick={() => setMobileMenuOpen(false)}
+            >
+              Team
+            </Link>
+            <Link 
+              href="/#insights" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
               Insights
             </Link>
             <Link 
-              href="#contact" 
+              href="/#contact" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
