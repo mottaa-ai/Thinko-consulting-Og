@@ -8,16 +8,16 @@ import { useTranslation } from "@/lib/i18n"
 import images from "@/content/images.json"
 
 const teamImages: Record<string, string> = {
-  "member-1": "/images/team/placeholder.jpg",  // José Antonio Lozano
-  "member-2": "/images/team/placeholder.jpg",  // Álvaro Mejía
-  "member-3": "/images/team/placeholder.jpg",  // José Luis Kannarek
-  "member-4": "/images/team/placeholder.jpg",  // Octavio Sanz
-  "member-5": "/images/team/placeholder.jpg",  // Ruddyard Villalobos
-  "member-6": "/images/team/placeholder.jpg",  // Rodrigo Salas
-  "member-7": "/images/team/placeholder.jpg",  // Verónica Calderaro
-  "member-8": "/images/team/placeholder.jpg",  // Abraham Martínez
-  "member-9": "/images/team/placeholder.jpg",  // María José Favela
-  "member-10": "/images/team/placeholder.jpg", // Kenia Estrada
+  "member-1": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jose%CC%81%20Antonio%20Lozano-sDk7qz60OVFGkPEl5R8sVBCv93MUBt.png",  // José Antonio Lozano
+  "member-2": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/A%CC%81lvaro%20Meji%CC%81a-vgX7D6uPc3mu6jSOSFuZKOE0FF6rKo.png",  // Álvaro Mejía
+  "member-3": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Jose%CC%81%20Luis%20Kannarek-EW6kAOxN7aw9967rw7El9IGF0KUpMb.png",  // José Luis Kannarek
+  "member-4": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Octavio%20Sanz-czb9h2BIIrJZKItkzgl6DIddY5Xq69.png",  // Octavio Sanz
+  "member-5": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ruddyard%20Villalobos-lUNYTfZeqomNu6l49Hhz52pCVnULDL.png",  // Ruddyard Villalobos
+  "member-6": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Rodrigo%20Salas-uVEbdwVCzJ3ol2UVOOkc9Ld1z10AtX.png",  // Rodrigo Salas
+  "member-7": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Vero%CC%81nica%20Calderaro-KFQJXbu9hu7VjxVCF89GixrcPSh5hj.png",  // Verónica Calderaro
+  "member-8": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Abraham%20Marti%CC%81nez-GdNo0FdzzRGqXCnRJBtFfoZLNNSmCj.png",  // Abraham Martínez
+  "member-9": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Mari%CC%81a%20Jose%CC%81%20Favela-leaSfWnAEsQA7iPWQKI6Epv9oLMcyb.png",  // María José Favela
+  "member-10": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Kenia%20Estrada-vYAPivDbVCLQl0G31hPGexSRoDAuXm.png", // Kenia Estrada
 }
 
 interface TeamMember {
