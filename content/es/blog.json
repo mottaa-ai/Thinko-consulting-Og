@@ -1,0 +1,86 @@
+{
+  "seo": {
+    "title": "Blog | Thinko Consulting - Análisis Estratégico y Opinión Pública",
+    "description": "Artículos de análisis político, opinión pública y estrategia empresarial. Insights y perspectivas de los expertos de Thinko Consulting.",
+    "keywords": ["consultoría política", "opinión pública", "análisis estratégico", "asuntos públicos", "México"]
+  },
+  "page": {
+    "title": "Insights & Análisis",
+    "subtitle": "Perspectivas estratégicas sobre política, sociedad y negocios",
+    "filterAll": "Todos",
+    "readMore": "Leer más",
+    "publishedOn": "Publicado el",
+    "author": "Por",
+    "shareArticle": "Compartir artículo",
+    "relatedArticles": "Artículos relacionados",
+    "categories": [
+      { "id": "all", "label": "Todos" },
+      { "id": "opinion-publica", "label": "Opinión Pública" },
+      { "id": "asuntos-publicos", "label": "Asuntos Públicos" },
+      { "id": "estrategia", "label": "Estrategia" },
+      { "id": "economia", "label": "Economía" }
+    ]
+  },
+  "articles": [
+    {
+      "id": "tendencias-opinion-publica-2026",
+      "slug": "tendencias-opinion-publica-mexico-2026",
+      "title": "Tendencias de Opinión Pública en México para 2026",
+      "excerpt": "Un análisis profundo de las corrientes de pensamiento que definirán el panorama político y social de México en los próximos meses.",
+      "content": "El panorama de la opinión pública en México atraviesa un momento de transformación significativa. Las encuestas recientes revelan cambios sustanciales en las preferencias ciudadanas...\n\n## Metodología de Análisis\n\nNuestro estudio se basa en una muestra representativa de más de 5,000 ciudadanos mexicanos, con un margen de error del 2.5%...\n\n## Hallazgos Principales\n\n1. **Confianza institucional**: Los niveles de confianza en instituciones gubernamentales muestran una tendencia mixta...\n\n2. **Prioridades ciudadanas**: La seguridad y la economía continúan siendo las principales preocupaciones...\n\n3. **Participación digital**: El 67% de los encuestados consume noticias políticas principalmente a través de redes sociales...",
+      "category": "opinion-publica",
+      "author": "Alejandro Méndez",
+      "authorRole": "Director de Análisis",
+      "publishDate": "2026-04-10",
+      "readTime": "8 min",
+      "image": "/images/blog/opinion-publica-2026.jpg",
+      "featured": true,
+      "tags": ["opinión pública", "México", "encuestas", "análisis político"]
+    },
+    {
+      "id": "estrategias-comunicacion-crisis",
+      "slug": "estrategias-comunicacion-crisis-empresarial",
+      "title": "Estrategias de Comunicación en Crisis Empresarial",
+      "excerpt": "Cómo las organizaciones pueden navegar situaciones de crisis manteniendo su reputación y la confianza de sus stakeholders.",
+      "content": "En un entorno empresarial cada vez más volátil, la capacidad de respuesta ante crisis se ha convertido en un diferenciador competitivo fundamental...\n\n## Los Pilares de la Comunicación de Crisis\n\n### Preparación Preventiva\n\nAntes de que cualquier crisis ocurra, las organizaciones deben contar con protocolos claros...\n\n### Respuesta Inmediata\n\nLas primeras 24 horas son críticas. Nuestra experiencia demuestra que...\n\n### Recuperación y Aprendizaje\n\nUna vez superada la fase aguda de la crisis, es fundamental documentar las lecciones aprendidas...",
+      "category": "estrategia",
+      "author": "Carolina Vásquez",
+      "authorRole": "Directora de Estrategia",
+      "publishDate": "2026-04-05",
+      "readTime": "6 min",
+      "image": "/images/blog/comunicacion-crisis.jpg",
+      "featured": false,
+      "tags": ["comunicación", "crisis", "reputación corporativa", "stakeholders"]
+    },
+    {
+      "id": "analisis-politico-latam",
+      "slug": "panorama-politico-latinoamerica-2026",
+      "title": "Panorama Político de Latinoamérica: Desafíos y Oportunidades",
+      "excerpt": "Un recorrido por los principales acontecimientos políticos de la región y su impacto en el clima de negocios.",
+      "content": "Latinoamérica enfrenta un momento de redefinición política que impacta directamente en las decisiones empresariales y de inversión...\n\n## Contexto Regional\n\nLos procesos electorales recientes han configurado un mapa político diverso...\n\n## Implicaciones para los Negocios\n\nLas empresas que operan en la región deben considerar varios factores...",
+      "category": "asuntos-publicos",
+      "author": "Roberto Fuentes",
+      "authorRole": "Senior Consultant",
+      "publishDate": "2026-03-28",
+      "readTime": "10 min",
+      "image": "/images/blog/politica-latam.jpg",
+      "featured": true,
+      "tags": ["Latinoamérica", "política regional", "inversión", "riesgo político"]
+    },
+    {
+      "id": "economia-digital-mexico",
+      "slug": "economia-digital-transformacion-mexico",
+      "title": "La Transformación Digital de la Economía Mexicana",
+      "excerpt": "Análisis del avance de la digitalización en México y su impacto en los diferentes sectores productivos.",
+      "content": "La economía digital en México ha experimentado un crecimiento acelerado, impulsado por cambios en los patrones de consumo y la adopción tecnológica...\n\n## Estado Actual\n\nEl comercio electrónico representa ya el 12% del PIB nacional...\n\n## Sectores en Transformación\n\n### Servicios Financieros\n\nEl sector fintech mexicano se ha consolidado como el más dinámico de la región...\n\n### Retail y Consumo\n\nLa omnicanalidad se ha convertido en la norma...",
+      "category": "economia",
+      "author": "María José Soto",
+      "authorRole": "Analista Senior",
+      "publishDate": "2026-03-20",
+      "readTime": "7 min",
+      "image": "/images/blog/economia-digital.jpg",
+      "featured": false,
+      "tags": ["economía digital", "fintech", "transformación digital", "México"]
+    }
+  ]
+}

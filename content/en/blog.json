@@ -1,0 +1,86 @@
+{
+  "seo": {
+    "title": "Blog | Thinko Consulting - Strategic Analysis and Public Opinion",
+    "description": "Articles on political analysis, public opinion and business strategy. Insights and perspectives from Thinko Consulting experts.",
+    "keywords": ["political consulting", "public opinion", "strategic analysis", "public affairs", "Mexico"]
+  },
+  "page": {
+    "title": "Insights & Analysis",
+    "subtitle": "Strategic perspectives on politics, society and business",
+    "filterAll": "All",
+    "readMore": "Read more",
+    "publishedOn": "Published on",
+    "author": "By",
+    "shareArticle": "Share article",
+    "relatedArticles": "Related articles",
+    "categories": [
+      { "id": "all", "label": "All" },
+      { "id": "opinion-publica", "label": "Public Opinion" },
+      { "id": "asuntos-publicos", "label": "Public Affairs" },
+      { "id": "estrategia", "label": "Strategy" },
+      { "id": "economia", "label": "Economy" }
+    ]
+  },
+  "articles": [
+    {
+      "id": "tendencias-opinion-publica-2026",
+      "slug": "public-opinion-trends-mexico-2026",
+      "title": "Public Opinion Trends in Mexico for 2026",
+      "excerpt": "An in-depth analysis of the currents of thought that will define Mexico's political and social landscape in the coming months.",
+      "content": "The public opinion landscape in Mexico is undergoing a significant transformation. Recent polls reveal substantial changes in citizen preferences...\n\n## Analysis Methodology\n\nOur study is based on a representative sample of more than 5,000 Mexican citizens, with a margin of error of 2.5%...\n\n## Key Findings\n\n1. **Institutional trust**: Levels of trust in government institutions show a mixed trend...\n\n2. **Citizen priorities**: Security and economy continue to be the main concerns...\n\n3. **Digital participation**: 67% of respondents consume political news primarily through social media...",
+      "category": "opinion-publica",
+      "author": "Alejandro Méndez",
+      "authorRole": "Director of Analysis",
+      "publishDate": "2026-04-10",
+      "readTime": "8 min",
+      "image": "/images/blog/opinion-publica-2026.jpg",
+      "featured": true,
+      "tags": ["public opinion", "Mexico", "polls", "political analysis"]
+    },
+    {
+      "id": "estrategias-comunicacion-crisis",
+      "slug": "crisis-communication-strategies-business",
+      "title": "Crisis Communication Strategies for Business",
+      "excerpt": "How organizations can navigate crisis situations while maintaining their reputation and stakeholder trust.",
+      "content": "In an increasingly volatile business environment, crisis response capability has become a fundamental competitive differentiator...\n\n## The Pillars of Crisis Communication\n\n### Preventive Preparation\n\nBefore any crisis occurs, organizations must have clear protocols...\n\n### Immediate Response\n\nThe first 24 hours are critical. Our experience shows that...\n\n### Recovery and Learning\n\nOnce the acute phase of the crisis is over, it is essential to document lessons learned...",
+      "category": "estrategia",
+      "author": "Carolina Vásquez",
+      "authorRole": "Strategy Director",
+      "publishDate": "2026-04-05",
+      "readTime": "6 min",
+      "image": "/images/blog/comunicacion-crisis.jpg",
+      "featured": false,
+      "tags": ["communication", "crisis", "corporate reputation", "stakeholders"]
+    },
+    {
+      "id": "analisis-politico-latam",
+      "slug": "latin-america-political-landscape-2026",
+      "title": "Latin America Political Landscape: Challenges and Opportunities",
+      "excerpt": "A tour of the main political events in the region and their impact on the business climate.",
+      "content": "Latin America faces a moment of political redefinition that directly impacts business and investment decisions...\n\n## Regional Context\n\nRecent electoral processes have configured a diverse political map...\n\n## Implications for Business\n\nCompanies operating in the region must consider several factors...",
+      "category": "asuntos-publicos",
+      "author": "Roberto Fuentes",
+      "authorRole": "Senior Consultant",
+      "publishDate": "2026-03-28",
+      "readTime": "10 min",
+      "image": "/images/blog/politica-latam.jpg",
+      "featured": true,
+      "tags": ["Latin America", "regional politics", "investment", "political risk"]
+    },
+    {
+      "id": "economia-digital-mexico",
+      "slug": "digital-economy-transformation-mexico",
+      "title": "The Digital Transformation of the Mexican Economy",
+      "excerpt": "Analysis of the progress of digitalization in Mexico and its impact on different productive sectors.",
+      "content": "The digital economy in Mexico has experienced accelerated growth, driven by changes in consumption patterns and technological adoption...\n\n## Current State\n\nE-commerce already represents 12% of national GDP...\n\n## Sectors in Transformation\n\n### Financial Services\n\nThe Mexican fintech sector has established itself as the most dynamic in the region...\n\n### Retail and Consumption\n\nOmnichannel has become the norm...",
+      "category": "economia",
+      "author": "María José Soto",
+      "authorRole": "Senior Analyst",
+      "publishDate": "2026-03-20",
+      "readTime": "7 min",
+      "image": "/images/blog/economia-digital.jpg",
+      "featured": false,
+      "tags": ["digital economy", "fintech", "digital transformation", "Mexico"]
+    }
+  ]
+}

@@ -70,14 +70,14 @@ function ServiceCard({
         <ul className="space-y-4 text-on-surface-variant font-light">
           {features.map((item) => (
             <li key={item} className="flex items-center gap-3">
-              <span className="w-1 h-1 bg-tertiary-fixed-dim" />
+              <span className="w-1 h-1 bg-[#E1CEE1]" />
               {item}
             </li>
           ))}
         </ul>
       </div>
       <div className="mt-12">
-        <div className="w-4 h-4 bg-tertiary-fixed-dim" />
+        <div className="w-4 h-4 bg-[#E1CEE1]" />
       </div>
     </div>
   )
