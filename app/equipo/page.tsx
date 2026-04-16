@@ -8,13 +8,16 @@ import { useTranslation } from "@/lib/i18n"
 import images from "@/content/images.json"
 
 const teamImages: Record<string, string> = {
-  "member-1": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/AM-1gk2YUUURNiduPzgv81xntVDxqse6e.png",
-  "member-2": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/VC-Af4SdOCYx5iEhk3KmUTuh0xYyQcWtE.png",
-  "member-3": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/RS-i2nXSjJNbiYIbLUHHfHNOVzgVyAEbs.png",
-  "member-4": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/MJF-iJAlkgKjqM0QX754t6EJsgIb2D4AcY.png",
-  "member-5": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/JLK-2DvmgjvE4S0sfSr51GsAgYrv7rJ8d3.png",
-  "member-6": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/KE-iwe1nzdlk9lLQyBVuxlwsk9QbQAdKq.png",
-  "member-7": "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/ALVME-9xkXBWw9CEHWvPC5uz9abLz1ZONB3q.png",
+  "member-1": "/images/team/placeholder.jpg",  // José Antonio Lozano
+  "member-2": "/images/team/placeholder.jpg",  // Álvaro Mejía
+  "member-3": "/images/team/placeholder.jpg",  // José Luis Kannarek
+  "member-4": "/images/team/placeholder.jpg",  // Octavio Sanz
+  "member-5": "/images/team/placeholder.jpg",  // Ruddyard Villalobos
+  "member-6": "/images/team/placeholder.jpg",  // Rodrigo Salas
+  "member-7": "/images/team/placeholder.jpg",  // Verónica Calderaro
+  "member-8": "/images/team/placeholder.jpg",  // Abraham Martínez
+  "member-9": "/images/team/placeholder.jpg",  // María José Favela
+  "member-10": "/images/team/placeholder.jpg", // Kenia Estrada
 }
 
 interface TeamMember {
