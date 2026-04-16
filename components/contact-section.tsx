@@ -155,7 +155,7 @@ export function ContactSection() {
               <button 
                 type="submit"
                 disabled={status === "submitting"}
-                className="bg-primary text-on-primary px-16 py-5 text-xs font-bold tracking-widest uppercase hover:opacity-90 transition-all flex items-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#470053] text-white px-16 py-5 text-xs font-bold tracking-widest uppercase hover:opacity-90 transition-all flex items-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === "submitting" ? t.form.submitting : t.form.submit}
                 <Send className="w-4 h-4" />

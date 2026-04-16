@@ -14,7 +14,7 @@ export function HeroSection() {
         <span className="block text-xs uppercase tracking-[0.3em] text-on-surface-variant mb-6 font-semibold">
           {t.tagline}
         </span>
-        <h1 className="font-serif text-6xl md:text-9xl font-light leading-[0.9] tracking-tight text-primary mb-12">
+        <h1 className="font-serif text-6xl md:text-9xl font-light leading-[0.9] tracking-tight text-[#470053] mb-12">
           {t.title} <br /> <span className="italic font-normal">{t.titleHighlight}</span>
         </h1>
         <p className="text-lg md:text-xl text-on-surface-variant max-w-xl font-light leading-relaxed mb-12">
@@ -23,7 +23,7 @@ export function HeroSection() {
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-12">
           <Link 
             href="#contact" 
-            className="bg-primary text-on-primary px-10 py-4 text-sm font-bold tracking-widest uppercase inline-block hover:opacity-80 transition-opacity"
+            className="bg-[#470053] text-white px-10 py-4 text-sm font-bold tracking-widest uppercase inline-block hover:opacity-80 transition-opacity"
           >
             Consultar
           </Link>

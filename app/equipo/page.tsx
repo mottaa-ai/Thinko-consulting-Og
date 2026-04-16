@@ -63,7 +63,7 @@ export default function EquipoPage() {
         <div className="max-w-[1600px] mx-auto px-8 md:px-12 mb-32">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
             <div className="md:col-span-8">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-tight text-primary">
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-tight text-[#470053]">
                 {t.hero.title}
               </h1>
             </div>
@@ -97,7 +97,7 @@ export default function EquipoPage() {
           <div className="flex justify-center">
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-4 text-primary font-bold uppercase text-xs tracking-widest group"
+              className="inline-flex items-center gap-4 text-[#470053] font-bold uppercase text-xs tracking-widest group"
             >
               {t.cta.button}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />
