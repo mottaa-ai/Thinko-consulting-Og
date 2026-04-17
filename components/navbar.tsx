@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import Link from "next/link"
+import Image from "next/image"
 import { Menu, X } from "lucide-react"
 import { useI18n, useTranslation } from "@/lib/i18n"
 
@@ -15,8 +16,15 @@ export function Navbar() {
       <div className="flex justify-between items-center w-full px-8 py-6 max-w-full">
         <Link 
           href="/" 
-          className="text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50"
+          className="flex items-center gap-3 text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50"
         >
+          <Image 
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Thinko%20fondo%20blanco-XR4rZIXObzbGcRDEjDAVHTWtoHyuOm.png"
+            alt="Thinko Consulting"
+            width={36}
+            height={36}
+            className="object-contain"
+          />
           Thinko Consulting
         </Link>
         
