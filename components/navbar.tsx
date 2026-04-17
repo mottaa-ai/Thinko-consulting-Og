@@ -19,7 +19,7 @@ export function Navbar() {
           className="flex items-center gap-3 text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50"
         >
           <Image 
-            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Logo%20Thinko%20fondo%20blanco-XR4rZIXObzbGcRDEjDAVHTWtoHyuOm.png"
+            src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20iso_-Fj3tFLzmb3nWvuazVNDmAn32mQIk2w.png"
             alt="Thinko Consulting"
             width={36}
             height={36}
