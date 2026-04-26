@@ -40,8 +40,8 @@ export function HeroSection() {
       {/* Abstract Architectural Visual */}
       <div className="absolute right-0 top-0 w-1/3 h-full hidden lg:block bg-surface-container-low">
         <Image
-          src="/images/hero-architecture.jpg"
-          alt="Líneas arquitectónicas abstractas de una fachada de rascacielos moderno"
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/compressedImage-GbVn12NLvMXh0PfpPlYemqiiJ4JpU3.jpeg"
+          alt="Cruce peatonal concurrido en Ciudad de México con efecto de movimiento"
           fill
           className="object-cover grayscale opacity-40 mix-blend-multiply"
           priority
