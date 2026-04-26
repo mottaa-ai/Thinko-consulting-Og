@@ -8,7 +8,7 @@
         { "label": "Approach", "href": "/#philosophy" },
         { "label": "Services", "href": "/#services" },
         { "label": "Experts", "href": "/equipo" },
-        { "label": "Publications", "href": "/#insights" },
+        { "label": "Publications", "href": "/blog" },
         { "label": "Contact", "href": "/#contact" }
       ]
     },

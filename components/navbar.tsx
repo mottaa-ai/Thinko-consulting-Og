@@ -53,7 +53,7 @@ export function Navbar() {
             {t.links.team}
           </Link>
           <Link 
-            href="/#insights" 
+            href="/blog" 
             className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.insights}
@@ -123,7 +123,7 @@ export function Navbar() {
               {t.links.team}
             </Link>
             <Link 
-              href="/#insights" 
+              href="/blog" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >
