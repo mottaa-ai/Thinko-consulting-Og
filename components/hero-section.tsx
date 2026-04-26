@@ -57,7 +57,7 @@ export function HeroSection() {
   const { locale } = useI18n()
 
   const rotatingWords = locale === 'en'
-    ? ['Solutions', 'Research', 'Analysis', 'Consulting']
+    ? ['TaylorMade', 'Research', 'Analysis', 'Consulting']
     : ['Soluciones', 'Investigación', 'Análisis', 'Consultorías']
 
   return (
@@ -75,14 +75,14 @@ export function HeroSection() {
           {t.subtitle}
         </p>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-12">
-          <Link 
-            href="#contact" 
+          <Link
+            href="#contact"
             className="bg-foreground text-white px-10 py-4 text-sm font-semibold tracking-widest uppercase inline-block hover:bg-[#00b8b4] transition-colors duration-300"
           >
             {locale === 'en' ? 'Consult' : 'Consultar'}
           </Link>
-          <Link 
-            href="#philosophy" 
+          <Link
+            href="#philosophy"
             className="group flex items-center gap-3 text-sm font-semibold tracking-widest uppercase text-foreground hover:text-[#00b8b4] transition-colors"
           >
             {locale === 'en' ? 'Our Approach' : 'Nuestro Enfoque'}
@@ -90,7 +90,7 @@ export function HeroSection() {
           </Link>
         </div>
       </div>
-      
+
       {/* Visual */}
       <div className="absolute right-0 top-0 w-1/3 h-full hidden lg:block bg-surface-container-low">
         <Image
