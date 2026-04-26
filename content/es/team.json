@@ -1,67 +1,67 @@
 {
   "hero": {
-    "title": "Liderazgo y Capital Intelectual",
+    "title": "Ecosistema de Expertos",
     "quote": "La excelencia en consultoría nace de la combinación de rigor académico, experiencia práctica y una comprensión profunda de las dinámicas del poder."
   },
   "members": [
     {
       "id": "member-1",
       "name": "José Antonio Lozano",
-      "role": "Liderazgo Institucional y Jurídico",
+      "role": "Consejero Senior & Estrategia Institucional",
       "bio": "Presidente de la Junta UP-IPADE y Doctor en Derecho; referente de opinión pública en los principales medios de comunicación de México."
     },
     {
       "id": "member-2",
       "name": "Álvaro Mejía",
-      "role": "Inteligencia de Datos y Mercados",
+      "role": "Director de Data Science & Opinión Pública",
       "bio": "Estratega con formación en Warwick y Essex; experto en modelado estadístico, comportamiento electoral y reputación corporativa para el sector público y privado."
     },
     {
       "id": "member-3",
       "name": "José Luis Kannarek",
-      "role": "Psicología Social Aplicada",
+      "role": "Director de Investigación Cualitativa",
       "bio": "Consultor senior con más de 35 años de trayectoria internacional liderando investigación cualitativa profunda en 8 países de América Latina."
     },
     {
       "id": "member-4",
       "name": "Octavio Sanz",
-      "role": "Consultoría Política y Coyuntura",
+      "role": "Consultor Senior en Inteligencia de Mercado",
       "bio": "Especialista en análisis de discurso y metodologías híbridas, enfocado en la gestión estratégica de entornos complejos y proyectos de alto impacto."
     },
     {
       "id": "member-5",
       "name": "Ruddyard Villalobos",
-      "role": "Dinámicas de Grupo e Inteligencia Emocional",
+      "role": "Especialista en Dinámicas Organizacionales",
       "bio": "Industriólogo con 20 años de experiencia en consultoría empresarial; experto en capacitación de alto rendimiento y pasión por el servicio."
     },
     {
       "id": "member-6",
       "name": "Rodrigo Salas",
-      "role": "Comportamiento del Consumidor",
+      "role": "Especialista en Comportamiento del Consumidor",
       "bio": "Psicólogo experto en etnografía y moderación; ha liderado la inteligencia de audiencias para gigantes del entretenimiento como History Channel."
     },
     {
       "id": "member-7",
       "name": "Verónica Calderaro",
-      "role": "Ciencias y Finanzas Conductuales",
+      "role": "Consultora en Ciencias del Comportamiento & Insights",
       "bio": "MBA y psicóloga enfocada en el análisis de la toma de decisiones; líder de proyectos cuali-cuantitativos para firmas globales como Ipsos."
     },
     {
       "id": "member-8",
       "name": "Abraham Martínez",
-      "role": "Asuntos Públicos y Regulación",
+      "role": "Especialista en Asuntos Públicos & Regulatorios",
       "bio": "Doctor en Derecho y experto en Teoría Política por la University of Toronto; especialista en incidencia legislativa y gestión de stakeholders."
     },
     {
       "id": "member-9",
       "name": "María José Favela",
-      "role": "Economía y Análisis Social",
+      "role": "Analista Senior de Economía & Políticas Públicas",
       "bio": "Maestra en Economía y Finanzas; especialista en la intersección de mercados laborales y políticas públicas con enfoque en inclusión."
     },
     {
       "id": "member-10",
       "name": "Kenia Estrada",
-      "role": "Comunicación Estratégica y RRPP",
+      "role": "Estratega en Comunicación & Relaciones Públicas",
       "bio": "Especialista en manejo de imagen y campañas electorales, integrando la ética de la comunicación con herramientas digitales de vanguardia."
     }
   ],

@@ -45,64 +45,47 @@ export function ContactSection() {
   }
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-surface-container-highest" id="contact">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-24">
+    <section className="py-32 px-8 md:px-24 bg-surface-container-low" id="contact">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
         <div className="lg:col-span-5">
-          <span className="text-xs uppercase tracking-[0.3em] text-on-surface-variant mb-8 block">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] mb-8 block font-semibold">
             {t.label}
           </span>
-          <h2 className="font-serif text-5xl md:text-6xl font-light mb-12">
+          <h2 className="font-headline text-5xl md:text-6xl font-light mb-8 text-foreground tracking-tight">
             {t.title}
           </h2>
-          <p className="text-on-surface-variant font-light leading-relaxed mb-12">
+          <div className="h-[2px] w-16 bg-[#00b8b4] mb-8" />
+          <p className="text-on-surface-variant font-light leading-relaxed mb-12 text-lg">
             {t.subtitle}
           </p>
-          <div className="space-y-8">
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-on-primary-container mb-2">
-                {t.info.location.label}
-              </p>
-              <p className="text-xl font-light italic">
-                {t.info.location.value}
-              </p>
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-on-primary-container mb-2">
-                {t.info.email.label}
-              </p>
-              <Link 
-                href={`mailto:${t.info.email.value}`}
-                className="text-xl font-light hover:text-on-tertiary-container transition-colors italic"
-              >
-                {t.info.email.value}
-              </Link>
-            </div>
-            <div>
-              <p className="text-[10px] uppercase tracking-widest text-on-primary-container mb-2">
-                {t.info.schedule.label}
-              </p>
-              <p className="text-xl font-light italic">
-                {t.info.schedule.value}
-              </p>
-            </div>
+          <div>
+            <p className="text-[10px] uppercase tracking-[0.3em] text-on-surface-variant mb-3 font-semibold">
+              {t.info.email.label}
+            </p>
+            <Link 
+              href={`mailto:${t.info.email.value}`}
+              className="text-xl md:text-2xl font-light text-foreground hover:text-[#00b8b4] transition-colors"
+            >
+              {t.info.email.value}
+            </Link>
           </div>
         </div>
         
         <div className="lg:col-span-7">
           {status === "success" ? (
-            <div className="flex flex-col items-center justify-center h-full py-20 text-center">
-              <CheckCircle className="w-16 h-16 text-green-600 mb-6" />
-              <h3 className="font-serif text-3xl font-light mb-4">{t.form.successTitle}</h3>
+            <div className="flex flex-col items-center justify-center h-full py-20 text-center bg-white p-12">
+              <CheckCircle className="w-16 h-16 text-[#00b8b4] mb-6" />
+              <h3 className="font-headline text-3xl font-light mb-4">{t.form.successTitle}</h3>
               <p className="text-on-surface-variant font-light">{t.form.successMessage}</p>
               <button
                 onClick={() => setStatus("idle")}
-                className="mt-8 text-sm font-bold tracking-widest uppercase border-b border-primary pb-2 hover:opacity-60 transition-opacity"
+                className="mt-8 text-sm font-semibold tracking-widest uppercase border-b-2 border-[#00b8b4] pb-2 hover:opacity-60 transition-opacity"
               >
                 Enviar otro mensaje
               </button>
             </div>
           ) : (
-            <form onSubmit={handleSubmit} className="space-y-12">
+            <form onSubmit={handleSubmit} className="space-y-12 bg-white p-8 md:p-12">
               {status === "error" && (
                 <div className="flex items-center gap-4 p-4 bg-red-50 border border-red-200 text-red-800">
                   <AlertCircle className="w-5 h-5" />
@@ -155,7 +138,7 @@ export function ContactSection() {
               <button 
                 type="submit"
                 disabled={status === "submitting"}
-                className="bg-[#470053] text-white px-16 py-5 text-xs font-bold tracking-widest uppercase hover:opacity-90 transition-all flex items-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-foreground text-white px-12 py-5 text-xs font-semibold tracking-widest uppercase hover:bg-[#00b8b4] transition-colors flex items-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {status === "submitting" ? t.form.submitting : t.form.submit}
                 <Send className="w-4 h-4" />
@@ -195,11 +178,11 @@ function FloatingInput({
         placeholder=" "
         required={required}
         disabled={disabled}
-        className="peer w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary px-0 py-4 transition-all placeholder-transparent font-light disabled:opacity-50"
+        className="peer w-full bg-transparent border-0 border-b border-slate-300 focus:ring-0 focus:border-[#00b8b4] focus:outline-none px-0 py-4 transition-all placeholder-transparent font-light disabled:opacity-50 text-foreground"
       />
       <label
         htmlFor={id}
-        className="absolute left-0 top-4 text-on-surface-variant/60 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[10px]"
+        className="absolute left-0 top-4 text-on-surface-variant pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-[#00b8b4] peer-focus:font-semibold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-semibold"
       >
         {label}
       </label>
@@ -232,11 +215,11 @@ function FloatingTextarea({
         rows={4}
         required={required}
         disabled={disabled}
-        className="peer w-full bg-transparent border-0 border-b border-outline-variant/30 focus:ring-0 focus:border-primary px-0 py-4 transition-all placeholder-transparent font-light resize-none disabled:opacity-50"
+        className="peer w-full bg-transparent border-0 border-b border-slate-300 focus:ring-0 focus:border-[#00b8b4] focus:outline-none px-0 py-4 transition-all placeholder-transparent font-light resize-none disabled:opacity-50 text-foreground"
       />
       <label
         htmlFor={id}
-        className="absolute left-0 top-4 text-on-surface-variant/60 pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-primary peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[10px]"
+        className="absolute left-0 top-4 text-on-surface-variant pointer-events-none transition-all peer-focus:-top-4 peer-focus:text-[10px] peer-focus:uppercase peer-focus:tracking-widest peer-focus:text-[#00b8b4] peer-focus:font-semibold peer-[:not(:placeholder-shown)]:-top-4 peer-[:not(:placeholder-shown)]:text-[10px] peer-[:not(:placeholder-shown)]:uppercase peer-[:not(:placeholder-shown)]:tracking-widest peer-[:not(:placeholder-shown)]:font-semibold"
       >
         {label}
       </label>

@@ -1,19 +1,19 @@
 {
-  "tagline": "Inteligencia estratégica para un mundo complejo",
+  "tagline": "Inteligencia estratégica para un mundo complejo. Decodificamos ecosistemas de consumo y reputación para potenciar el crecimiento integral.",
   "sections": {
     "navigation": {
       "title": "Navegación",
       "links": [
         { "label": "Inicio", "href": "/" },
-        { "label": "Filosofía", "href": "/#philosophy" },
+        { "label": "Enfoque", "href": "/#philosophy" },
         { "label": "Servicios", "href": "/#services" },
-        { "label": "Equipo", "href": "/equipo" },
+        { "label": "Expertos", "href": "/equipo" },
         { "label": "Publicaciones", "href": "/#insights" },
         { "label": "Contacto", "href": "/#contact" }
       ]
     },
     "services": {
-      "title": "Servicios",
+      "title": "Expertise",
       "links": [
         { "label": "Opinión Pública", "href": "/#services" },
         { "label": "Asuntos Públicos", "href": "/#services" },
@@ -22,8 +22,7 @@
     },
     "contact": {
       "title": "Contacto",
-      "email": "contacto@thinko.mx",
-      "location": "Ciudad de México, México"
+      "email": "amotta@thinkoconsulting.com"
     }
   },
   "legal": {
@@ -32,9 +31,5 @@
       { "label": "Política de Privacidad", "href": "/privacidad" },
       { "label": "Términos de Uso", "href": "/terminos" }
     ]
-  },
-  "social": {
-    "linkedin": "https://linkedin.com",
-    "twitter": "https://twitter.com"
   }
 }

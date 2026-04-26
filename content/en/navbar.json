@@ -1,9 +1,9 @@
 {
   "links": {
-    "philosophy": "Philosophy",
+    "philosophy": "Approach",
     "services": "Services",
-    "team": "Team",
-    "insights": "Insights",
+    "team": "Experts",
+    "insights": "Publications",
     "contact": "Contact"
   }
 }

@@ -15,17 +15,9 @@
     "errorMessage": "Hubo un problema al enviar el mensaje. Por favor intente nuevamente."
   },
   "info": {
-    "location": {
-      "label": "Ubicación",
-      "value": "Ciudad de México, México"
-    },
     "email": {
       "label": "Email",
-      "value": "contacto@thinko.mx"
-    },
-    "schedule": {
-      "label": "Horario",
-      "value": "Lun - Vie: 9:00 - 18:00"
+      "value": "amotta@thinkoconsulting.com"
     }
   }
 }

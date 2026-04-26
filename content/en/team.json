@@ -1,67 +1,67 @@
 {
   "hero": {
-    "title": "Leadership and Intellectual Capital",
+    "title": "Ecosystem of Experts",
     "quote": "Excellence in consulting is born from the combination of academic rigor, practical experience and a deep understanding of power dynamics."
   },
   "members": [
     {
       "id": "member-1",
       "name": "José Antonio Lozano",
-      "role": "Institutional and Legal Leadership",
+      "role": "Senior Advisor & Institutional Strategy",
       "bio": "President of the UP-IPADE Board and Doctor of Law; leading voice in public opinion across Mexico's major media outlets."
     },
     {
       "id": "member-2",
       "name": "Álvaro Mejía",
-      "role": "Data and Market Intelligence",
+      "role": "Director of Data Science & Public Opinion",
       "bio": "Strategist trained at Warwick and Essex; expert in statistical modeling, electoral behavior and corporate reputation for public and private sectors."
     },
     {
       "id": "member-3",
       "name": "José Luis Kannarek",
-      "role": "Applied Social Psychology",
+      "role": "Director of Qualitative Research",
       "bio": "Senior consultant with over 35 years of international experience leading deep qualitative research across 8 Latin American countries."
     },
     {
       "id": "member-4",
       "name": "Octavio Sanz",
-      "role": "Political Consulting and Analysis",
+      "role": "Senior Consultant in Market Intelligence",
       "bio": "Specialist in discourse analysis and hybrid methodologies, focused on strategic management of complex environments and high-impact projects."
     },
     {
       "id": "member-5",
       "name": "Ruddyard Villalobos",
-      "role": "Group Dynamics and Emotional Intelligence",
+      "role": "Specialist in Organizational Dynamics",
       "bio": "Industrial engineer with 20 years of business consulting experience; expert in high-performance training with a passion for service."
     },
     {
       "id": "member-6",
       "name": "Rodrigo Salas",
-      "role": "Consumer Behavior",
+      "role": "Specialist in Consumer Behavior",
       "bio": "Psychologist expert in ethnography and moderation; has led audience intelligence for entertainment giants like History Channel."
     },
     {
       "id": "member-7",
       "name": "Verónica Calderaro",
-      "role": "Behavioral Science and Finance",
+      "role": "Consultant in Behavioral Science & Insights",
       "bio": "MBA and psychologist focused on decision-making analysis; leader of quali-quantitative projects for global firms like Ipsos."
     },
     {
       "id": "member-8",
       "name": "Abraham Martínez",
-      "role": "Public Affairs and Regulation",
+      "role": "Specialist in Public Affairs & Regulation",
       "bio": "Doctor of Law and Political Theory expert from University of Toronto; specialist in legislative advocacy and stakeholder management."
     },
     {
       "id": "member-9",
       "name": "María José Favela",
-      "role": "Economics and Social Analysis",
+      "role": "Senior Analyst in Economics & Public Policy",
       "bio": "Master in Economics and Finance; specialist at the intersection of labor markets and public policies with a focus on inclusion."
     },
     {
       "id": "member-10",
       "name": "Kenia Estrada",
-      "role": "Strategic Communications and PR",
+      "role": "Strategist in Communications & Public Relations",
       "bio": "Specialist in image management and electoral campaigns, integrating communication ethics with cutting-edge digital tools."
     }
   ],

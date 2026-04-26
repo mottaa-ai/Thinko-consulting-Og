@@ -4,29 +4,30 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Thinko Consulting Color System - Purple Theme */
-  --surface: #f9f5fa;
-  --surface-container: #cda1ca;
-  --surface-container-low: #e8d5e6;
-  --surface-container-high: #b879b5;
-  --surface-container-highest: #BC90C3;
-  --surface-variant: #c5b1d6;
-  --surface-dim: #b879b5;
+  /* Thinko Consulting Color System - Clean Professional Palette */
+  /* Primary: Deep Slate / Accent: Teal #00b8b4 */
+  --surface: #ffffff;
+  --surface-container: #f8fafc;
+  --surface-container-low: #f1f5f9;
+  --surface-container-high: #e2e8f0;
+  --surface-container-highest: #f1f5f9;
+  --surface-variant: #0f172a;
+  --surface-dim: #cbd5e1;
   
-  --primary: #470053;
+  --primary: #0f172a;
   --on-primary: #ffffff;
-  --primary-container: #2e1a2c;
-  --on-primary-container: #9b7c98;
+  --primary-container: #1e293b;
+  --on-primary-container: #94a3b8;
   
-  --on-surface: #2d111c;
-  --on-surface-variant: #4d4548;
+  --on-surface: #0f172a;
+  --on-surface-variant: #64748b;
   
-  --tertiary: #470053;
-  --tertiary-fixed-dim: #e9c176;
-  --on-tertiary-container: #a17f3b;
+  --tertiary: #00b8b4;
+  --tertiary-fixed-dim: #00b8b4;
+  --on-tertiary-container: #00b8b4;
   
-  --outline: #7d7679;
-  --outline-variant: #cdc6c9;
+  --outline: #94a3b8;
+  --outline-variant: #cbd5e1;
   
   /* Shadcn compatibility */
   --background: var(--surface);
@@ -36,42 +37,43 @@
   --popover: var(--surface);
   --popover-foreground: var(--on-surface);
   --primary-foreground: var(--on-primary);
-  --secondary: #745160;
+  --secondary: #475569;
   --secondary-foreground: #ffffff;
   --muted: var(--surface-container-low);
   --muted-foreground: var(--on-surface-variant);
-  --accent: var(--tertiary-fixed-dim);
-  --accent-foreground: var(--primary);
+  --accent: var(--tertiary);
+  --accent-foreground: #ffffff;
   --destructive: #ba1a1a;
   --destructive-foreground: #ffffff;
   --border: var(--outline-variant);
   --input: var(--outline-variant);
-  --ring: var(--primary);
+  --ring: var(--tertiary);
   --radius: 0px;
 }
 
 .dark {
-  --surface: #1c1120;
-  --surface-container: #2a1d2e;
-  --surface-container-low: #231828;
-  --surface-container-high: #3a2d3e;
-  --surface-container-highest: #4a3d4e;
-  --surface-variant: #3a2d3e;
-  --surface-dim: #150d18;
+  --surface: #0f172a;
+  --surface-container: #1e293b;
+  --surface-container-low: #1a2436;
+  --surface-container-high: #334155;
+  --surface-container-highest: #1e293b;
+  --surface-variant: #ffffff;
+  --surface-dim: #0a0f1c;
   
   --primary: #ffffff;
-  --on-primary: #000000;
-  --primary-container: #d6bee0;
-  --on-primary-container: #5c3f60;
+  --on-primary: #0f172a;
+  --primary-container: #f1f5f9;
+  --on-primary-container: #64748b;
   
-  --on-surface: #ecf1ff;
-  --on-surface-variant: #c6c6cd;
+  --on-surface: #f1f5f9;
+  --on-surface-variant: #94a3b8;
   
-  --tertiary-fixed-dim: #e9c176;
-  --on-tertiary-container: #ffdea5;
+  --tertiary: #00b8b4;
+  --tertiary-fixed-dim: #00b8b4;
+  --on-tertiary-container: #00b8b4;
   
-  --outline: #76777d;
-  --outline-variant: #45464d;
+  --outline: #475569;
+  --outline-variant: #334155;
   
   --background: var(--surface);
   --foreground: var(--on-surface);
@@ -87,10 +89,10 @@
 }
 
 @theme inline {
-  --font-body: var(--font-body), 'Manrope', sans-serif;
-  --font-headline: var(--font-headline), 'Newsreader', serif;
-  --font-sans: var(--font-body), 'Manrope', sans-serif;
-  --font-serif: var(--font-headline), 'Newsreader', serif;
+  --font-body: var(--font-body), 'Inter', sans-serif;
+  --font-headline: var(--font-headline), 'Montserrat', sans-serif;
+  --font-sans: var(--font-body), 'Inter', sans-serif;
+  --font-serif: var(--font-headline), 'Montserrat', sans-serif;
   
   --color-surface: var(--surface);
   --color-surface-container: var(--surface-container);
@@ -146,8 +148,10 @@
   }
   body {
     @apply bg-surface text-on-surface;
+    font-family: var(--font-body), 'Inter', sans-serif;
   }
-  h1, h2, h3, blockquote {
-    font-family: var(--font-headline), 'Newsreader', serif;
+  h1, h2, h3, h4, h5, h6, blockquote {
+    font-family: var(--font-headline), 'Montserrat', sans-serif;
+    letter-spacing: -0.02em;
   }
 }

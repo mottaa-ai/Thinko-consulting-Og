@@ -12,66 +12,71 @@ export function Navbar() {
   const t = useTranslation('navbar')
 
   return (
-    <nav className="fixed top-0 w-full z-50 bg-slate-50/80 dark:bg-slate-950/80 backdrop-blur-md">
-      <div className="flex justify-between items-center w-full px-8 py-6 max-w-full">
+    <nav className="fixed top-0 w-full z-50 bg-white/85 dark:bg-slate-950/85 backdrop-blur-md border-b border-slate-200/60 dark:border-slate-800/60">
+      <div className="flex justify-between items-center w-full px-8 py-5 max-w-full">
         <Link 
           href="/" 
-          className="flex items-center gap-3 text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50"
+          className="flex items-center gap-3 text-foreground"
         >
           <Image 
             src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/logo%20iso_-Fj3tFLzmb3nWvuazVNDmAn32mQIk2w.png"
             alt="Thinko Consulting"
-            width={36}
-            height={36}
+            width={32}
+            height={32}
             className="object-contain"
           />
-          Thinko Consulting
+          <div className="flex flex-col leading-none">
+            <span className="font-headline text-base font-semibold tracking-tight">Thinko</span>
+            <span className="font-headline text-[10px] uppercase tracking-[0.3em] text-on-surface-variant font-medium mt-0.5">
+              Consulting
+            </span>
+          </div>
         </Link>
         
-        <div className="hidden md:flex gap-10 items-center">
+        <div className="hidden md:flex gap-8 items-center">
           <Link 
             href="/#philosophy" 
-            className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+            className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.philosophy}
           </Link>
           <Link 
             href="/#services" 
-            className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+            className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.services}
           </Link>
           <Link 
             href="/equipo" 
-            className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+            className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.team}
           </Link>
           <Link 
             href="/#insights" 
-            className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+            className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.insights}
           </Link>
           <Link 
             href="/#contact" 
-            className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
+            className="bg-foreground text-white px-5 py-2.5 text-xs font-semibold tracking-widest uppercase hover:bg-[#00b8b4] transition-colors duration-300"
           >
             {t.links.contact}
           </Link>
           
           {/* Language Switcher */}
-          <div className="flex items-center gap-1 text-sm font-medium">
+          <div className="flex items-center gap-1 text-xs font-semibold uppercase tracking-widest">
             <button
               onClick={() => setLocale('es')}
-              className={`px-2 py-1 transition-colors ${locale === 'es' ? 'text-slate-900 dark:text-white' : 'text-slate-400 hover:text-slate-600'}`}
+              className={`px-1 py-1 transition-colors ${locale === 'es' ? 'text-[#00b8b4]' : 'text-slate-400 hover:text-foreground'}`}
             >
               ES
             </button>
-            <span className="text-slate-300">|</span>
+            <span className="text-slate-300">/</span>
             <button
               onClick={() => setLocale('en')}
-              className={`px-2 py-1 transition-colors ${locale === 'en' ? 'text-slate-900 dark:text-white' : 'text-slate-400 hover:text-slate-600'}`}
+              className={`px-1 py-1 transition-colors ${locale === 'en' ? 'text-[#00b8b4]' : 'text-slate-400 hover:text-foreground'}`}
             >
               EN
             </button>

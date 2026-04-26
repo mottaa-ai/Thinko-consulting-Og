@@ -32,21 +32,21 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
   
   return (
     <div className="group">
-      <div className="aspect-[4/5] bg-surface-container-low mb-8 relative overflow-hidden">
+      <div className="aspect-[4/5] bg-slate-100 mb-6 relative overflow-hidden">
         <img
           alt={`Portrait of ${member.name}`}
           className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
           src={imageUrl}
         />
-        <div className="absolute top-4 right-4 h-1 w-1 bg-tertiary-fixed-dim" />
+        <div className="absolute top-4 right-4 h-2 w-2 bg-[#00b8b4]" />
       </div>
       <div className="flex flex-col">
-        <h3 className="text-3xl font-serif font-medium mb-2">{member.name}</h3>
-        <p className="text-xs uppercase tracking-[0.2em] text-on-primary-container mb-6">
+        <h3 className="text-2xl md:text-3xl font-headline font-medium mb-3 text-foreground tracking-tight">{member.name}</h3>
+        <p className="text-xs uppercase tracking-[0.25em] text-[#00b8b4] mb-6 font-semibold">
           {member.role}
         </p>
-        <div className="w-12 h-[1px] bg-outline-variant opacity-30 mb-6" />
-        <p className="text-on-surface-variant text-sm leading-relaxed max-w-[90%] font-body">
+        <div className="w-12 h-[2px] bg-[#00b8b4] mb-6" />
+        <p className="text-on-surface-variant text-sm leading-relaxed max-w-[95%] font-light">
           {member.bio}
         </p>
       </div>
@@ -66,12 +66,16 @@ export default function EquipoPage() {
         <div className="max-w-[1600px] mx-auto px-8 md:px-12 mb-32">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
             <div className="md:col-span-8">
-              <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif font-light leading-tight text-[#470053]">
+              <span className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] font-semibold mb-6 block">
+                Talento
+              </span>
+              <h1 className="text-5xl md:text-7xl lg:text-8xl font-headline font-light leading-tight text-foreground tracking-tight">
                 {t.hero.title}
               </h1>
+              <div className="mt-8 h-[2px] w-16 bg-[#00b8b4]" />
             </div>
             <div className="md:col-span-4 flex items-end">
-              <p className="text-on-surface-variant font-body leading-relaxed text-lg italic opacity-80">
+              <p className="text-on-surface-variant font-light leading-relaxed text-lg">
                 &ldquo;{t.hero.quote}&rdquo;
               </p>
             </div>
@@ -89,18 +93,21 @@ export default function EquipoPage() {
       </section>
 
       {/* Recruitment/CTA Section */}
-      <section className="py-32 bg-surface-container-low">
+      <section className="py-32 bg-[#0f172a] text-white">
         <div className="max-w-[1600px] mx-auto px-8 md:px-12 text-center">
-          <h2 className="text-4xl md:text-5xl font-serif font-light mb-12">
+          <span className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] font-semibold mb-6 block">
+            Carreras
+          </span>
+          <h2 className="text-4xl md:text-5xl font-headline font-light mb-8 text-white tracking-tight">
             {t.cta.title}
           </h2>
-          <p className="font-body text-on-surface-variant max-w-2xl mx-auto mb-12 uppercase tracking-widest text-xs leading-loose">
+          <p className="font-light text-slate-300 max-w-2xl mx-auto mb-12 leading-relaxed text-base">
             {t.cta.description}
           </p>
           <div className="flex justify-center">
             <Link
               href="/#contact"
-              className="inline-flex items-center gap-4 text-[#470053] font-bold uppercase text-xs tracking-widest group"
+              className="inline-flex items-center gap-4 bg-[#00b8b4] text-white px-10 py-4 font-semibold uppercase text-xs tracking-widest hover:bg-white hover:text-[#0f172a] transition-colors group"
             >
               {t.cta.button}
               <ArrowRight className="w-4 h-4 group-hover:translate-x-2 transition-transform" />

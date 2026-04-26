@@ -29,7 +29,7 @@ export function FounderSection() {
   const t = founderContent[locale] || founderContent.es
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-surface-variant" id="founder">
+    <section className="py-32 px-8 md:px-24 bg-[#0f172a] text-white" id="founder">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
         {/* Photo */}
         <div className="md:col-span-5">
@@ -40,25 +40,27 @@ export function FounderSection() {
               fill
               className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
             />
+            <div className="absolute top-4 right-4 h-2 w-2 bg-[#00b8b4]" />
           </div>
         </div>
         
         {/* Content */}
         <div className="md:col-span-6 md:col-start-7 space-y-6">
-          <span className="text-xs uppercase tracking-widest text-on-surface-variant mb-4 block">
+          <span className="text-xs uppercase tracking-widest text-[#00b8b4] mb-4 block font-semibold">
             {t.label}
           </span>
           <div className="space-y-2">
-            <h2 className="font-serif text-4xl md:text-5xl font-light text-[#470053] leading-tight">
+            <h2 className="font-headline text-4xl md:text-5xl font-light text-white leading-tight">
               {t.name}
             </h2>
-            <p className="text-lg text-on-surface-variant font-medium">
+            <p className="text-base text-slate-300 font-medium uppercase tracking-widest">
               {t.title}
             </p>
           </div>
-          <div className="space-y-6 pt-4">
+          <div className="h-[2px] w-16 bg-[#00b8b4] my-6" />
+          <div className="space-y-6">
             {t.description.map((paragraph, index) => (
-              <p key={index} className="text-lg text-on-surface leading-relaxed">
+              <p key={index} className="text-lg text-slate-200 leading-relaxed font-light">
                 {paragraph}
               </p>
             ))}

@@ -1,19 +1,20 @@
 import type { Metadata } from 'next'
-import { Newsreader, Manrope } from 'next/font/google'
+import { Montserrat, Inter } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { I18nProvider } from '@/lib/i18n'
 import './globals.css'
 
-const newsreader = Newsreader({ 
+const montserrat = Montserrat({ 
   subsets: ["latin"],
   variable: '--font-headline',
   style: ['normal', 'italic'],
-  weight: ['200', '300', '400', '500', '600', '700', '800'],
+  weight: ['300', '400', '500', '600', '700', '800'],
 })
 
-const manrope = Manrope({ 
+const inter = Inter({ 
   subsets: ["latin"],
   variable: '--font-body',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
 export const metadata: Metadata = {
@@ -44,7 +45,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="es" data-scroll-behavior="smooth" className={`${newsreader.variable} ${manrope.variable} scroll-smooth bg-surface`}>
+    <html lang="es" data-scroll-behavior="smooth" className={`${montserrat.variable} ${inter.variable} scroll-smooth bg-surface`}>
       <body className="font-body antialiased bg-surface text-on-surface">
         <I18nProvider>
           {children}

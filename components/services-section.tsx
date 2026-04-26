@@ -1,6 +1,6 @@
 "use client"
 
-import { BarChart3, Landmark, Target } from "lucide-react"
+import { BarChart3, Landmark, Target, ArrowUpRight } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
@@ -19,15 +19,17 @@ export function ServicesSection() {
     <section className="py-32 px-8 md:px-24 bg-surface" id="services">
       <div className="mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div>
-          <span className="text-xs uppercase tracking-widest text-on-surface-variant">
+          <span className="text-xs uppercase tracking-widest text-[#00b8b4] font-semibold">
             {t.label}
           </span>
-          <h2 className="font-serif text-5xl font-light mt-4">{t.title}</h2>
+          <h2 className="font-headline text-4xl md:text-5xl font-light mt-4 text-foreground tracking-tight">
+            {t.title}
+          </h2>
+          <div className="mt-8 h-[2px] w-16 bg-[#00b8b4]" />
         </div>
-        <div className="hidden md:block h-[1px] bg-outline-variant w-1/3 opacity-20 mb-4" />
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-1">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-slate-200">
         {t.services.map((service, index) => (
           <ServiceCard 
             key={service.id} 
@@ -57,27 +59,38 @@ function ServiceCard({
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <div className="group p-12 bg-surface-container hover:bg-surface-container-highest transition-colors duration-500 min-h-[500px] flex flex-col justify-between relative overflow-hidden">
-      <div className="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-100 transition-opacity">
-        <Icon className="w-10 h-10" />
+    <div className="group p-12 bg-white hover:bg-[#0f172a] transition-colors duration-500 min-h-[520px] flex flex-col justify-between relative overflow-hidden">
+      {/* Icon */}
+      <div className="absolute top-6 right-6 transition-all duration-500">
+        <div className="w-12 h-12 flex items-center justify-center border border-slate-300 group-hover:border-[#00b8b4] group-hover:bg-[#00b8b4]/10 transition-all">
+          <Icon className="w-5 h-5 text-slate-600 group-hover:text-[#00b8b4] transition-colors" />
+        </div>
       </div>
+
       <div>
-        <span className="text-xs font-bold text-on-primary-container tracking-widest uppercase">
+        <span className="text-xs font-bold text-[#00b8b4] tracking-[0.3em] uppercase">
           {number}
         </span>
-        <h3 className="font-serif text-3xl font-light mt-8 mb-4">{title}</h3>
-        <p className="text-on-surface-variant font-light mb-6 text-sm leading-relaxed">{description}</p>
-        <ul className="space-y-4 text-on-surface-variant font-light">
+        <h3 className="font-headline text-2xl md:text-3xl font-medium mt-8 mb-4 text-foreground group-hover:text-white transition-colors tracking-tight">
+          {title}
+        </h3>
+        <p className="text-on-surface-variant group-hover:text-slate-300 font-light mb-8 text-sm leading-relaxed transition-colors">
+          {description}
+        </p>
+        <ul className="space-y-3 text-on-surface-variant group-hover:text-slate-300 font-light text-sm transition-colors">
           {features.map((item) => (
-            <li key={item} className="flex items-center gap-3">
-              <span className="w-1 h-1 bg-[#E1CEE1]" />
-              {item}
+            <li key={item} className="flex items-start gap-3">
+              <span className="w-1.5 h-1.5 bg-[#00b8b4] mt-2 flex-shrink-0" />
+              <span>{item}</span>
             </li>
           ))}
         </ul>
       </div>
-      <div className="mt-12">
-        <div className="w-4 h-4 bg-[#E1CEE1]" />
+      <div className="mt-12 flex items-center justify-between pt-6 border-t border-slate-200 group-hover:border-slate-700 transition-colors">
+        <span className="text-[10px] uppercase tracking-[0.3em] font-semibold text-on-surface-variant group-hover:text-[#00b8b4] transition-colors">
+          Expertise
+        </span>
+        <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-[#00b8b4] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all" />
       </div>
     </div>
   )
