@@ -152,18 +152,22 @@ function mapPageToArticle(page: any): NotionArticle {
 }
 
 /**
- * Builds a Status filter that works whether the property is of type "status" or "select".
- * Tries "status" first; if Notion responds with a validation error, retries with "select".
+ * Builds a Status filter that works whether the property is of type "status" or "select",
+ * and whether the published value is "Publicado" (Spanish) or "Published" (English).
+ * Strategy: try select+Publicado, then status+Publicado, then select+Published, then status+Published.
  */
+const PUBLISHED_VALUES = ["Publicado", "Published"]
+const STATUS_TYPES: Array<"select" | "status"> = ["select", "status"]
+
 async function queryWithStatusFilter(
   baseFilter: any | null,
   sorts?: any[],
   pageSize = 50,
 ): Promise<any> {
-  const buildBody = (statusFilterType: "status" | "select") => {
+  const buildBody = (statusFilterType: "status" | "select", value: string) => {
     const statusClause = {
       property: "Status",
-      [statusFilterType]: { equals: "Published" },
+      [statusFilterType]: { equals: value },
     }
     let filter: any
     if (baseFilter && baseFilter.and) {
@@ -180,15 +184,29 @@ async function queryWithStatusFilter(
     }
   }
 
-  try {
-    return await queryDatabase(buildBody("status"))
-  } catch (err: any) {
-    const msg = String(err?.message || "")
-    if (msg.includes("validation_error") || msg.includes("status") || msg.includes("select")) {
-      return await queryDatabase(buildBody("select"))
+  let lastError: any = null
+  for (const value of PUBLISHED_VALUES) {
+    for (const type of STATUS_TYPES) {
+      try {
+        const response = await queryDatabase(buildBody(type, value))
+        if (response.results && response.results.length > 0) {
+          return response
+        }
+        // Empty result is still valid; remember it but keep trying other combos
+        lastError = null
+        if (!lastError) lastError = { _emptyResponse: response }
+      } catch (err: any) {
+        lastError = err
+        // Try next combination
+      }
     }
-    throw err
   }
+
+  // If we got an empty response from a valid query, return it
+  if (lastError && lastError._emptyResponse) {
+    return lastError._emptyResponse
+  }
+  throw lastError || new Error("All Status filter combinations failed")
 }
 
 export async function getPublishedArticles(limit?: number): Promise<NotionArticle[]> {
