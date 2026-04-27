@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
-import { Client } from "@notionhq/client"
 import * as cheerio from "cheerio"
+import { createDraftArticle, findArticleBySourceUrl } from "@/lib/notion"
 
 export const dynamic = "force-dynamic"
 export const maxDuration = 60
@@ -99,7 +99,6 @@ async function scrapeAuthorPage(pageUrl: string): Promise<ScrapedArticle[]> {
       if (!href) return
 
       const url = absoluteUrl(href)
-      // Filter to only article URLs (typically have date or slug pattern)
       if (
         !url.includes("larazon.es") ||
         url === AUTHOR_URL ||
@@ -144,86 +143,6 @@ async function scrapeAuthorPage(pageUrl: string): Promise<ScrapedArticle[]> {
   return articles
 }
 
-async function articleExistsInNotion(
-  notion: Client,
-  dbId: string,
-  url: string,
-): Promise<boolean> {
-  const response = await notion.databases.query({
-    database_id: dbId,
-    filter: {
-      property: "URL fuente",
-      url: { equals: url },
-    },
-    page_size: 1,
-  })
-  return response.results.length > 0
-}
-
-async function createDraftInNotion(
-  notion: Client,
-  dbId: string,
-  article: ScrapedArticle,
-) {
-  const slug = slugify(article.title)
-
-  const properties: Record<string, unknown> = {
-    Name: {
-      title: [{ text: { content: article.title.slice(0, 200) } }],
-    },
-    Slug: {
-      rich_text: [{ text: { content: slug } }],
-    },
-    Status: {
-      select: { name: "Draft" },
-    },
-    Autor: {
-      rich_text: [{ text: { content: "Alejandro G. Motta" } }],
-    },
-    Fuente: {
-      select: { name: "La Razón" },
-    },
-    "URL fuente": {
-      url: article.url,
-    },
-    "Canonical URL": {
-      url: article.url,
-    },
-    Sincronizado: {
-      checkbox: false,
-    },
-    Destacado: {
-      checkbox: false,
-    },
-  }
-
-  if (article.excerpt) {
-    properties.Extracto = {
-      rich_text: [{ text: { content: article.excerpt.slice(0, 2000) } }],
-    }
-  }
-
-  if (article.image) {
-    properties["Imagen destacada"] = { url: article.image }
-  }
-
-  if (article.date) {
-    try {
-      const iso = new Date(article.date).toISOString()
-      properties["Fecha publicación original"] = {
-        date: { start: iso },
-      }
-    } catch {
-      // skip invalid dates
-    }
-  }
-
-  return notion.pages.create({
-    parent: { database_id: dbId },
-    properties: properties as never,
-  })
-}
-
 async function authorize(request: Request): Promise<boolean> {
   const url = new URL(request.url)
   const token = url.searchParams.get("token")
@@ -262,8 +181,6 @@ export async function GET(request: Request) {
       })
     }
 
-    const notion = new Client({ auth: apiKey })
-
     const results: Array<{
       title: string
       url: string
@@ -273,7 +190,7 @@ export async function GET(request: Request) {
 
     for (const article of scraped) {
       try {
-        const exists = await articleExistsInNotion(notion, dbId, article.url)
+        const exists = await findArticleBySourceUrl(article.url)
         if (exists) {
           results.push({
             title: article.title,
@@ -282,7 +199,26 @@ export async function GET(request: Request) {
           })
           continue
         }
-        await createDraftInNotion(notion, dbId, article)
+
+        let isoDate: string | undefined
+        if (article.date) {
+          try {
+            isoDate = new Date(article.date).toISOString()
+          } catch {}
+        }
+
+        await createDraftArticle({
+          title: article.title.slice(0, 200),
+          slug: slugify(article.title),
+          author: "Alejandro G. Motta",
+          source: "La Razón",
+          sourceUrl: article.url,
+          canonicalUrl: article.url,
+          excerpt: article.excerpt,
+          coverImage: article.image,
+          originalPublishedAt: isoDate,
+        })
+
         results.push({
           title: article.title,
           url: article.url,

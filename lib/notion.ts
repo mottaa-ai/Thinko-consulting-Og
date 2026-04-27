@@ -1,5 +1,3 @@
-import { Client } from "@notionhq/client"
-
 export interface NotionArticle {
   id: string
   title: string
@@ -27,11 +25,65 @@ export interface NotionBlock {
   children?: NotionBlock[]
 }
 
-const notion = process.env.NOTION_API_KEY
-  ? new Client({ auth: process.env.NOTION_API_KEY })
-  : null
-
+const NOTION_API_KEY = process.env.NOTION_API_KEY || ""
 const DATABASE_ID = process.env.NOTION_CMS_DB_ID || ""
+const NOTION_VERSION = "2022-06-28"
+const NOTION_BASE = "https://api.notion.com/v1"
+
+async function notionFetch(path: string, init?: RequestInit): Promise<any> {
+  if (!NOTION_API_KEY) {
+    throw new Error("NOTION_API_KEY is not set")
+  }
+
+  const res = await fetch(`${NOTION_BASE}${path}`, {
+    ...init,
+    headers: {
+      Authorization: `Bearer ${NOTION_API_KEY}`,
+      "Notion-Version": NOTION_VERSION,
+      "Content-Type": "application/json",
+      ...(init?.headers || {}),
+    },
+    cache: "no-store",
+  })
+
+  if (!res.ok) {
+    const text = await res.text()
+    let parsed: any = null
+    try {
+      parsed = JSON.parse(text)
+    } catch {}
+    const message = parsed?.message || text || `HTTP ${res.status}`
+    throw new Error(`Notion API ${res.status}: ${message}`)
+  }
+
+  return res.json()
+}
+
+async function queryDatabase(body: Record<string, any>): Promise<any> {
+  return notionFetch(`/databases/${DATABASE_ID}/query`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+}
+
+export async function retrieveDatabase(): Promise<any> {
+  return notionFetch(`/databases/${DATABASE_ID}`)
+}
+
+export async function retrievePage(pageId: string): Promise<any> {
+  return notionFetch(`/pages/${pageId}`)
+}
+
+export async function retrieveBotUser(): Promise<any> {
+  return notionFetch(`/users/me`)
+}
+
+export async function searchAccessible(): Promise<any> {
+  return notionFetch(`/search`, {
+    method: "POST",
+    body: JSON.stringify({ page_size: 20 }),
+  })
+}
 
 function getPlainText(richText: any[] | undefined): string {
   if (!richText || !Array.isArray(richText)) return ""
@@ -45,6 +97,10 @@ function getSelect(prop: any): string {
 function getMultiSelect(prop: any): string[] {
   if (!prop?.multi_select) return []
   return prop.multi_select.map((s: any) => s.name)
+}
+
+function getStatusName(prop: any): string {
+  return prop?.status?.name || prop?.select?.name || ""
 }
 
 function getDate(prop: any): string | null {
@@ -95,26 +151,57 @@ function mapPageToArticle(page: any): NotionArticle {
   }
 }
 
-export async function getPublishedArticles(limit?: number): Promise<NotionArticle[]> {
-  if (!notion || !DATABASE_ID) return []
+/**
+ * Builds a Status filter that works whether the property is of type "status" or "select".
+ * Tries "status" first; if Notion responds with a validation error, retries with "select".
+ */
+async function queryWithStatusFilter(
+  baseFilter: any | null,
+  sorts?: any[],
+  pageSize = 50,
+): Promise<any> {
+  const buildBody = (statusFilterType: "status" | "select") => {
+    const statusClause = {
+      property: "Status",
+      [statusFilterType]: { equals: "Published" },
+    }
+    let filter: any
+    if (baseFilter && baseFilter.and) {
+      filter = { and: [statusClause, ...baseFilter.and] }
+    } else if (baseFilter) {
+      filter = { and: [statusClause, baseFilter] }
+    } else {
+      filter = statusClause
+    }
+    return {
+      filter,
+      ...(sorts ? { sorts } : {}),
+      page_size: pageSize,
+    }
+  }
 
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter: {
-        property: "Status",
-        select: { equals: "Published" },
-      },
-      sorts: [
-        {
-          property: "Fecha publicación Thinko",
-          direction: "descending",
-        },
-      ],
-      page_size: limit ?? 50,
-    })
+    return await queryDatabase(buildBody("status"))
+  } catch (err: any) {
+    const msg = String(err?.message || "")
+    if (msg.includes("validation_error") || msg.includes("status") || msg.includes("select")) {
+      return await queryDatabase(buildBody("select"))
+    }
+    throw err
+  }
+}
 
-    return response.results.map(mapPageToArticle).filter((a) => a.title)
+export async function getPublishedArticles(limit?: number): Promise<NotionArticle[]> {
+  if (!NOTION_API_KEY || !DATABASE_ID) return []
+
+  try {
+    const response = await queryWithStatusFilter(
+      null,
+      [{ property: "Fecha publicación Thinko", direction: "descending" }],
+      limit ?? 50,
+    )
+
+    return (response.results || []).map(mapPageToArticle).filter((a: NotionArticle) => a.title)
   } catch (error) {
     console.error("[v0] Error fetching Notion articles:", error)
     return []
@@ -122,27 +209,16 @@ export async function getPublishedArticles(limit?: number): Promise<NotionArticl
 }
 
 export async function getFeaturedArticles(limit = 4): Promise<NotionArticle[]> {
-  if (!notion || !DATABASE_ID) return []
+  if (!NOTION_API_KEY || !DATABASE_ID) return []
 
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter: {
-        and: [
-          { property: "Status", select: { equals: "Published" } },
-          { property: "Destacado", checkbox: { equals: true } },
-        ],
-      },
-      sorts: [
-        {
-          property: "Fecha publicación Thinko",
-          direction: "descending",
-        },
-      ],
-      page_size: limit,
-    })
+    const response = await queryWithStatusFilter(
+      { and: [{ property: "Destacado", checkbox: { equals: true } }] },
+      [{ property: "Fecha publicación Thinko", direction: "descending" }],
+      limit,
+    )
 
-    return response.results.map(mapPageToArticle).filter((a) => a.title)
+    return (response.results || []).map(mapPageToArticle).filter((a: NotionArticle) => a.title)
   } catch (error) {
     console.error("[v0] Error fetching featured articles:", error)
     return []
@@ -150,21 +226,16 @@ export async function getFeaturedArticles(limit = 4): Promise<NotionArticle[]> {
 }
 
 export async function getArticleBySlug(slug: string): Promise<NotionArticle | null> {
-  if (!notion || !DATABASE_ID) return null
+  if (!NOTION_API_KEY || !DATABASE_ID) return null
 
   try {
-    const response = await notion.databases.query({
-      database_id: DATABASE_ID,
-      filter: {
-        and: [
-          { property: "Status", select: { equals: "Published" } },
-          { property: "Slug", rich_text: { equals: slug } },
-        ],
-      },
-      page_size: 1,
-    })
+    const response = await queryWithStatusFilter(
+      { and: [{ property: "Slug", rich_text: { equals: slug } }] },
+      undefined,
+      1,
+    )
 
-    if (response.results.length === 0) return null
+    if (!response.results || response.results.length === 0) return null
     return mapPageToArticle(response.results[0])
   } catch (error) {
     console.error("[v0] Error fetching article by slug:", error)
@@ -173,19 +244,16 @@ export async function getArticleBySlug(slug: string): Promise<NotionArticle | nu
 }
 
 export async function getArticleBlocks(pageId: string): Promise<any[]> {
-  if (!notion) return []
+  if (!NOTION_API_KEY) return []
 
   try {
     const blocks: any[] = []
     let cursor: string | undefined
 
     do {
-      const response = await notion.blocks.children.list({
-        block_id: pageId,
-        start_cursor: cursor,
-        page_size: 100,
-      })
-      blocks.push(...response.results)
+      const url = `/blocks/${pageId}/children?page_size=100${cursor ? `&start_cursor=${cursor}` : ""}`
+      const response = await notionFetch(url)
+      blocks.push(...(response.results || []))
       cursor = response.has_more ? response.next_cursor || undefined : undefined
     } while (cursor)
 
@@ -199,4 +267,74 @@ export async function getArticleBlocks(pageId: string): Promise<any[]> {
 export async function getAllSlugs(): Promise<string[]> {
   const articles = await getPublishedArticles(100)
   return articles.map((a) => a.slug).filter(Boolean)
+}
+
+/**
+ * Creates a draft article in Notion. Used by the La Razón scraper.
+ */
+export async function createDraftArticle(input: {
+  title: string
+  slug: string
+  author?: string
+  source?: string
+  sourceUrl?: string
+  canonicalUrl?: string
+  excerpt?: string
+  coverImage?: string
+  originalPublishedAt?: string
+}): Promise<any> {
+  if (!NOTION_API_KEY || !DATABASE_ID) {
+    throw new Error("NOTION_API_KEY or NOTION_CMS_DB_ID not set")
+  }
+
+  const properties: Record<string, any> = {
+    Name: { title: [{ text: { content: input.title } }] },
+    Slug: { rich_text: [{ text: { content: input.slug } }] },
+    Status: { status: { name: "Draft" } },
+  }
+
+  if (input.author) properties["Autor"] = { rich_text: [{ text: { content: input.author } }] }
+  if (input.source) properties["Fuente"] = { select: { name: input.source } }
+  if (input.sourceUrl) properties["URL fuente"] = { url: input.sourceUrl }
+  if (input.canonicalUrl) properties["Canonical URL"] = { url: input.canonicalUrl }
+  if (input.excerpt) properties["Extracto"] = { rich_text: [{ text: { content: input.excerpt.slice(0, 2000) } }] }
+  if (input.coverImage) properties["Imagen destacada"] = { url: input.coverImage }
+  if (input.originalPublishedAt) properties["Fecha publicación original"] = { date: { start: input.originalPublishedAt } }
+
+  try {
+    return await notionFetch(`/pages`, {
+      method: "POST",
+      body: JSON.stringify({
+        parent: { database_id: DATABASE_ID },
+        properties,
+      }),
+    })
+  } catch (err: any) {
+    // Fallback: Status as select if not configured as status
+    const msg = String(err?.message || "")
+    if (msg.includes("status")) {
+      properties.Status = { select: { name: "Draft" } }
+      return await notionFetch(`/pages`, {
+        method: "POST",
+        body: JSON.stringify({
+          parent: { database_id: DATABASE_ID },
+          properties,
+        }),
+      })
+    }
+    throw err
+  }
+}
+
+export async function findArticleBySourceUrl(sourceUrl: string): Promise<any | null> {
+  if (!NOTION_API_KEY || !DATABASE_ID) return null
+  try {
+    const response = await queryDatabase({
+      filter: { property: "URL fuente", url: { equals: sourceUrl } },
+      page_size: 1,
+    })
+    return response.results?.[0] || null
+  } catch {
+    return null
+  }
 }
