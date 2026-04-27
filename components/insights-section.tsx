@@ -26,16 +26,7 @@ export function InsightsSection() {
     revalidateOnFocus: false,
   })
 
-  const liveArticles = data?.articles ?? []
-  const fallbackArticles: Article[] = (t.articles ?? []).map((a: any) => ({
-    id: a.id,
-    title: a.title,
-    link: "#",
-    date: a.date,
-    category: a.category,
-    excerpt: a.excerpt,
-  }))
-  const articles = liveArticles.length > 0 ? liveArticles.slice(0, 4) : fallbackArticles
+  const articles = (data?.articles ?? []).slice(0, 4)
 
   return (
     <section className="py-32 px-8 md:px-12 bg-white" id="insights">
