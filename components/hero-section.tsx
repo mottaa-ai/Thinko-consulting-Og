@@ -21,7 +21,7 @@ function TypewriterText({ words }: { words: string[] }) {
       return () => clearTimeout(pauseTimeout)
     }
 
-    const speed = isDeleting ? 50 : 110
+    const speed = isDeleting ? 52 : 113
 
     const timeout = setTimeout(() => {
       if (!isDeleting) {
