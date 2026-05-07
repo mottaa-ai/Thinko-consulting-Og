@@ -13,55 +13,57 @@
     {
       "id": "member-2",
       "name": "Álvaro Mejía",
-      "role": "Director of Data Science & Public Opinion",
+      "role": "Senior Consultant",
+      "specialty": "Data Science Expert",
       "bio": "Strategist trained at Warwick and Essex; expert in statistical modeling, electoral behavior and corporate reputation for public and private sectors."
     },
     {
       "id": "member-3",
       "name": "José Luis Kannarek",
-      "role": "Director of Qualitative Research",
+      "role": "Senior Consultant",
+      "specialty": "Qualitative Research",
       "bio": "Senior consultant with over 35 years of international experience leading deep qualitative research across 8 Latin American countries."
     },
     {
       "id": "member-4",
       "name": "Octavio Sanz",
-      "role": "Senior Consultant in Market Intelligence",
+      "role": "Senior Consultant",
       "bio": "Specialist in discourse analysis and hybrid methodologies, focused on strategic management of complex environments and high-impact projects."
     },
     {
       "id": "member-5",
       "name": "Ruddyard Villalobos",
-      "role": "Specialist in Organizational Dynamics",
+      "role": "Senior Consultant",
       "bio": "Industrial engineer with 20 years of business consulting experience; expert in high-performance training with a passion for service."
     },
     {
       "id": "member-6",
       "name": "Rodrigo Salas",
-      "role": "Specialist in Consumer Behavior",
+      "role": "Senior Consultant",
       "bio": "Psychologist expert in ethnography and moderation; has led audience intelligence for entertainment giants like History Channel."
     },
     {
       "id": "member-7",
       "name": "Verónica Calderaro",
-      "role": "Consultant in Behavioral Science & Insights",
+      "role": "Senior Consultant",
       "bio": "MBA and psychologist focused on decision-making analysis; leader of quali-quantitative projects for global firms like Ipsos."
     },
     {
       "id": "member-8",
       "name": "Abraham Martínez",
-      "role": "Specialist in Public Affairs & Regulation",
+      "role": "Senior Analyst",
       "bio": "Doctor of Law and Political Theory expert from University of Toronto; specialist in legislative advocacy and stakeholder management."
     },
     {
       "id": "member-9",
       "name": "María José Favela",
-      "role": "Senior Analyst in Economics & Public Policy",
+      "role": "Senior Analyst",
       "bio": "Master in Economics and Finance; specialist at the intersection of labor markets and public policies with a focus on inclusion."
     },
     {
       "id": "member-10",
       "name": "Kenia Estrada",
-      "role": "Strategist in Communications & Public Relations",
+      "role": "Senior Analyst",
       "bio": "Specialist in image management and electoral campaigns, integrating communication ethics with cutting-edge digital tools."
     }
   ],

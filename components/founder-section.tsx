@@ -9,7 +9,7 @@ const founderContent = {
     name: "Alejandro Motta Nicolicchia",
     title: "Socio Director",
     description: [
-      "22 años de experiencia apoyando a organizaciones públicas y privadas en el diseño de soluciones basadas en información confiable, análisis riguroso y visión estratégica.",
+      "Dos décadas de experiencia apoyando a organizaciones públicas y privadas en el diseño de soluciones basadas en información confiable, análisis riguroso y visión estratégica.",
       "A lo largo de su trayectoria, la firma ha trabajado para más de 80 clientes combinando investigación y comunicación estratégica; consolidando experiencia en distintos sectores y contextos. Alejandro ha participado en proyectos en Hispanoamérica, lo que le permite integrar perspectivas globales con conocimiento local."
     ]
   },
@@ -18,7 +18,7 @@ const founderContent = {
     name: "Alejandro Motta Nicolicchia",
     title: "Managing Partner",
     description: [
-      "22 years of experience supporting public and private organizations in designing solutions based on reliable information, rigorous analysis, and strategic vision.",
+      "Two decades of experience supporting public and private organizations in designing solutions based on reliable information, rigorous analysis, and strategic vision.",
       "Throughout his career, the firm has worked for more than 80 clients combining research and strategic communication; consolidating experience in different sectors and contexts. Alejandro has participated in projects throughout Latin America, which allows him to integrate global perspectives with local knowledge."
     ]
   }

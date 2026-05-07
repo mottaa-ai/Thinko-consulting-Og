@@ -1,5 +1,6 @@
 "use client"
 
+import Link from "next/link"
 import { BarChart3, Landmark, Target, ArrowUpRight } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 
@@ -31,14 +32,19 @@ export function ServicesSection() {
       
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-slate-200">
         {t.services.map((service, index) => (
-          <ServiceCard 
-            key={service.id} 
-            number={String(index + 1).padStart(2, '0')}
-            title={service.title}
-            description={service.description}
-            features={service.features}
-            icon={iconMap[service.id] || BarChart3}
-          />
+          <Link
+            key={service.id}
+            href={`#${service.id}`}
+            className="no-underline"
+          >
+            <ServiceCard 
+              number={String(index + 1).padStart(2, '0')}
+              title={service.title}
+              description={service.description}
+              features={service.features}
+              icon={iconMap[service.id] || BarChart3}
+            />
+          </Link>
         ))}
       </div>
     </section>
@@ -59,7 +65,7 @@ function ServiceCard({
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <div className="group p-12 bg-white hover:bg-[#0f172a] transition-colors duration-500 min-h-[520px] flex flex-col justify-between relative overflow-hidden">
+    <div className="group p-12 bg-white hover:bg-[#0f172a] transition-colors duration-500 min-h-[520px] flex flex-col justify-between relative overflow-hidden cursor-pointer">
       {/* Icon */}
       <div className="absolute top-6 right-6 transition-all duration-500">
         <div className="w-12 h-12 flex items-center justify-center border border-slate-300 group-hover:border-[#00b8b4] group-hover:bg-[#00b8b4]/10 transition-all">

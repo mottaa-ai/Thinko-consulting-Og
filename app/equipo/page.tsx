@@ -24,6 +24,7 @@ interface TeamMember {
   id: string
   name: string
   role: string
+  specialty?: string
   bio: string
 }
 
@@ -42,9 +43,14 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
       </div>
       <div className="flex flex-col">
         <h3 className="text-2xl md:text-3xl font-headline font-medium mb-3 text-foreground tracking-tight">{member.name}</h3>
-        <p className="text-xs uppercase tracking-[0.25em] text-[#00b8b4] mb-6 font-semibold">
+        <p className="text-xs uppercase tracking-[0.25em] text-[#00b8b4] mb-2 font-semibold">
           {member.role}
         </p>
+        {member.specialty && (
+          <p className="text-xs text-slate-500 mb-4 font-light">
+            {member.specialty}
+          </p>
+        )}
         <div className="w-12 h-[2px] bg-[#00b8b4] mb-6" />
         <p className="text-on-surface-variant text-sm leading-relaxed max-w-[95%] font-light">
           {member.bio}
