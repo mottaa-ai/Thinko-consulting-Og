@@ -35,7 +35,7 @@ export function Navbar() {
         
         <div className="hidden md:flex gap-8 items-center">
           <Link 
-            href="/#philosophy" 
+            href="/#nuestro-enfoque" 
             className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.philosophy}
@@ -102,7 +102,7 @@ export function Navbar() {
         <div className="md:hidden absolute top-full left-0 right-0 bg-slate-50/95 dark:bg-slate-950/95 backdrop-blur-md border-t border-outline-variant/20">
           <div className="flex flex-col px-8 py-6 gap-6">
             <Link 
-              href="/#philosophy" 
+              href="/#nuestro-enfoque" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >

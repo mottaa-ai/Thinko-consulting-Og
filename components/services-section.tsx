@@ -47,6 +47,8 @@ export function ServicesSection() {
           </Link>
         ))}
       </div>
+      
+      {/* TODO: Insert PPT content here */}
     </section>
   )
 }

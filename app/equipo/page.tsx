@@ -1,10 +1,11 @@
 "use client"
 
+import { useState } from "react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, ChevronDown } from "lucide-react"
 import Link from "next/link"
-import { useTranslation } from "@/lib/i18n"
+import { useI18n, useTranslation } from "@/lib/i18n"
 import images from "@/content/images.json"
 
 const teamImages: Record<string, string> = {
@@ -26,10 +27,14 @@ interface TeamMember {
   role: string
   specialty?: string
   bio: string
+  fullBio?: string
 }
 
-function TeamMemberCard({ member }: { member: TeamMember }) {
+function TeamMemberCard({ member, locale }: { member: TeamMember; locale: string }) {
+  const [isExpanded, setIsExpanded] = useState(false)
   const imageUrl = teamImages[member.id] || images.team[member.id as keyof typeof images.team]
+  const displayBio = isExpanded ? (member.fullBio || member.bio) : member.bio
+  const hasFullBio = member.fullBio && member.fullBio !== member.bio
   
   return (
     <div className="group">
@@ -52,9 +57,20 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
           </p>
         )}
         <div className="w-12 h-[2px] bg-[#00b8b4] mb-6" />
-        <p className="text-on-surface-variant text-sm leading-relaxed max-w-[95%] font-light">
-          {member.bio}
-        </p>
+        <div className="max-h-auto overflow-hidden transition-all duration-300">
+          <p className="text-on-surface-variant text-sm leading-relaxed max-w-[95%] font-light">
+            {displayBio}
+          </p>
+        </div>
+        {hasFullBio && (
+          <button
+            onClick={() => setIsExpanded(!isExpanded)}
+            className="mt-4 flex items-center gap-2 text-xs uppercase tracking-widest font-semibold text-[#00b8b4] hover:text-[#00a3a0] transition-colors group/btn"
+          >
+            {isExpanded ? (locale === 'es' ? 'Ver menos' : 'Read less') : (locale === 'es' ? 'Ver más' : 'Read more')}
+            <ChevronDown className={`w-4 h-4 transition-transform ${isExpanded ? 'rotate-180' : ''}`} />
+          </button>
+        )}
       </div>
     </div>
   )
@@ -62,6 +78,7 @@ function TeamMemberCard({ member }: { member: TeamMember }) {
 
 export default function EquipoPage() {
   const t = useTranslation('team')
+  const { locale } = useI18n()
 
   return (
     <main className="bg-surface text-on-surface">
@@ -93,7 +110,7 @@ export default function EquipoPage() {
       <section className="max-w-[1600px] mx-auto px-8 md:px-12 pb-24">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-24 gap-x-16">
           {t.members.map((member) => (
-            <TeamMemberCard key={member.id} member={member} />
+            <TeamMemberCard key={member.id} member={member} locale={locale} />
           ))}
         </div>
       </section>

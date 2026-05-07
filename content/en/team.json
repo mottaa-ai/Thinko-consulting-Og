@@ -8,63 +8,73 @@
       "id": "member-1",
       "name": "José Antonio Lozano",
       "role": "Senior Advisor & Institutional Strategy",
-      "bio": "President of the UP-IPADE Board and Doctor of Law; leading voice in public opinion across Mexico's major media outlets."
+      "bio": "President of the UP-IPADE Board and Doctor of Law; leading voice in public opinion across Mexico's major media outlets.",
+      "fullBio": "President of the UP-IPADE Board and Doctor of Law; leading voice in public opinion across Mexico's major media outlets. With over three decades of strategic consulting experience, he has advised governments, multinational companies, and civil society organizations. His expertise in institutional political analysis and stakeholder management positions him as an indispensable guide for high-impact projects."
     },
     {
       "id": "member-2",
       "name": "Álvaro Mejía",
       "role": "Senior Consultant",
       "specialty": "Data Science Expert",
-      "bio": "Strategist trained at Warwick and Essex; expert in statistical modeling, electoral behavior and corporate reputation for public and private sectors."
+      "bio": "Strategist trained at Warwick and Essex; expert in statistical modeling, electoral behavior and corporate reputation for public and private sectors.",
+      "fullBio": "Strategist trained at Warwick and Essex; expert in statistical modeling, electoral behavior and corporate reputation for public and private sectors. His cutting-edge quantitative methodology has transformed how organizations understand their audiences. Specialist at the intersection of big data, political analysis, and strategic business decisions."
     },
     {
       "id": "member-3",
       "name": "José Luis Kannarek",
       "role": "Senior Consultant",
       "specialty": "Qualitative Research",
-      "bio": "Senior consultant with over 35 years of international experience leading deep qualitative research across 8 Latin American countries."
+      "bio": "Senior consultant with over 35 years of international experience leading deep qualitative research across 8 Latin American countries.",
+      "fullBio": "Senior consultant with over 35 years of international experience leading deep qualitative research across 8 Latin American countries. Master in designing ethnographic methodologies and strategic focus groups. His ability to decode complex narratives and social behaviors has been fundamental in transformational reputation and strategic communication projects."
     },
     {
       "id": "member-4",
       "name": "Octavio Sanz",
       "role": "Senior Consultant",
-      "bio": "Specialist in discourse analysis and hybrid methodologies, focused on strategic management of complex environments and high-impact projects."
+      "bio": "Specialist in discourse analysis and hybrid methodologies, focused on strategic management of complex environments and high-impact projects.",
+      "fullBio": "Specialist in discourse analysis and hybrid methodologies, focused on strategic management of complex environments and high-impact projects. Combines text analysis tools with ethnographic research to provide unique insights. His expertise in political communication and crisis management has been key to building client reputation in volatility contexts."
     },
     {
       "id": "member-5",
       "name": "Ruddyard Villalobos",
       "role": "Senior Consultant",
-      "bio": "Industrial engineer with 20 years of business consulting experience; expert in high-performance training with a passion for service."
+      "bio": "Industrial engineer with 20 years of business consulting experience; expert in high-performance training with a passion for service.",
+      "fullBio": "Industrial engineer with 20 years of business consulting experience; expert in high-performance training with a passion for service. Specialist in organizational transformation and leadership development. His methodology has impacted hundreds of professionals across diverse sectors, combining analytical rigor with humanism."
     },
     {
       "id": "member-6",
       "name": "Rodrigo Salas",
       "role": "Senior Consultant",
-      "bio": "Psychologist expert in ethnography and moderation; has led audience intelligence for entertainment giants like History Channel."
+      "bio": "Psychologist expert in ethnography and moderation; has led audience intelligence for entertainment giants like History Channel.",
+      "fullBio": "Psychologist expert in ethnography and moderation; has led audience intelligence for entertainment giants like History Channel. His ability to facilitate deep dialogues and extract human behavior insights is unique. Expert in consumer anthropology and multi-platform engagement strategies."
     },
     {
       "id": "member-7",
       "name": "Verónica Calderaro",
       "role": "Senior Consultant",
-      "bio": "MBA and psychologist focused on decision-making analysis; leader of quali-quantitative projects for global firms like Ipsos."
+      "bio": "MBA and psychologist focused on decision-making analysis; leader of quali-quantitative projects for global firms like Ipsos.",
+      "fullBio": "MBA and psychologist focused on decision-making analysis; leader of quali-quantitative projects for global firms like Ipsos. Combines scientific rigor with strategic creativity to solve complex communication and branding challenges. Her expertise in behavioral economics and neuromarketing is differentiating in the industry."
     },
     {
       "id": "member-8",
       "name": "Abraham Martínez",
       "role": "Senior Analyst",
-      "bio": "Doctor of Law and Political Theory expert from University of Toronto; specialist in legislative advocacy and stakeholder management."
+      "bio": "Doctor of Law and Political Theory expert from University of Toronto; specialist in legislative advocacy and stakeholder management.",
+      "fullBio": "Doctor of Law and Political Theory expert from University of Toronto; specialist in legislative advocacy and stakeholder management. His deep understanding of regulatory frameworks and institutional dynamics is critical for clients in regulated sectors. Expert in designing government engagement and lobbying strategy."
     },
     {
       "id": "member-9",
       "name": "María José Favela",
       "role": "Senior Analyst",
-      "bio": "Master in Economics and Finance; specialist at the intersection of labor markets and public policies with a focus on inclusion."
+      "bio": "Master in Economics and Finance; specialist at the intersection of labor markets and public policies with a focus on inclusion.",
+      "fullBio": "Master in Economics and Finance; specialist at the intersection of labor markets and public policies with a focus on inclusion. Her research in behavioral economics has informed social impact policies. Expert in program design and impact evaluation for governments and multilateral institutions."
     },
     {
       "id": "member-10",
       "name": "Kenia Estrada",
       "role": "Senior Analyst",
-      "bio": "Specialist in image management and electoral campaigns, integrating communication ethics with cutting-edge digital tools."
+      "bio": "Specialist in image management and electoral campaigns, integrating communication ethics with cutting-edge digital tools.",
+      "fullBio": "Specialist in image management and electoral campaigns, integrating communication ethics with cutting-edge digital tools. Expert in media strategy and digital communications with mass audience impact. Her work has combined public relations tradition with digital marketing methodologies to generate authentic engagement."
     }
   ],
   "cta": {
