@@ -58,7 +58,7 @@ export function HeroSection() {
 
   const rotatingWords = locale === 'en'
     ? ['TaylorMade', 'Research', 'Analysis', 'Consulting']
-    : ['Soluciones', 'Investigación', 'Análisis', 'Consultorías']
+    : ['Soluciones', 'Proyectos Tailor-made', 'Análisis', 'Consultorías']
 
   return (
     <section className="relative min-h-screen flex items-center px-8 md:px-24 pt-20 overflow-hidden bg-surface">

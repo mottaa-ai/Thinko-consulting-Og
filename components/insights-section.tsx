@@ -29,7 +29,7 @@ export function InsightsSection() {
   const articles = (data?.articles ?? []).slice(0, 4)
 
   return (
-    <section className="py-32 px-8 md:px-12 bg-white" id="insights">
+    <section className="py-32 px-8 md:px-12 bg-white scroll-mt-20" id="proyectos-tailor-made">
       <div className="max-w-[1600px] mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
           <div>

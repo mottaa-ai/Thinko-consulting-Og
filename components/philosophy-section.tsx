@@ -6,7 +6,7 @@ export function PhilosophySection() {
   const t = useTranslation('philosophy')
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-surface-container-low" id="nuestro-enfoque">
+    <section className="py-32 px-8 md:px-24 bg-surface-container-low scroll-mt-20" id="nuestro-enfoque">
       <div className="grid grid-cols-1 md:grid-cols-12 gap-12">
         <div className="md:col-span-4">
           <span className="text-xs uppercase tracking-widest text-[#00b8b4] mb-4 block font-semibold">

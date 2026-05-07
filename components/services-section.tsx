@@ -17,7 +17,7 @@ export function ServicesSection() {
   const t = useTranslation('services')
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-surface" id="services">
+    <section className="py-32 px-8 md:px-24 bg-surface scroll-mt-20" id="services">
       <div className="mb-20 flex flex-col md:flex-row justify-between items-start md:items-end gap-8">
         <div>
           <span className="text-xs uppercase tracking-widest text-[#00b8b4] font-semibold">
