@@ -13,11 +13,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   "consultoria-empresarial": Target,
 }
 
-export const metadata = {
-  title: "Servicios | Thinko Consulting",
-  description: "Explore our expertise areas in public opinion, public affairs, and business consulting.",
-}
-
 export default function ServiciosPage() {
   const t = useTranslation('services')
 
