@@ -66,7 +66,7 @@ export default function ServiciosPage() {
                     </h3>
 
                     {/* Description */}
-                    <p className="text-on-surface-variant font-light text-base leading-relaxed mb-8 flex-grow">
+                    <p className="text-on-surface-variant font-light text-base leading-relaxed mb-8 flex-grow min-h-[120px]">
                       {service.description}
                     </p>
 
