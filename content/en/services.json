@@ -3,36 +3,103 @@
   "title": "Areas of Expertise",
   "services": [
     {
-      "id": "public-opinion",
+      "id": "opinion-publica",
       "title": "Public Opinion",
-      "description": "Deep analysis of social trends, perception studies and political climate monitoring through cutting-edge quantitative and qualitative methodologies.",
+      "description": "In-depth analysis of social trends, perception studies and political climate monitoring through quali-quantitative methodologies to guide governments, political actors and opinion leaders.",
+      "sectionTitle": "Methodologies & Solutions",
       "features": [
-        "Surveys and opinion studies",
-        "Social sentiment analysis",
-        "Political actor mapping",
-        "Public image studies"
+        "Opinion Studies",
+        "Quantitative Surveys",
+        "Qualitative Research",
+        "Strategic Lines"
+      ],
+      "items": [
+        {
+          "name": "Opinion Studies",
+          "detail": "Evaluation of national interest topics and their impact on the political and social environment."
+        },
+        {
+          "name": "Quantitative Surveys",
+          "detail": "Custom sampling designs through periodic Tracking, Omnibus surveys (multi-client) and online measurements. Phone, household, face-to-face and point-of-sale applications."
+        },
+        {
+          "name": "Qualitative Research",
+          "detail": "Focus groups, triad focus groups (to break the spiral of silence) and in-depth interviews with experts and opinion leaders."
+        },
+        {
+          "name": "Strategic Lines",
+          "detail": "Management evaluation, actor positioning, voting intention, voter profiles and media message impact."
+        }
       ]
     },
     {
-      "id": "public-affairs",
+      "id": "asuntos-publicos",
       "title": "Public Affairs",
-      "description": "Institutional relationship strategies, crisis management and positioning with governmental and regulatory stakeholders.",
+      "description": "Institutional relationship strategies, crisis management and positioning before regulatory stakeholders to anticipate scenarios and facilitate complex decision-making.",
+      "sectionTitle": "Solutions & Services",
       "features": [
-        "Strategic lobbying",
-        "Reputational crisis management",
-        "Government relations",
-        "Regulatory analysis"
+        "Strategic Lobbying",
+        "Government Relations",
+        "Crisis Management",
+        "Regulatory Analysis",
+        "Methodology"
+      ],
+      "items": [
+        {
+          "name": "Strategic Lobbying",
+          "detail": "Building legitimate institutional agendas before public decision-makers."
+        },
+        {
+          "name": "Government Relations",
+          "detail": "Public-private alliances and transparent bridges with national and local authorities."
+        },
+        {
+          "name": "Crisis Management",
+          "detail": "Immediate protocols and forward-looking strategies to mitigate reputational risks and socio-environmental conflicts."
+        },
+        {
+          "name": "Regulatory Analysis",
+          "detail": "Active monitoring of bills and regulatory trends to prevent business impacts."
+        },
+        {
+          "name": "Methodology",
+          "detail": "Situation diagnosis, political actor influence mapping and predictive scenario building."
+        }
       ]
     },
     {
-      "id": "business-consulting",
+      "id": "consultoria-empresarial",
       "title": "Business Consulting",
-      "description": "Strategic advice for corporate decision-making in complex political and social environments.",
+      "description": "Strategic advisory and competitive intelligence for corporations. We combine traditional market research with sociological rigor to guide commercial and reputational goals.",
+      "sectionTitle": "Solutions & Services",
       "features": [
-        "Political due diligence",
-        "Country risk analysis",
-        "Corporate strategy",
-        "Competitive intelligence"
+        "Country & Environment Risk",
+        "Consumer Studies",
+        "Innovation & Product",
+        "Advertising Strategy",
+        "Advanced Techniques"
+      ],
+      "items": [
+        {
+          "name": "Country & Environment Risk",
+          "detail": "Political-social Due Diligence and macroeconomic or regulatory risk assessment before investments and projects."
+        },
+        {
+          "name": "Consumer Studies",
+          "detail": "Habits, uses, profiles, market segmentation, corporate image, brand positioning and price sensitivity."
+        },
+        {
+          "name": "Innovation & Product",
+          "detail": "Concept tests, packaging tests, organoleptic analysis and unmet needs detection."
+        },
+        {
+          "name": "Advertising Strategy",
+          "detail": "Pre-Test, Post-Test and advertising Tracking evaluations to optimize campaign return on investment."
+        },
+        {
+          "name": "Advanced Techniques",
+          "detail": "Ethnographic studies, customer experience audits (Mystery Shopper) and secondary research based on hard data."
+        }
       ]
     }
   ]
