@@ -41,7 +41,7 @@ export function Navbar() {
             {t.links.philosophy}
           </Link>
           <Link 
-            href="/#services" 
+            href="/servicios" 
             className="text-sm font-medium tracking-tight text-on-surface-variant hover:text-[#00b8b4] transition-colors duration-300"
           >
             {t.links.services}
@@ -109,7 +109,7 @@ export function Navbar() {
               {t.links.philosophy}
             </Link>
             <Link 
-              href="/#services" 
+              href="/servicios" 
               className="text-sm font-medium tracking-tight text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors duration-300"
               onClick={() => setMobileMenuOpen(false)}
             >

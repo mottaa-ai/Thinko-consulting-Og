@@ -34,7 +34,7 @@ export function ServicesSection() {
         {t.services.map((service, index) => (
           <Link
             key={service.id}
-            href={`#${service.id}`}
+            href={`/servicios/${service.id}`}
             className="no-underline"
           >
             <ServiceCard 

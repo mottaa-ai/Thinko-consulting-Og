@@ -5,34 +5,101 @@
     {
       "id": "opinion-publica",
       "title": "Opinión Pública",
-      "description": "Análisis profundo de tendencias sociales, estudios de percepción y monitoreo de clima político mediante metodologías cuantitativas y cualitativas de vanguardia.",
+      "description": "Análisis profundo de tendencias sociales, estudios de percepción y monitoreo de clima político mediante metodologías cuali-cuantitativas para guiar a gobiernos, actores políticos y líderes de opinión.",
+      "sectionTitle": "Metodologías y Soluciones",
       "features": [
-        "Encuestas y estudios de opinión",
-        "Análisis de sentiment social",
-        "Mapeo de actores políticos",
-        "Estudios de imagen pública"
+        "Estudios de Opinión",
+        "Encuestas Cuantitativas",
+        "Investigación Cualitativa",
+        "Líneas Estratégicas"
+      ],
+      "items": [
+        {
+          "name": "Estudios de Opinión",
+          "detail": "Evaluación de temas de interés nacional e impacto en el entorno político y social."
+        },
+        {
+          "name": "Encuestas Cuantitativas",
+          "detail": "Diseños muestrales personalizados mediante Tracking periódicos, encuestas Ómnibus (multiclientes) y mediciones online. Aplicación telefónica, hogares, cara a cara y puntos de venta."
+        },
+        {
+          "name": "Investigación Cualitativa",
+          "detail": "Focus groups, focus tríadas (para romper la espiral del silencio) y entrevistas en profundidad a expertos y líderes de opinión."
+        },
+        {
+          "name": "Líneas Estratégicas",
+          "detail": "Evaluación de gestión, posicionamiento de actores, intención de voto, perfiles de electores e impacto de mensajes en medios."
+        }
       ]
     },
     {
       "id": "asuntos-publicos",
       "title": "Asuntos Públicos",
-      "description": "Estrategias de relacionamiento institucional, gestión de crisis y posicionamiento ante stakeholders gubernamentales y regulatorios.",
+      "description": "Estrategias de relacionamiento institucional, gestión de crisis y posicionamiento ante stakeholders regulatorios para anticipar escenarios y facilitar la toma de decisiones complejas.",
+      "sectionTitle": "Soluciones y Servicios",
       "features": [
-        "Lobby estratégico",
-        "Gestión de crisis reputacional",
-        "Relaciones gubernamentales",
-        "Análisis regulatorio"
+        "Lobby Estratégico",
+        "Relaciones Gubernamentales",
+        "Gestión de Crisis",
+        "Análisis Regulatorio",
+        "Metodología"
+      ],
+      "items": [
+        {
+          "name": "Lobby Estratégico",
+          "detail": "Construcción de agendas institucionales legítimas frente a tomadores de decisión públicos."
+        },
+        {
+          "name": "Relaciones Gubernamentales",
+          "detail": "Alianzas público-privadas y puentes transparentes con autoridades nacionales y locales."
+        },
+        {
+          "name": "Gestión de Crisis",
+          "detail": "Protocolos inmediatos y estrategias prospectivas para mitigar riesgos reputacionales y conflictos socio-ambientales."
+        },
+        {
+          "name": "Análisis Regulatorio",
+          "detail": "Monitoreo activo de proyectos de ley y tendencias normativas para prevenir impactos en el negocio."
+        },
+        {
+          "name": "Metodología",
+          "detail": "Diagnóstico de coyunturas, mapeo de influencia de actores políticos y construcción de escenarios predictivos."
+        }
       ]
     },
     {
       "id": "consultoria-empresarial",
       "title": "Consultoría Empresarial",
-      "description": "Asesoramiento estratégico para la toma de decisiones corporativas en entornos políticos y sociales complejos.",
+      "description": "Asesoramiento estratégico e inteligencia competitiva para corporaciones. Combinamos la investigación de mercados tradicional con rigurosidad sociológica para guiar metas comerciales y de reputación.",
+      "sectionTitle": "Soluciones y Servicios",
       "features": [
-        "Due diligence político",
-        "Análisis de riesgo país",
-        "Estrategia corporativa",
-        "Inteligencia competitiva"
+        "Riesgo Entorno y País",
+        "Estudios del Consumidor",
+        "Innovación y Producto",
+        "Estrategia Publicitaria",
+        "Técnicas Avanzadas"
+      ],
+      "items": [
+        {
+          "name": "Riesgo Entorno y País",
+          "detail": "Due Diligence político-social y evaluación de riesgos macroeconómicos o regulatorios antes de inversiones y proyectos."
+        },
+        {
+          "name": "Estudios del Consumidor",
+          "detail": "Hábitos, usos, perfiles, segmentación de mercado, imagen corporativa, posicionamiento de marca y sensibilidad de precios."
+        },
+        {
+          "name": "Innovación y Producto",
+          "detail": "Pruebas de concepto, test de empaque, análisis organolépticos y detección de necesidades insatisfechas."
+        },
+        {
+          "name": "Estrategia Publicitaria",
+          "detail": "Evaluaciones Pre-Test, Post-Test y Tracking publicitario para optimizar el retorno de inversión de las campañas."
+        },
+        {
+          "name": "Técnicas Avanzadas",
+          "detail": "Estudios etnográficos, auditorías de experiencia de cliente (Mystery Shopper) e investigación secundaria basada en datos duros."
+        }
       ]
     }
   ]
