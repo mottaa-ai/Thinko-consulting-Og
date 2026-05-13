@@ -7,11 +7,6 @@ import { ContactSection } from "@/components/contact-section"
 import { ArrowLeft } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 
-export const metadata = {
-  title: "Asuntos Públicos | Thinko Consulting",
-  description: "Estrategias de relacionamiento institucional, gestión de crisis y posicionamiento ante stakeholders regulatorios.",
-}
-
 export default function AsuntosPublicosPage() {
   const t = useTranslation('services')
   const service = t.services[1] // asuntos-publicos
