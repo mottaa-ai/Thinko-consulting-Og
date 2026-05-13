@@ -7,11 +7,6 @@ import { ContactSection } from "@/components/contact-section"
 import { ArrowLeft } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 
-export const metadata = {
-  title: "Consultoría Empresarial | Thinko Consulting",
-  description: "Asesoramiento estratégico e inteligencia competitiva para corporaciones.",
-}
-
 export default function ConsultoriaEmpresarialPage() {
   const t = useTranslation('services')
   const service = t.services[2] // consultoria-empresarial
