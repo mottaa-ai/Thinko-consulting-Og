@@ -7,11 +7,6 @@ import { ContactSection } from "@/components/contact-section"
 import { ArrowLeft } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 
-export const metadata = {
-  title: "Opinión Pública | Thinko Consulting",
-  description: "Análisis profundo de tendencias sociales, estudios de percepción y monitoreo de clima político.",
-}
-
 export default function OpinionPublicaPage() {
   const t = useTranslation('services')
   const service = t.services[0] // opinion-publica
