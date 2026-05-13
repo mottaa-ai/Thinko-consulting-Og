@@ -213,11 +213,11 @@ export async function getPublishedArticles(limit?: number): Promise<NotionArticl
   if (!NOTION_API_KEY || !DATABASE_ID) return []
 
   try {
-    const response = await queryWithStatusFilter(
-      null,
-      [{ property: "Fecha publicación Thinko", direction: "descending" }],
-      limit ?? 50,
-    )
+    // Query without Status filter since all articles in Notion should be fetched
+    const response = await queryDatabase({
+      sorts: [{ property: "Fecha publicación Thinko", direction: "descending" }],
+      page_size: limit ?? 50,
+    })
 
     return (response.results || []).map(mapPageToArticle).filter((a: NotionArticle) => a.title)
   } catch (error) {
@@ -230,11 +230,12 @@ export async function getFeaturedArticles(limit = 4): Promise<NotionArticle[]> {
   if (!NOTION_API_KEY || !DATABASE_ID) return []
 
   try {
-    const response = await queryWithStatusFilter(
-      { and: [{ property: "Destacado", checkbox: { equals: true } }] },
-      [{ property: "Fecha publicación Thinko", direction: "descending" }],
-      limit,
-    )
+    // Query articles marked as featured
+    const response = await queryDatabase({
+      filter: { property: "Destacado", checkbox: { equals: true } },
+      sorts: [{ property: "Fecha publicación Thinko", direction: "descending" }],
+      page_size: limit,
+    })
 
     return (response.results || []).map(mapPageToArticle).filter((a: NotionArticle) => a.title)
   } catch (error) {
@@ -247,11 +248,10 @@ export async function getArticleBySlug(slug: string): Promise<NotionArticle | nu
   if (!NOTION_API_KEY || !DATABASE_ID) return null
 
   try {
-    const response = await queryWithStatusFilter(
-      { and: [{ property: "Slug", rich_text: { equals: slug } }] },
-      undefined,
-      1,
-    )
+    const response = await queryDatabase({
+      filter: { property: "Slug", rich_text: { equals: slug } },
+      page_size: 1,
+    })
 
     if (!response.results || response.results.length === 0) return null
     return mapPageToArticle(response.results[0])
