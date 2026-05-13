@@ -82,7 +82,7 @@ function ServiceCard({
         <h3 className="font-headline text-2xl md:text-3xl font-medium mt-8 mb-4 text-foreground group-hover:text-white transition-colors tracking-tight">
           {title}
         </h3>
-        <p className="text-on-surface-variant group-hover:text-slate-300 font-light mb-8 text-sm leading-relaxed transition-colors">
+        <p className="text-on-surface-variant group-hover:text-slate-300 font-light mb-8 text-sm leading-relaxed transition-colors min-h-[70px]">
           {description}
         </p>
         <ul className="space-y-3 text-on-surface-variant group-hover:text-slate-300 font-light text-sm transition-colors">
