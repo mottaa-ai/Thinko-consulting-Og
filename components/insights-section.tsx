@@ -16,6 +16,7 @@ interface Article {
   author?: string
   excerpt?: string
   coverImage?: string | null
+  imageUrl?: string
 }
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -80,13 +81,9 @@ export function InsightsSection() {
 }
 
 function InsightCard({ article }: { article: Article }) {
-  const isExternal = article.link.startsWith("http")
-
   return (
     <Link
       href={article.link}
-      target={isExternal ? "_blank" : undefined}
-      rel={isExternal ? "noopener noreferrer" : undefined}
       className="group block"
     >
       <div className="relative aspect-[16/10] bg-slate-100 mb-6 overflow-hidden">
