@@ -35,7 +35,7 @@ export function ServicesSection() {
           <Link
             key={service.id}
             href={`/servicios/${service.id}`}
-            className="no-underline"
+            className="no-underline h-full"
           >
             <ServiceCard 
               number={String(index + 1).padStart(2, '0')}
