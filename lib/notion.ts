@@ -111,6 +111,19 @@ function getUrl(prop: any): string | null {
   return prop?.url || null
 }
 
+function getFileUrl(prop: any): string | null {
+  // Handle files property type from Notion
+  if (!prop?.files || prop.files.length === 0) return null
+  const file = prop.files[0]
+  if (file.type === "external" && file.external?.url) {
+    return file.external.url
+  }
+  if (file.type === "file" && file.file?.url) {
+    return file.file.url
+  }
+  return null
+}
+
 function getCheckbox(prop: any): boolean {
   return prop?.checkbox || false
 }
@@ -138,7 +151,7 @@ function mapPageToArticle(page: any): NotionArticle {
     category: getSelect(props["Categoría"]),
     tags: getMultiSelect(props["Tags"]),
     excerpt: getRichText(props["Extracto"]),
-    coverImage: getUrl(props["Imagen destacada"]),
+    coverImage: getFileUrl(props["Imagen destacada"]) || getUrl(props["Imagen destacada"]),
     publishedAt: getDate(props["Fecha publicación Thinko"]) || "",
     originalPublishedAt: getDate(props["Fecha publicación original"]),
     source: getSelect(props["Fuente"]),
