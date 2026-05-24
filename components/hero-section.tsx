@@ -82,7 +82,7 @@ export function HeroSection() {
             {locale === 'en' ? 'Consult' : 'Consultar'}
           </Link>
           <Link
-            href="#philosophy"
+            href="#nuestro-enfoque"
             className="group flex items-center gap-3 text-sm font-semibold tracking-widest uppercase text-foreground hover:text-[#00b8b4] transition-colors"
           >
             {locale === 'en' ? 'Our Approach' : 'Nuestro Enfoque'}
