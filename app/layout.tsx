@@ -18,7 +18,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: 'Thinko Consulting | Estrategia TaylorMade',
+  title: 'Thinko Consulting | Estrategia tailor-made',
   description: 'Consultoría de alta precisión en estrategia, opinión pública y análisis político para quienes exigen exclusividad y rigor metodológico.',
   icons: {
     icon: [

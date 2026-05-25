@@ -57,7 +57,7 @@ export function HeroSection() {
   const { locale } = useI18n()
 
   const rotatingWords = locale === 'en'
-    ? ['TaylorMade', 'Research', 'Analysis', 'Consulting']
+    ? ['tailor-made', 'Research', 'Analysis', 'Consulting']
     : ['Soluciones', 'Proyectos Tailor-made', 'Análisis', 'Consultorías']
 
   return (
