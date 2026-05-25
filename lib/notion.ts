@@ -261,13 +261,21 @@ export async function getArticleBySlug(slug: string): Promise<NotionArticle | nu
   if (!NOTION_API_KEY || !DATABASE_ID) return null
 
   try {
+    // First try to find by Slug field
     const response = await queryDatabase({
       filter: { property: "Slug", rich_text: { equals: slug } },
       page_size: 1,
     })
 
-    if (!response.results || response.results.length === 0) return null
-    return mapPageToArticle(response.results[0])
+    if (response.results && response.results.length > 0) {
+      return mapPageToArticle(response.results[0])
+    }
+
+    // If not found, try to find by page ID (fallback for UUIDs)
+    const allArticles = await getPublishedArticles(100)
+    const article = allArticles.find((a) => a.id === slug || a.slug === slug)
+    
+    return article || null
   } catch (error) {
     console.error("[v0] Error fetching article by slug:", error)
     return null
