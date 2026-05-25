@@ -75,7 +75,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    setLocaleState(detectBrowserLocale())
+    const detected = detectBrowserLocale()
+    setLocaleState(detected)
     setMounted(true)
   }, [])
 
@@ -84,15 +85,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('thinko-locale', newLocale)
   }
 
+  // Always use the current locale for content
   const content = contentMap[locale]
-
-  if (!mounted) {
-    return (
-      <I18nContext.Provider value={{ locale: 'es', setLocale, content: contentMap.es }}>
-        {children}
-      </I18nContext.Provider>
-    )
-  }
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, content }}>
