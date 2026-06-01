@@ -45,13 +45,13 @@ export function ContactSection() {
   }
 
   return (
-        <section className="py-32 px-8 md:px-24 bg-surface-container-low scroll-mt-20" id="contact">
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24">
+        <section className="py-24 md:py-32 px-8 md:px-24 bg-surface-container-low scroll-mt-20" id="contact">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
         <div className="lg:col-span-5">
           <span className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] mb-8 block font-semibold">
             {t.label}
           </span>
-          <h2 className="font-headline text-5xl md:text-6xl font-light mb-8 text-foreground tracking-tight">
+          <h2 className="font-headline text-4xl md:text-5xl lg:text-6xl font-light mb-8 text-foreground tracking-tight">
             {t.title}
           </h2>
           <div className="h-[2px] w-16 bg-[#00b8b4] mb-8" />
@@ -96,7 +96,7 @@ export function ContactSection() {
                 </div>
               )}
               
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
                 <FloatingInput
                   id="name"
                   label={t.form.name}

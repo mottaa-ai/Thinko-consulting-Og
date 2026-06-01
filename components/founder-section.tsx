@@ -29,11 +29,11 @@ export function FounderSection() {
   const t = founderContent[locale] || founderContent.es
 
   return (
-    <section className="py-32 px-8 md:px-24 bg-[#0f172a] text-white" id="founder">
-      <div className="grid grid-cols-1 md:grid-cols-12 gap-12 items-center">
+    <section className="py-24 md:py-32 px-8 md:px-24 bg-[#0f172a] text-white" id="founder">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         {/* Photo */}
-        <div className="md:col-span-5">
-          <div className="relative aspect-[3/4] w-full max-w-md mx-auto md:mx-0 overflow-hidden group">
+        <div className="lg:col-span-5">
+          <div className="relative aspect-[3/4] w-full max-w-sm mx-auto lg:mx-0 overflow-hidden group">
             <Image
               src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Alejandro%20Motta%20Nicolicchia-FLtoQSD04EfBzsHHcIfvMa6n866Bry.png"
               alt={t.name}
@@ -45,12 +45,12 @@ export function FounderSection() {
         </div>
         
         {/* Content */}
-        <div className="md:col-span-6 md:col-start-7 space-y-6">
+        <div className="lg:col-span-6 lg:col-start-7 space-y-6">
           <span className="text-xs uppercase tracking-widest text-[#00b8b4] mb-4 block font-semibold">
             {t.label}
           </span>
           <div className="space-y-2">
-            <h2 className="font-headline text-4xl md:text-5xl font-light text-white leading-tight">
+            <h2 className="font-headline text-3xl md:text-4xl lg:text-5xl font-light text-white leading-tight">
               {t.name}
             </h2>
             <p className="text-base text-slate-300 font-medium uppercase tracking-widest">

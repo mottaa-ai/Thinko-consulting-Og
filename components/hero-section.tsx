@@ -62,19 +62,19 @@ export function HeroSection() {
 
   return (
     <section className="relative min-h-screen flex items-center px-8 md:px-24 pt-20 overflow-hidden bg-surface">
-      <div className="z-10 max-w-4xl">
+      <div className="z-10 max-w-4xl w-full">
         <span className="block text-xs uppercase tracking-[0.3em] text-[#00b8b4] mb-6 font-semibold">
           {t.tagline}
         </span>
-        <h1 className="font-headline text-5xl md:text-8xl font-light leading-[0.95] tracking-tight text-foreground mb-12">
+        <h1 className="font-headline text-4xl md:text-6xl lg:text-8xl font-light leading-[0.95] tracking-tight text-foreground mb-10 md:mb-12">
           <TypewriterText words={rotatingWords} />
           <br />
           <span className="font-medium text-foreground">{t.titleHighlight}</span>
         </h1>
-        <p className="text-lg md:text-xl text-on-surface-variant max-w-xl font-light leading-relaxed mb-12">
+        <p className="text-base md:text-lg lg:text-xl text-on-surface-variant max-w-xl font-light leading-relaxed mb-10 md:mb-12">
           {t.subtitle}
         </p>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-8 sm:gap-12">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:gap-12">
           <Link
             href="#contact"
             className="bg-foreground text-white px-10 py-4 text-sm font-semibold tracking-widest uppercase inline-block hover:bg-[#00b8b4] transition-colors duration-300"

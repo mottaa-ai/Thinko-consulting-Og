@@ -32,7 +32,7 @@ export function InsightsSection() {
   return (
     <section className="py-32 px-8 md:px-12 bg-white scroll-mt-20" id="proyectos-tailor-made">
       <div className="max-w-[1600px] mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 gap-8">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-end mb-16 gap-8">
           <div>
             <span className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] font-semibold">
               {t.label}
