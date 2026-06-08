@@ -56,6 +56,19 @@ interface I18nContextType {
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined)
 
+type Overrides = {
+  es?: Partial<AllContent>
+  en?: Partial<AllContent>
+}
+
+// Shallow-merge content overrides (per top-level section) on top of the
+// bundled JSON defaults. Each section coming from the DB fully replaces the
+// default section, which keeps the merge predictable for nested arrays.
+function mergeContent(base: AllContent, overrides?: Partial<AllContent>): AllContent {
+  if (!overrides) return base
+  return { ...base, ...overrides }
+}
+
 function detectBrowserLocale(): Locale {
   if (typeof window === 'undefined') return 'es'
   
@@ -70,7 +83,7 @@ function detectBrowserLocale(): Locale {
   return langCode === 'en' ? 'en' : 'es'
 }
 
-export function I18nProvider({ children }: { children: ReactNode }) {
+export function I18nProvider({ children, overrides }: { children: ReactNode; overrides?: Overrides }) {
   const [locale, setLocaleState] = useState<Locale>('es')
   const [mounted, setMounted] = useState(false)
 
@@ -85,8 +98,8 @@ export function I18nProvider({ children }: { children: ReactNode }) {
     localStorage.setItem('thinko-locale', newLocale)
   }
 
-  // Always use the current locale for content
-  const content = contentMap[locale]
+  // Merge any DB-backed overrides on top of the bundled JSON defaults.
+  const content = mergeContent(contentMap[locale], overrides?.[locale])
 
   return (
     <I18nContext.Provider value={{ locale, setLocale, content }}>

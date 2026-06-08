@@ -377,3 +377,139 @@ export async function findArticleBySourceUrl(sourceUrl: string): Promise<any | n
     return null
   }
 }
+
+/* ----------------------------- Admin helpers ----------------------------- */
+
+export interface AdminArticleSummary extends NotionArticle {
+  status: string
+}
+
+function getStatusForAdmin(props: any): string {
+  return getStatusName(props["Status"]) || "Draft"
+}
+
+/**
+ * Lists every article (drafts included) for the admin panel.
+ */
+export async function getAllArticlesForAdmin(): Promise<AdminArticleSummary[]> {
+  if (!NOTION_API_KEY || !DATABASE_ID) return []
+  try {
+    const response = await queryDatabase({
+      sorts: [{ property: "Fecha publicación Thinko", direction: "descending" }],
+      page_size: 100,
+    })
+    return (response.results || [])
+      .map((page: any) => ({
+        ...mapPageToArticle(page),
+        status: getStatusForAdmin(page.properties || {}),
+      }))
+      .filter((a: AdminArticleSummary) => a.title)
+  } catch (error) {
+    console.error("[v0] Error fetching admin articles:", error)
+    return []
+  }
+}
+
+export interface ArticleInput {
+  title: string
+  slug?: string
+  author?: string
+  category?: string
+  excerpt?: string
+  coverImage?: string
+  status?: string
+  seoTitle?: string
+  seoDescription?: string
+}
+
+function buildArticleProperties(input: ArticleInput): Record<string, any> {
+  const properties: Record<string, any> = {}
+  if (input.title !== undefined) properties["Name"] = { title: [{ text: { content: input.title } }] }
+  if (input.slug !== undefined) properties["Slug"] = { rich_text: [{ text: { content: input.slug } }] }
+  if (input.author !== undefined) properties["Autor"] = { rich_text: [{ text: { content: input.author } }] }
+  if (input.category !== undefined) properties["Categoría"] = { select: { name: input.category } }
+  if (input.excerpt !== undefined)
+    properties["Extracto"] = { rich_text: [{ text: { content: input.excerpt.slice(0, 2000) } }] }
+  if (input.coverImage !== undefined && input.coverImage)
+    properties["Imagen destacada"] = { url: input.coverImage }
+  if (input.seoTitle !== undefined)
+    properties["SEO Title"] = { rich_text: [{ text: { content: input.seoTitle } }] }
+  if (input.seoDescription !== undefined)
+    properties["SEO Description"] = { rich_text: [{ text: { content: input.seoDescription.slice(0, 2000) } }] }
+  return properties
+}
+
+async function applyStatus(properties: Record<string, any>, status: string) {
+  properties["Status"] = { status: { name: status } }
+}
+
+/**
+ * Creates a new article. Returns the created page.
+ */
+export async function createArticle(input: ArticleInput): Promise<any> {
+  if (!NOTION_API_KEY || !DATABASE_ID) throw new Error("Notion no está configurado")
+
+  const properties = buildArticleProperties(input)
+  if (!properties["Fecha publicación Thinko"] && input.status === "Publicado") {
+    properties["Fecha publicación Thinko"] = { date: { start: new Date().toISOString().slice(0, 10) } }
+  }
+  await applyStatus(properties, input.status || "Draft")
+
+  const body = JSON.stringify({ parent: { database_id: DATABASE_ID }, properties })
+  try {
+    return await notionFetch(`/pages`, { method: "POST", body })
+  } catch (err: any) {
+    // Fallback when Status is a select rather than status type
+    if (String(err?.message || "").toLowerCase().includes("status")) {
+      properties["Status"] = { select: { name: input.status || "Draft" } }
+      return await notionFetch(`/pages`, {
+        method: "POST",
+        body: JSON.stringify({ parent: { database_id: DATABASE_ID }, properties }),
+      })
+    }
+    throw err
+  }
+}
+
+/**
+ * Updates an existing article's properties.
+ */
+export async function updateArticle(pageId: string, input: ArticleInput): Promise<any> {
+  if (!NOTION_API_KEY) throw new Error("Notion no está configurado")
+
+  const properties = buildArticleProperties(input)
+  if (input.status) {
+    await applyStatus(properties, input.status)
+    if (input.status === "Publicado") {
+      properties["Fecha publicación Thinko"] = { date: { start: new Date().toISOString().slice(0, 10) } }
+    }
+  }
+
+  const body = JSON.stringify({ properties })
+  try {
+    return await notionFetch(`/pages/${pageId}`, { method: "PATCH", body })
+  } catch (err: any) {
+    if (input.status && String(err?.message || "").toLowerCase().includes("status")) {
+      properties["Status"] = { select: { name: input.status } }
+      return await notionFetch(`/pages/${pageId}`, {
+        method: "PATCH",
+        body: JSON.stringify({ properties }),
+      })
+    }
+    throw err
+  }
+}
+
+/**
+ * Retrieves a single article (draft or published) by its Notion page ID for the admin editor.
+ */
+export async function getAdminArticleById(pageId: string): Promise<AdminArticleSummary | null> {
+  if (!NOTION_API_KEY) return null
+  try {
+    const page = await retrievePage(pageId)
+    return { ...mapPageToArticle(page), status: getStatusForAdmin(page.properties || {}) }
+  } catch (error) {
+    console.error("[v0] Error fetching admin article:", error)
+    return null
+  }
+}
