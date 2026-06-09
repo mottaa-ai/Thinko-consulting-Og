@@ -43,3 +43,31 @@ export async function getSectionContent(section: string, locale: Locale) {
     return null
   }
 }
+
+export type TrackingCodes = {
+  metaPixel: string
+  googleAnalytics: string
+  googleTagManager: string
+}
+
+/**
+ * Loads the public tracking codes (Meta Pixel, Google Analytics, Tag Manager)
+ * that get injected into the site header. Safe to call from the root layout —
+ * returns empty strings when nothing is configured.
+ */
+export async function getTrackingCodes(): Promise<TrackingCodes> {
+  const empty: TrackingCodes = { metaPixel: "", googleAnalytics: "", googleTagManager: "" }
+  try {
+    const rows = await db.select().from(siteContent)
+    const match = rows.find((r) => r.section === "tracking" && r.locale === "global")
+    const d = (match?.data ?? {}) as Partial<TrackingCodes>
+    return {
+      metaPixel: typeof d.metaPixel === "string" ? d.metaPixel : "",
+      googleAnalytics: typeof d.googleAnalytics === "string" ? d.googleAnalytics : "",
+      googleTagManager: typeof d.googleTagManager === "string" ? d.googleTagManager : "",
+    }
+  } catch (e) {
+    console.log("[v0] getTrackingCodes error:", e)
+    return empty
+  }
+}

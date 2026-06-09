@@ -45,3 +45,8 @@ export function canDeleteUsers(role: Role): boolean {
 export function canEditContent(role: Role): boolean {
   return role === "superadmin" || role === "admin" || role === "content_manager"
 }
+
+/** Can this role edit tracking/analytics codes that live in the site header? */
+export function canEditTracking(role: Role): boolean {
+  return role === "superadmin" || role === "admin"
+}

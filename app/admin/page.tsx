@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
-import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
+import { getSessionUser, canManageUsers, canEditTracking, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
 
@@ -19,6 +19,7 @@ export default async function AdminDashboard() {
   if (!current) redirect("/admin/login")
 
   const manageUsers = canManageUsers(current.role)
+  const editTracking = canEditTracking(current.role)
 
   return (
     <>
@@ -73,22 +74,39 @@ export default async function AdminDashboard() {
           </Link>
         </section>
 
-        {manageUsers && (
+        {(manageUsers || editTracking) && (
           <section className="mt-12">
             <h2 className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] font-semibold mb-5">
               Administración
             </h2>
-            <Link
-              href="/admin/usuarios"
-              className="group block border border-slate-800 bg-[#1e293b]/50 p-6 hover:border-[#00b8b4] transition-colors max-w-md"
-            >
-              <h3 className="font-headline text-lg font-light text-white mb-2 group-hover:text-[#00b8b4] transition-colors">
-                Gestión de usuarios
-              </h3>
-              <p className="text-sm text-slate-400 leading-relaxed">
-                Crea cuentas, asigna roles y administra los accesos al panel.
-              </p>
-            </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {manageUsers && (
+                <Link
+                  href="/admin/usuarios"
+                  className="group block border border-slate-800 bg-[#1e293b]/50 p-6 hover:border-[#00b8b4] transition-colors"
+                >
+                  <h3 className="font-headline text-lg font-light text-white mb-2 group-hover:text-[#00b8b4] transition-colors">
+                    Gestión de usuarios
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Crea cuentas, asigna roles y administra los accesos al panel.
+                  </p>
+                </Link>
+              )}
+              {editTracking && (
+                <Link
+                  href="/admin/tracking"
+                  className="group block border border-slate-800 bg-[#1e293b]/50 p-6 hover:border-[#00b8b4] transition-colors"
+                >
+                  <h3 className="font-headline text-lg font-light text-white mb-2 group-hover:text-[#00b8b4] transition-colors">
+                    Códigos de seguimiento
+                  </h3>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Configura Meta Pixel, Google Analytics y Tag Manager en el encabezado del sitio.
+                  </p>
+                </Link>
+              )}
+            </div>
           </section>
         )}
       </main>

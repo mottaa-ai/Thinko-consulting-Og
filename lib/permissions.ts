@@ -15,6 +15,7 @@ export {
   canManageUsers,
   canDeleteUsers,
   canEditContent,
+  canEditTracking,
   type Role,
   type AdminUserRow,
 } from "@/lib/roles"
