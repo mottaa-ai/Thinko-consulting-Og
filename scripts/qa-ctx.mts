@@ -1,8 +1,14 @@
 import { auth } from "../lib/auth"
-
 const ctx = await auth.$context
-console.log("password keys:", Object.keys(ctx.password ?? {}))
-console.log("internalAdapter has createUser:", typeof ctx.internalAdapter?.createUser)
-console.log("internalAdapter has linkAccount:", typeof ctx.internalAdapter?.linkAccount)
-console.log("internalAdapter has createAccount:", typeof ctx.internalAdapter?.createAccount)
+const email = `sig-${Date.now()}@thinko.test`
+const hash = await ctx.password.hash("TempPass1234")
+const u = await ctx.internalAdapter.createUser({ name: "Sig Test", email, emailVerified: false, role: "admin" })
+console.log("createUser returned:", JSON.stringify(u))
+const acc = await ctx.internalAdapter.createAccount({
+  userId: u.id,
+  providerId: "credential",
+  accountId: u.id,
+  password: hash,
+})
+console.log("createAccount returned:", JSON.stringify(acc))
 process.exit(0)
