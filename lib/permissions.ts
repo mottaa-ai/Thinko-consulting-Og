@@ -16,6 +16,7 @@ export {
   canDeleteUsers,
   canEditContent,
   type Role,
+  type AdminUserRow,
 } from "@/lib/roles"
 
 export interface SessionUser {

@@ -2,8 +2,8 @@
 
 import { useState, useTransition } from "react"
 import { useRouter } from "next/navigation"
-import { createUser, updateUserRole, deleteUser, type AdminUserRow } from "@/app/actions/users"
-import { ROLE_LABELS, type Role } from "@/lib/roles"
+import { createUser, updateUserRole, deleteUser } from "@/app/actions/users"
+import { ROLE_LABELS, type Role, type AdminUserRow } from "@/lib/roles"
 
 const ROLE_HINTS: Record<Role, string> = {
   superadmin: "Acceso total. Gestiona usuarios, roles y puede eliminar cuentas.",

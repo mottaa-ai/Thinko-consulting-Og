@@ -12,15 +12,8 @@ import {
   canDeleteUsers,
   isValidRole,
   type Role,
+  type AdminUserRow,
 } from "@/lib/permissions"
-
-export interface AdminUserRow {
-  id: string
-  name: string
-  email: string
-  role: Role
-  createdAt: string
-}
 
 /** Lists all admin users. Requires user-management access. */
 export async function listUsers(): Promise<AdminUserRow[]> {
@@ -56,10 +49,6 @@ export async function createUser(input: {
   password: string
   role: string
 }): Promise<{ ok: boolean; error?: string }> {
-  try {
-    const { writeFileSync } = await import("node:fs")
-    writeFileSync("/tmp/v0-createuser-trace.txt", `called ${new Date().toISOString()} email=${input.email} role=${input.role}`)
-  } catch {}
   const current = await getSessionUser()
   if (!current || !canManageUsers(current.role)) {
     return { ok: false, error: "No autorizado." }
@@ -115,10 +104,6 @@ export async function createUser(input: {
     revalidatePath("/admin/usuarios")
     return { ok: true }
   } catch (e) {
-    try {
-      const { writeFileSync } = await import("node:fs")
-      writeFileSync("/tmp/v0-createuser-error.txt", String(e instanceof Error ? e.stack : e))
-    } catch {}
     const message = e instanceof Error ? e.message : "No se pudo crear el usuario."
     if (/exist|already|unique|duplicate/i.test(message)) {
       return { ok: false, error: "Ya existe un usuario con ese correo." }

@@ -3,6 +3,15 @@
 
 export type Role = "superadmin" | "admin" | "content_manager"
 
+/** A user row as displayed in the admin users management table. */
+export interface AdminUserRow {
+  id: string
+  name: string
+  email: string
+  role: Role
+  createdAt: string
+}
+
 export const ROLE_LABELS: Record<Role, string> = {
   superadmin: "Superadministrador",
   admin: "Administrador",
