@@ -5,6 +5,7 @@ import { user as userTable } from "@/lib/db/schema"
 import { auth } from "@/lib/auth"
 import { eq, asc } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
+import { sendUserCredentialsEmail } from "@/lib/email"
 import {
   getSessionUser,
   assignableRoles,
@@ -99,6 +100,20 @@ export async function createUser(input: {
       providerId: "credential",
       accountId: newUser.id,
       password: hashed,
+    })
+
+    // Send credentials email (non-blocking; failure doesn't prevent user creation)
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+    const adminUrl = `${siteUrl}/admin`
+    sendUserCredentialsEmail({
+      toEmail: email,
+      userName: name,
+      password: input.password,
+      adminUrl,
+      siteUrl,
+    }).catch((err) => {
+      console.error("[v0] Failed to send credentials email:", err)
+      // Don't fail the user creation if email sending fails
     })
 
     revalidatePath("/admin/usuarios")
