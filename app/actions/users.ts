@@ -96,6 +96,7 @@ export async function createUser(input: {
     revalidatePath("/admin/usuarios")
     return { ok: true }
   } catch (e) {
+    console.log("[v0] createUser error:", e)
     const message = e instanceof Error ? e.message : "No se pudo crear el usuario."
     // Better Auth returns a generic message for duplicate emails.
     if (/exist|already|unique|duplicate/i.test(message)) {
