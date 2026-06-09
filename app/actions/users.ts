@@ -1,7 +1,7 @@
 "use server"
 
 import { db } from "@/lib/db"
-import { user as userTable, session as sessionTable } from "@/lib/db/schema"
+import { user as userTable } from "@/lib/db/schema"
 import { auth } from "@/lib/auth"
 import { eq, asc } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
@@ -56,6 +56,10 @@ export async function createUser(input: {
   password: string
   role: string
 }): Promise<{ ok: boolean; error?: string }> {
+  try {
+    const { writeFileSync } = await import("node:fs")
+    writeFileSync("/tmp/v0-createuser-trace.txt", `called ${new Date().toISOString()} email=${input.email} role=${input.role}`)
+  } catch {}
   const current = await getSessionUser()
   if (!current || !canManageUsers(current.role)) {
     return { ok: false, error: "No autorizado." }
@@ -76,29 +80,46 @@ export async function createUser(input: {
     return { ok: false, error: "Completa todos los campos. La contraseña debe tener al menos 8 caracteres." }
   }
 
+  // Reject duplicates up front for a clean error message.
+  const existing = await db
+    .select({ id: userTable.id })
+    .from(userTable)
+    .where(eq(userTable.email, email))
+    .limit(1)
+  if (existing.length > 0) {
+    return { ok: false, error: "Ya existe un usuario con ese correo." }
+  }
+
   try {
-    // Create the account WITHOUT forwarding headers so the current admin's
-    // session is not replaced by the newly created user's auto sign-in.
-    const result = await auth.api.signUpEmail({
-      body: { name, email, password: input.password },
+    // Use Better Auth's internal adapter so the user is created server-side
+    // with the correct role and a hashed password, WITHOUT creating a session
+    // or setting cookies (which would otherwise replace the current admin's
+    // session). This is the robust way to provision accounts from an admin.
+    const ctx = await auth.$context
+    const hashed = await ctx.password.hash(input.password)
+
+    const newUser = await ctx.internalAdapter.createUser({
+      name,
+      email,
+      emailVerified: false,
+      role: input.role,
     })
 
-    const newUserId = (result as { user?: { id?: string } })?.user?.id
-    if (newUserId) {
-      await db.update(userTable).set({ role: input.role }).where(eq(userTable.id, newUserId))
-      // Remove any session that auto sign-up may have created for the new user.
-      await db.delete(sessionTable).where(eq(sessionTable.userId, newUserId))
-    } else {
-      // Fallback: assign role by email if id wasn't returned.
-      await db.update(userTable).set({ role: input.role }).where(eq(userTable.email, email))
-    }
+    await ctx.internalAdapter.createAccount({
+      userId: newUser.id,
+      providerId: "credential",
+      accountId: newUser.id,
+      password: hashed,
+    })
 
     revalidatePath("/admin/usuarios")
     return { ok: true }
   } catch (e) {
-    console.log("[v0] createUser error:", e)
+    try {
+      const { writeFileSync } = await import("node:fs")
+      writeFileSync("/tmp/v0-createuser-error.txt", String(e instanceof Error ? e.stack : e))
+    } catch {}
     const message = e instanceof Error ? e.message : "No se pudo crear el usuario."
-    // Better Auth returns a generic message for duplicate emails.
     if (/exist|already|unique|duplicate/i.test(message)) {
       return { ok: false, error: "Ya existe un usuario con ese correo." }
     }
