@@ -14,6 +14,16 @@ export const auth = betterAuth({
     enabled: true,
     autoSignIn: true,
   },
+  user: {
+    additionalFields: {
+      role: {
+        type: "string",
+        required: false,
+        defaultValue: "content_manager",
+        input: false, // never set by the client; assigned server-side only
+      },
+    },
+  },
   trustedOrigins: [
     "http://localhost:3000",
     ...(process.env.V0_RUNTIME_URL ? [process.env.V0_RUNTIME_URL] : []),

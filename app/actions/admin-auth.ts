@@ -4,7 +4,7 @@ import { db } from "@/lib/db"
 import { user } from "@/lib/db/schema"
 import { auth } from "@/lib/auth"
 import { headers } from "next/headers"
-import { sql } from "drizzle-orm"
+import { sql, eq } from "drizzle-orm"
 
 /**
  * Returns true if at least one admin user already exists.
@@ -30,7 +30,7 @@ export async function createInitialAdmin(formData: {
   }
 
   try {
-    await auth.api.signUpEmail({
+    const result = await auth.api.signUpEmail({
       body: {
         name: formData.name,
         email: formData.email,
@@ -38,6 +38,17 @@ export async function createInitialAdmin(formData: {
       },
       headers: await headers(),
     })
+
+    // The very first account is always the superadmin.
+    const newUserId = (result as { user?: { id?: string } })?.user?.id
+    if (newUserId) {
+      await db.update(user).set({ role: "superadmin" }).where(eq(user.id, newUserId))
+    } else {
+      await db
+        .update(user)
+        .set({ role: "superadmin" })
+        .where(eq(user.email, formData.email.trim().toLowerCase()))
+    }
     return { ok: true }
   } catch (e) {
     console.log("[v0] createInitialAdmin error:", e)

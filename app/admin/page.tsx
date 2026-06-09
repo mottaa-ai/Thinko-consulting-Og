@@ -1,8 +1,7 @@
 import { redirect } from "next/navigation"
-import { headers } from "next/headers"
-import { auth } from "@/lib/auth"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
+import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
 
@@ -16,12 +15,18 @@ const EDITABLE_SECTIONS = [
 ]
 
 export default async function AdminDashboard() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user) redirect("/admin/login")
+  const current = await getSessionUser()
+  if (!current) redirect("/admin/login")
+
+  const manageUsers = canManageUsers(current.role)
 
   return (
     <>
-      <AdminHeader email={session.user.email} />
+      <AdminHeader
+        email={current.email}
+        roleLabel={ROLE_LABELS[current.role]}
+        canManageUsers={manageUsers}
+      />
       <main className="max-w-6xl mx-auto px-6 py-12">
         <div className="mb-10">
           <h1 className="font-headline text-3xl font-light text-white mb-2">Gestión de contenido</h1>
@@ -67,6 +72,25 @@ export default async function AdminDashboard() {
             </p>
           </Link>
         </section>
+
+        {manageUsers && (
+          <section className="mt-12">
+            <h2 className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] font-semibold mb-5">
+              Administración
+            </h2>
+            <Link
+              href="/admin/usuarios"
+              className="group block border border-slate-800 bg-[#1e293b]/50 p-6 hover:border-[#00b8b4] transition-colors max-w-md"
+            >
+              <h3 className="font-headline text-lg font-light text-white mb-2 group-hover:text-[#00b8b4] transition-colors">
+                Gestión de usuarios
+              </h3>
+              <p className="text-sm text-slate-400 leading-relaxed">
+                Crea cuentas, asigna roles y administra los accesos al panel.
+              </p>
+            </Link>
+          </section>
+        )}
       </main>
     </>
   )

@@ -1,10 +1,9 @@
 import { redirect, notFound } from "next/navigation"
-import { headers } from "next/headers"
-import { auth } from "@/lib/auth"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
 import { ContentEditor } from "@/components/admin/content-editor"
 import { loadSection } from "@/app/actions/content"
+import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 // Bundled defaults per locale
 import heroEs from "@/content/es/hero.json"
@@ -40,8 +39,8 @@ export default async function SectionEditorPage({
   const config = SECTIONS[section]
   if (!config) notFound()
 
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user) redirect("/admin/login")
+  const session = await getSessionUser()
+  if (!session) redirect("/admin/login")
 
   const [storedEs, storedEn] = await Promise.all([
     loadSection(section, "es"),
@@ -50,7 +49,11 @@ export default async function SectionEditorPage({
 
   return (
     <>
-      <AdminHeader email={session.user.email} />
+      <AdminHeader
+        email={session.email}
+        roleLabel={ROLE_LABELS[session.role]}
+        canManageUsers={canManageUsers(session.role)}
+      />
       <main className="max-w-3xl mx-auto px-6 py-12">
         <Link
           href="/admin"

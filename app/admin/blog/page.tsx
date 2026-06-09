@@ -1,21 +1,24 @@
 import { redirect } from "next/navigation"
-import { headers } from "next/headers"
-import { auth } from "@/lib/auth"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
 import { getAllArticlesForAdmin } from "@/lib/notion"
+import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
 
 export default async function AdminBlogPage() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user) redirect("/admin/login")
+  const current = await getSessionUser()
+  if (!current) redirect("/admin/login")
 
   const articles = await getAllArticlesForAdmin()
 
   return (
     <>
-      <AdminHeader email={session.user.email} />
+      <AdminHeader
+        email={current.email}
+        roleLabel={ROLE_LABELS[current.role]}
+        canManageUsers={canManageUsers(current.role)}
+      />
       <main className="max-w-5xl mx-auto px-6 py-12">
         <Link
           href="/admin"

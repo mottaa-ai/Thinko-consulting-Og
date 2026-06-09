@@ -2,16 +2,15 @@
 
 import { db } from "@/lib/db"
 import { siteContent } from "@/lib/db/schema"
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
 import { and, eq } from "drizzle-orm"
 import { revalidatePath } from "next/cache"
 import type { Locale } from "@/lib/i18n/types"
+import { getSessionUser, canEditContent } from "@/lib/permissions"
 
 async function requireUser() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user) throw new Error("Unauthorized")
-  return session.user
+  const user = await getSessionUser()
+  if (!user || !canEditContent(user.role)) throw new Error("Unauthorized")
+  return user
 }
 
 /**

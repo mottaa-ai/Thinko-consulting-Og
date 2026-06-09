@@ -1,14 +1,13 @@
 "use server"
 
-import { auth } from "@/lib/auth"
-import { headers } from "next/headers"
 import { createArticle, updateArticle, type ArticleInput } from "@/lib/notion"
 import { revalidatePath } from "next/cache"
+import { getSessionUser, canEditContent } from "@/lib/permissions"
 
 async function requireUser() {
-  const session = await auth.api.getSession({ headers: await headers() })
-  if (!session?.user) throw new Error("Unauthorized")
-  return session.user
+  const user = await getSessionUser()
+  if (!user || !canEditContent(user.role)) throw new Error("Unauthorized")
+  return user
 }
 
 export async function createArticleAction(input: ArticleInput): Promise<{ ok: boolean; id?: string; error?: string }> {

@@ -4,7 +4,15 @@ import { authClient } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import Link from "next/link"
 
-export function AdminHeader({ email }: { email: string }) {
+export function AdminHeader({
+  email,
+  roleLabel,
+  canManageUsers = false,
+}: {
+  email: string
+  roleLabel?: string
+  canManageUsers?: boolean
+}) {
   const router = useRouter()
 
   async function handleLogout() {
@@ -21,6 +29,14 @@ export function AdminHeader({ email }: { email: string }) {
           <span className="text-xs uppercase tracking-[0.3em] text-[#00b8b4] font-semibold">Admin</span>
         </Link>
         <div className="flex items-center gap-6">
+          {canManageUsers && (
+            <Link
+              href="/admin/usuarios"
+              className="text-xs uppercase tracking-wider text-slate-400 hover:text-white transition-colors"
+            >
+              Usuarios
+            </Link>
+          )}
           <Link
             href="/"
             target="_blank"
@@ -28,7 +44,12 @@ export function AdminHeader({ email }: { email: string }) {
           >
             Ver sitio
           </Link>
-          <span className="hidden sm:block text-xs text-slate-500">{email}</span>
+          <span className="hidden sm:flex flex-col items-end leading-tight">
+            <span className="text-xs text-slate-400">{email}</span>
+            {roleLabel && (
+              <span className="text-[10px] uppercase tracking-wider text-[#00b8b4]">{roleLabel}</span>
+            )}
+          </span>
           <button
             onClick={handleLogout}
             className="text-xs uppercase tracking-wider text-slate-400 hover:text-[#00b8b4] transition-colors"
