@@ -28,6 +28,8 @@ export interface ServiceItem {
   title: string
   description: string
   features: string[]
+  sectionTitle?: string
+  items?: Array<{ name: string; detail: string }>
 }
 
 export interface ServicesContent {
@@ -72,7 +74,7 @@ export interface ContactContent {
     errorMessage: string
   }
   info: {
-    location: {
+    location?: {
       label: string
       value: string
     }
@@ -80,7 +82,7 @@ export interface ContactContent {
       label: string
       value: string
     }
-    schedule: {
+    schedule?: {
       label: string
       value: string
     }
@@ -106,16 +108,16 @@ export interface FooterContent {
     contact: {
       title: string
       email: string
-      location: string
+      location?: string
     }
   }
   legal: {
     copyright: string
     links: FooterLink[]
   }
-  social: {
-    linkedin: string
-    twitter: string
+  social?: {
+    linkedin?: string
+    twitter?: string
   }
 }
 

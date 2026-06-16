@@ -17,6 +17,7 @@ export interface Article {
   sourceUrl: string | null
   seoTitle: string
   seoDescription: string
+  canonicalUrl: string | null
   readingTime: number | null
   featured: boolean
   status: "draft" | "published"
@@ -40,6 +41,7 @@ function mapDoc(doc: any): Article {
     sourceUrl: doc.sourceUrl ?? null,
     seoTitle: doc.seo?.title ?? doc.title ?? "",
     seoDescription: doc.seo?.description ?? doc.excerpt ?? "",
+    canonicalUrl: doc.seo?.canonicalUrl ?? null,
     readingTime: doc.readingTime ?? null,
     featured: doc.featured ?? false,
     status: doc.status ?? "draft",
@@ -158,6 +160,9 @@ export interface ArticleInput {
   featured?: boolean
   readingTime?: number | null
   publishedAt?: string | null
+  source?: string
+  sourceUrl?: string
+  notionId?: string
 }
 
 function toPayloadShape(input: ArticleInput) {
@@ -174,6 +179,9 @@ function toPayloadShape(input: ArticleInput) {
     featured: input.featured ?? false,
     readingTime: input.readingTime ?? null,
     publishedAt: input.publishedAt ?? null,
+    source: input.source ?? "",
+    sourceUrl: input.sourceUrl ?? "",
+    notionId: input.notionId ?? "",
     seo: {
       title: input.seoTitle ?? "",
       description: input.seoDescription ?? "",
