@@ -5,13 +5,12 @@ import { notFound } from "next/navigation"
 import { ArrowLeft, Clock, Calendar } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { NotionBlocks } from "@/components/notion-blocks"
+import { LexicalRenderer } from "@/components/lexical-renderer"
 import {
   getArticleBySlug,
-  getArticleBlocks,
   getAllSlugs,
   getPublishedArticles,
-} from "@/lib/notion"
+} from "@/lib/articles"
 
 export const revalidate = 60
 
@@ -80,10 +79,7 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound()
   }
 
-  const [blocks, allArticles] = await Promise.all([
-    getArticleBlocks(article.id),
-    getPublishedArticles(50),
-  ])
+  const allArticles = await getPublishedArticles(50)
 
   const related = allArticles
     .filter((a) => a.id !== article.id && a.category === article.category)
@@ -211,7 +207,7 @@ export default async function ArticlePage({ params }: PageProps) {
           {/* Body */}
           <div className="max-w-3xl mx-auto px-6 md:px-8 mt-12">
             <div className="prose-custom">
-              <NotionBlocks blocks={blocks} />
+              <LexicalRenderer content={article.content} />
             </div>
 
             {/* Tags */}

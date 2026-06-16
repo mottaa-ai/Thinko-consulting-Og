@@ -1,8 +1,18 @@
 "use client"
 
+import dynamic from "next/dynamic"
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { createArticleAction, updateArticleAction } from "@/app/actions/blog"
+import { lexicalToMarkdown, markdownToLexical } from "@/lib/lexical-markdown"
+
+// Load the MD editor only on the client (it uses window)
+const MDEditor = dynamic(() => import("@uiw/react-md-editor"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-full h-64 bg-[#0f172a] border border-slate-700 animate-pulse" />
+  ),
+})
 
 type ArticleFormValues = {
   title: string
@@ -14,9 +24,10 @@ type ArticleFormValues = {
   status: string
   seoTitle: string
   seoDescription: string
+  contentMarkdown: string
 }
 
-const STATUS_OPTIONS = ["Draft", "Publicado"]
+const STATUS_OPTIONS = ["draft", "published"]
 
 function slugify(text: string) {
   return text
@@ -28,11 +39,14 @@ function slugify(text: string) {
 }
 
 export function ArticleForm({
-  pageId,
+  articleId,
   initial,
+  initialContent,
 }: {
-  pageId?: string
+  articleId?: number | string
   initial?: Partial<ArticleFormValues>
+  /** Raw Lexical JSON from Payload, converted to Markdown for editing */
+  initialContent?: any
 }) {
   const router = useRouter()
   const [values, setValues] = useState<ArticleFormValues>({
@@ -42,15 +56,23 @@ export function ArticleForm({
     category: initial?.category ?? "",
     excerpt: initial?.excerpt ?? "",
     coverImage: initial?.coverImage ?? "",
-    status: initial?.status ?? "Draft",
+    status: initial?.status ?? "draft",
     seoTitle: initial?.seoTitle ?? "",
     seoDescription: initial?.seoDescription ?? "",
+    contentMarkdown: initial?.contentMarkdown ?? lexicalToMarkdown(initialContent),
   })
   const [saving, setSaving] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   function set<K extends keyof ArticleFormValues>(key: K, value: ArticleFormValues[K]) {
-    setValues((prev) => ({ ...prev, [key]: value }))
+    setValues((prev) => {
+      const next = { ...prev, [key]: value }
+      // Auto-generate slug from title if slug is empty
+      if (key === "title" && !prev.slug) {
+        next.slug = slugify(value as string)
+      }
+      return next
+    })
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -58,13 +80,23 @@ export function ArticleForm({
     setSaving(true)
     setError(null)
 
+    const lexicalContent = markdownToLexical(values.contentMarkdown)
+
     const payload = {
-      ...values,
+      title: values.title,
       slug: values.slug || slugify(values.title),
+      author: values.author,
+      category: values.category,
+      excerpt: values.excerpt,
+      coverImage: values.coverImage,
+      status: values.status,
+      seoTitle: values.seoTitle,
+      seoDescription: values.seoDescription,
+      content: lexicalContent,
     }
 
-    const result = pageId
-      ? await updateArticleAction(pageId, payload)
+    const result = articleId
+      ? await updateArticleAction(articleId, payload)
       : await createArticleAction(payload)
 
     setSaving(false)
@@ -83,7 +115,7 @@ export function ArticleForm({
   const labelClass = "block text-xs uppercase tracking-wider text-slate-400 font-semibold mb-2"
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6 max-w-2xl">
+    <form onSubmit={handleSubmit} className="space-y-6">
       <div>
         <label className={labelClass} htmlFor="title">
           Título
@@ -147,7 +179,7 @@ export function ArticleForm({
           >
             {STATUS_OPTIONS.map((s) => (
               <option key={s} value={s}>
-                {s === "Draft" ? "Borrador" : "Publicado"}
+                {s === "draft" ? "Borrador" : "Publicado"}
               </option>
             ))}
           </select>
@@ -178,6 +210,27 @@ export function ArticleForm({
           value={values.excerpt}
           onChange={(e) => set("excerpt", e.target.value)}
         />
+      </div>
+
+      {/* Rich text / Markdown editor */}
+      <div>
+        <label className={labelClass}>Contenido</label>
+        <div data-color-mode="dark">
+          <MDEditor
+            value={values.contentMarkdown}
+            onChange={(val) => set("contentMarkdown", val ?? "")}
+            height={480}
+            preview="edit"
+            style={{
+              background: "#0f172a",
+              borderRadius: 0,
+              border: "1px solid rgb(51,65,85)",
+            }}
+          />
+        </div>
+        <p className="text-xs text-slate-500 mt-2">
+          Escribe en Markdown. Usa **negrita**, *cursiva*, ## Título, - Lista, etc.
+        </p>
       </div>
 
       <div>
@@ -213,7 +266,7 @@ export function ArticleForm({
           disabled={saving}
           className="bg-[#00b8b4] text-[#0f172a] py-3 px-8 font-semibold uppercase tracking-wider text-xs hover:bg-[#00a39f] transition-colors disabled:opacity-50"
         >
-          {saving ? "Guardando..." : pageId ? "Guardar cambios" : "Crear publicación"}
+          {saving ? "Guardando..." : articleId ? "Guardar cambios" : "Crear publicación"}
         </button>
         <button
           type="button"
@@ -223,11 +276,6 @@ export function ArticleForm({
           Cancelar
         </button>
       </div>
-
-      <p className="text-xs text-slate-500 leading-relaxed pt-2">
-        Nota: el cuerpo del artículo (contenido largo) se edita directamente en Notion. Aquí gestionas los
-        metadatos, el estado y la información de portada.
-      </p>
     </form>
   )
 }

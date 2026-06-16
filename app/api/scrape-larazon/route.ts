@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server"
 import * as cheerio from "cheerio"
-import { createDraftArticle, findArticleBySourceUrl } from "@/lib/notion"
+import { createArticle, getPublishedArticles } from "@/lib/articles"
 
 export const dynamic = "force-dynamic"
 export const maxDuration = 60
@@ -156,16 +156,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 })
   }
 
-  const apiKey = process.env.NOTION_API_KEY
-  const dbId = process.env.NOTION_CMS_DB_ID
-
-  if (!apiKey || !dbId) {
-    return NextResponse.json(
-      { error: "Missing NOTION_API_KEY or NOTION_CMS_DB_ID" },
-      { status: 500 },
-    )
-  }
-
   const url = new URL(request.url)
   const dryRun = url.searchParams.get("dry") === "1"
 
@@ -181,6 +171,10 @@ export async function GET(request: Request) {
       })
     }
 
+    // Load existing articles to check for duplicates by sourceUrl
+    const existing = await getPublishedArticles(200)
+    const existingUrls = new Set(existing.map((a) => a.sourceUrl).filter(Boolean))
+
     const results: Array<{
       title: string
       url: string
@@ -190,40 +184,32 @@ export async function GET(request: Request) {
 
     for (const article of scraped) {
       try {
-        const exists = await findArticleBySourceUrl(article.url)
-        if (exists) {
-          results.push({
-            title: article.title,
-            url: article.url,
-            status: "skipped",
-          })
+        if (existingUrls.has(article.url)) {
+          results.push({ title: article.title, url: article.url, status: "skipped" })
           continue
         }
 
         let isoDate: string | undefined
         if (article.date) {
           try {
-            isoDate = new Date(article.date).toISOString()
+            isoDate = new Date(article.date).toISOString().slice(0, 10)
           } catch {}
         }
 
-        await createDraftArticle({
+        await createArticle({
           title: article.title.slice(0, 200),
           slug: slugify(article.title),
           author: "Alejandro G. Motta",
-          source: "La Razón",
+          category: article.category ?? "",
+          excerpt: article.excerpt ?? "",
+          coverImage: article.image ?? "",
+          status: "draft",
           sourceUrl: article.url,
-          canonicalUrl: article.url,
-          excerpt: article.excerpt,
-          coverImage: article.image,
-          originalPublishedAt: isoDate,
+          source: "La Razón",
+          publishedAt: isoDate ?? null,
         })
 
-        results.push({
-          title: article.title,
-          url: article.url,
-          status: "created",
-        })
+        results.push({ title: article.title, url: article.url, status: "created" })
       } catch (err) {
         results.push({
           title: article.title,
@@ -244,10 +230,7 @@ export async function GET(request: Request) {
     })
   } catch (error) {
     return NextResponse.json(
-      {
-        ok: false,
-        error: error instanceof Error ? error.message : String(error),
-      },
+      { ok: false, error: error instanceof Error ? error.message : String(error) },
       { status: 500 },
     )
   }

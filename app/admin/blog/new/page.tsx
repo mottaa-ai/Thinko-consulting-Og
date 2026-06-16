@@ -17,7 +17,7 @@ export default async function NewArticlePage() {
         roleLabel={ROLE_LABELS[current.role]}
         canManageUsers={canManageUsers(current.role)}
       />
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-12">
         <Link
           href="/admin/blog"
           className="text-xs uppercase tracking-wider text-slate-400 hover:text-[#00b8b4] transition-colors mb-6 inline-block"

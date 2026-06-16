@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { getPublishedArticles } from "@/lib/notion"
+import { getPublishedArticles } from "@/lib/articles"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thinkoconsulting.com"

@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
-import { getAllArticlesForAdmin } from "@/lib/notion"
+import { getAllArticlesForAdmin } from "@/lib/articles"
 import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
@@ -31,7 +31,7 @@ export default async function AdminBlogPage() {
           <div>
             <h1 className="font-headline text-3xl font-light text-white mb-2">Publicaciones</h1>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Crea y edita artículos. Se sincronizan con Notion.
+              Crea y edita artículos. Guardados en Payload CMS.
             </p>
           </div>
           <Link
@@ -65,12 +65,12 @@ export default async function AdminBlogPage() {
                 </div>
                 <span
                   className={`text-xs uppercase tracking-wider px-3 py-1 whitespace-nowrap ${
-                    a.status === "Publicado" || a.status === "Published"
+                    a.status === "published"
                       ? "bg-[#00b8b4]/15 text-[#00b8b4]"
                       : "bg-slate-700/40 text-slate-400"
                   }`}
                 >
-                  {a.status}
+                  {a.status === "published" ? "Publicado" : "Borrador"}
                 </span>
               </Link>
             ))}

@@ -4,7 +4,7 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { getPublishedArticles } from "@/lib/notion"
+import { getPublishedArticles } from "@/lib/articles"
 
 export const revalidate = 60
 

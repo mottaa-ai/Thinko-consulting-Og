@@ -2,7 +2,7 @@ import { redirect, notFound } from "next/navigation"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
 import { ArticleForm } from "@/components/admin/article-form"
-import { getAdminArticleById } from "@/lib/notion"
+import { getAdminArticleById } from "@/lib/articles"
 import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
@@ -27,7 +27,7 @@ export default async function EditArticlePage({
         roleLabel={ROLE_LABELS[current.role]}
         canManageUsers={canManageUsers(current.role)}
       />
-      <main className="max-w-3xl mx-auto px-6 py-12">
+      <main className="max-w-4xl mx-auto px-6 py-12">
         <Link
           href="/admin/blog"
           className="text-xs uppercase tracking-wider text-slate-400 hover:text-[#00b8b4] transition-colors mb-6 inline-block"
@@ -44,7 +44,8 @@ export default async function EditArticlePage({
           Ver en el sitio →
         </a>
         <ArticleForm
-          pageId={article.id}
+          articleId={article.id}
+          initialContent={article.content}
           initial={{
             title: article.title,
             slug: article.slug,
