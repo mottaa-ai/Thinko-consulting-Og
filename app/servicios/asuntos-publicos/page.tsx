@@ -48,7 +48,7 @@ export default function AsuntosPublicosPage() {
 
             {/* Items Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-              {service.items.map((item: any, index: number) => (
+              {(service.items ?? []).map((item: any, index: number) => (
                 <div key={index} className="flex flex-col">
                   <div className="flex items-start gap-4 mb-6">
                     <div className="w-8 h-8 flex items-center justify-center bg-[#00b8b4] text-white font-semibold text-sm flex-shrink-0 mt-1">

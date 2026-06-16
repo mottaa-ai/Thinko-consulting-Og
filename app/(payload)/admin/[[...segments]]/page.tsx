@@ -9,8 +9,7 @@ type Args = {
 }
 
 export async function generateMetadata({ params, searchParams }: Args): Promise<Metadata> {
-  const resolvedConfig = await config
-  return generatePageMetadata({ config: resolvedConfig as any, i18n: undefined as any })
+  return generatePageMetadata({ config, params, searchParams })
 }
 
 export default function Page({ params, searchParams }: Args) {
