@@ -69,3 +69,14 @@ export const siteContent = pgTable(
     sectionLocaleUnique: unique().on(t.section, t.locale),
   }),
 )
+
+// Stores contact form submissions (migrated from Firebase Firestore).
+export const contacts = pgTable("contacts", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  company: text("company"),
+  message: text("message").notNull(),
+  source: text("source").notNull().default("thinko-consulting-website"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+})

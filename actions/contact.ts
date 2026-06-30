@@ -1,6 +1,8 @@
 "use server"
 
 import { Resend } from "resend"
+import { db } from "@/lib/db"
+import { contacts } from "@/lib/db/schema"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const WEBHOOK_URL = "https://hook.us2.make.com/r8r6fwmz5z0421iyoazgcf8rlfxc105y"
@@ -74,6 +76,20 @@ function generateEmailHTML(data: ContactFormData): string {
 
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
   try {
+    // Persist the contact in Neon (replaces Firebase Firestore)
+    try {
+      await db.insert(contacts).values({
+        name: data.name,
+        email: data.email,
+        company: data.company || null,
+        message: data.message,
+        source: "thinko-consulting-website",
+      })
+    } catch (dbError) {
+      console.error("[v0] Contact DB insert error:", dbError)
+      // Don't fail the whole request if the DB write fails; email still goes out
+    }
+
     // Send email via Resend
     const emailResult = await resend.emails.send({
       from: "formulario@thinkoconsulting.com",

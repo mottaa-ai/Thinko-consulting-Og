@@ -5,8 +5,6 @@ import Link from "next/link"
 import { Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 import { submitContactForm } from "@/actions/contact"
-import { db } from "@/lib/firebase"
-import { collection, addDoc } from "firebase/firestore"
 
 type FormStatus = "idle" | "submitting" | "success" | "error"
 
@@ -25,17 +23,13 @@ export function ContactSection() {
     setStatus("submitting")
     
     try {
-      // Save to Firebase Firestore
-      await addDoc(collection(db, "contacts"), {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        createdAt: new Date(),
-        source: "thinko-consulting-website",
-      })
-      
-      // Also send to webhook
-      await submitContactForm(formData)
-      
+      // Persist to Neon, send email, and trigger webhook via the server action
+      const result = await submitContactForm(formData)
+
+      if (!result.success) {
+        throw new Error(result.error || "Error al enviar el formulario")
+      }
+
       setStatus("success")
       setFormData({ name: "", email: "", company: "", message: "" })
     } catch (error) {
