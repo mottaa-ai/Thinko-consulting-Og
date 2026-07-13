@@ -102,19 +102,19 @@ export async function createUser(input: {
       password: hashed,
     })
 
-    // Send credentials email (non-blocking; failure doesn't prevent user creation)
-    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000"
+    // Send credentials email — awaited so the Server Action doesn't exit before Resend resolves
+    const siteUrl = process.env.BETTER_AUTH_URL || "https://thinkoconsulting.com"
     const adminUrl = `${siteUrl}/admin`
-    sendUserCredentialsEmail({
+    const emailResult = await sendUserCredentialsEmail({
       toEmail: email,
       userName: name,
       password: input.password,
       adminUrl,
       siteUrl,
-    }).catch((err) => {
-      console.error("[v0] Failed to send credentials email:", err)
-      // Don't fail the user creation if email sending fails
     })
+    if (!emailResult.success) {
+      console.error("[v0] Credentials email failed:", emailResult.error)
+    }
 
     revalidatePath("/admin/usuarios")
     return { ok: true }
