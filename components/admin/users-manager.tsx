@@ -8,12 +8,8 @@ import { ROLE_LABELS, type Role, type AdminUserRow } from "@/lib/roles"
 // ─── Role metadata ────────────────────────────────────────────────────────────
 
 const ROLE_META: Record<Role, { hint: string; color: string }> = {
-  superadmin: {
-    hint: "Acceso total. Puede gestionar usuarios, cambiar roles y eliminar cuentas.",
-    color: "text-amber-400 border-amber-400/30 bg-amber-400/5",
-  },
   admin: {
-    hint: "Gestiona contenido y blog. Puede crear y editar usuarios con roles menores.",
+    hint: "Acceso completo. Gestiona contenido, blog, usuarios y roles.",
     color: "text-[#00b8b4] border-[#00b8b4]/30 bg-[#00b8b4]/5",
   },
   content_manager: {
@@ -332,7 +328,7 @@ export function UsersManager({
             Roles del sistema
           </h2>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-            {(["content_manager", "admin", "superadmin"] as Role[]).map((r) => (
+            {(["content_manager", "admin"] as Role[]).map((r) => (
               <div key={r} className="border border-slate-800 bg-[#1e293b]/30 p-4 space-y-1.5">
                 <RoleBadge role={r} />
                 <p className="text-xs text-slate-400 leading-relaxed">{ROLE_META[r].hint}</p>
@@ -355,9 +351,8 @@ export function UsersManager({
           <div className="border border-slate-800 divide-y divide-slate-800">
             {users.map((u) => {
               const isSelf = u.id === currentUserId
-              const locked = u.role === "superadmin" && currentRole !== "superadmin"
-              const canEditRow = !isSelf && !locked && creatableRoles.length > 0
-              const canDeleteRow = canDelete && !isSelf && u.role !== "superadmin"
+                  const canEditRow = !isSelf && creatableRoles.length > 0
+                  const canDeleteRow = canDelete && !isSelf
 
               return (
                 <div

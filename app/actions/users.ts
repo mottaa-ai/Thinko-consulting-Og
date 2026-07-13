@@ -145,18 +145,6 @@ export async function updateUserRole(
     return { ok: false, error: "No puedes cambiar tu propio rol." }
   }
 
-  const target = await db
-    .select({ role: userTable.role })
-    .from(userTable)
-    .where(eq(userTable.id, userId))
-    .limit(1)
-  const targetRole = isValidRole(target[0]?.role) ? (target[0].role as Role) : "content_manager"
-
-  // Only a superadmin may modify another superadmin.
-  if (targetRole === "superadmin" && current.role !== "superadmin") {
-    return { ok: false, error: "Solo un superadministrador puede modificar a otro superadministrador." }
-  }
-
   const allowed = assignableRoles(current.role)
   if (!allowed.includes(role as Role)) {
     return { ok: false, error: "No tienes permiso para asignar ese rol." }

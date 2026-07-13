@@ -41,7 +41,9 @@ export async function getSessionUser(): Promise<SessionUser | null> {
     .where(eq(userTable.id, session.user.id))
     .limit(1)
 
-  const role = isValidRole(rows[0]?.role) ? (rows[0].role as Role) : "content_manager"
+  // Any legacy "superadmin" rows are treated as "admin" going forward
+  const rawRole = rows[0]?.role === "superadmin" ? "admin" : rows[0]?.role
+  const role = isValidRole(rawRole) ? (rawRole as Role) : "content_manager"
   return {
     id: session.user.id,
     email: session.user.email,
