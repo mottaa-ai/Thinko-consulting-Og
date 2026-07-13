@@ -1,6 +1,7 @@
 "use server"
 
 import { Resend } from "resend"
+import { createContact } from "@/lib/contacts"
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 const WEBHOOK_URL = "https://hook.us2.make.com/r8r6fwmz5z0421iyoazgcf8rlfxc105y"
@@ -9,8 +10,10 @@ const CONTACT_EMAIL = "amotta@thinkoconsulting.com"
 interface ContactFormData {
   name: string
   email: string
-  company: string
+  company?: string
   message: string
+  phone?: string
+  subject?: string
 }
 
 function generateEmailHTML(data: ContactFormData): string {
@@ -74,6 +77,16 @@ function generateEmailHTML(data: ContactFormData): string {
 
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
   try {
+    // Save to database first
+    await createContact({
+      name: data.name,
+      email: data.email,
+      company: data.company,
+      message: data.message,
+      phone: data.phone,
+      subject: data.subject,
+    })
+
     // Send email via Resend
     const emailResult = await resend.emails.send({
       from: "formulario@thinkoconsulting.com",

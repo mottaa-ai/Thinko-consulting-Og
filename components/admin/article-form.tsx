@@ -64,7 +64,7 @@ export function ArticleForm({
     }
 
     const result = pageId
-      ? await updateArticleAction(pageId, payload)
+      ? await updateArticleAction(parseInt(pageId), payload)
       : await createArticleAction(payload)
 
     setSaving(false)

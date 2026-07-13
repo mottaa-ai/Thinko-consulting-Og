@@ -1,31 +1,13 @@
 import { NextResponse } from "next/server"
-import { getArticleBySlug, getArticleBlocks } from "@/lib/notion"
+import { getArticleBySlug } from "@/lib/articles"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export async function GET(
   _request: Request,
   { params }: { params: Promise<{ slug: string }> },
 ) {
   const { slug } = await params
-
-  const hasApiKey = !!process.env.NOTION_API_KEY
-  const hasDbId = !!process.env.NOTION_CMS_DB_ID
-
-  if (!hasApiKey || !hasDbId) {
-    return NextResponse.json(
-      {
-        article: null,
-        debug: {
-          ok: false,
-          error: "Missing environment variables",
-          NOTION_API_KEY: hasApiKey,
-          NOTION_CMS_DB_ID: hasDbId,
-        },
-      },
-      { status: 200 },
-    )
-  }
 
   if (!slug) {
     return NextResponse.json({ article: null, error: "Missing slug" }, { status: 400 })
@@ -44,49 +26,34 @@ export async function GET(
       )
     }
 
-    const blocks = await getArticleBlocks(article.id)
-
     const payload = {
       id: article.id,
       title: article.title,
       slug: article.slug,
       excerpt: article.excerpt,
+      content: article.content,
       author: article.author,
       category: article.category,
-      tags: article.tags,
-      featured: article.featured,
-      readTime: article.readingTime,
-      imageUrl: article.coverImage,
-      coverImage: article.coverImage,
+      imageUrl: article.imageUrl,
+      sourceUrl: article.sourceUrl,
+      sourceName: article.sourceName,
       date: article.publishedAt
         ? new Date(article.publishedAt).toLocaleDateString("es-MX", {
             day: "2-digit",
             month: "long",
             year: "numeric",
           })
-        : article.originalPublishedAt
-          ? new Date(article.originalPublishedAt).toLocaleDateString("es-MX", {
-              day: "2-digit",
-              month: "long",
-              year: "numeric",
-            })
-          : "",
-      rawDate: article.publishedAt || article.originalPublishedAt || null,
+        : "",
+      rawDate: article.publishedAt,
       publishedAt: article.publishedAt,
-      originalPublishedAt: article.originalPublishedAt,
-      source: article.source,
-      sourceUrl: article.sourceUrl,
-      canonicalUrl: article.canonicalUrl,
-      seoTitle: article.seoTitle,
-      seoDescription: article.seoDescription,
-      blocks,
+      isPublished: article.isPublished,
     }
 
     return NextResponse.json(
-      { article: payload, debug: { ok: true, blockCount: blocks.length } },
+      { article: payload, debug: { ok: true } },
       {
         headers: {
-          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=600",
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
         },
       },
     )

@@ -2,23 +2,15 @@ import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
 import { notFound } from "next/navigation"
-import { ArrowLeft, Clock, Calendar } from "lucide-react"
+import { ArrowLeft, ArrowUpRight, Calendar } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { NotionBlocks } from "@/components/notion-blocks"
 import {
   getArticleBySlug,
-  getArticleBlocks,
-  getAllSlugs,
   getPublishedArticles,
-} from "@/lib/notion"
+} from "@/lib/articles"
 
-export const revalidate = 60
-
-export async function generateStaticParams() {
-  const slugs = await getAllSlugs()
-  return slugs.map((slug) => ({ slug }))
-}
+export const revalidate = 3600
 
 interface PageProps {
   params: Promise<{ slug: string }>
@@ -36,35 +28,32 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const url = `${baseUrl}/blog/${article.slug}`
 
   return {
-    title: `${article.seoTitle || article.title} | Thinko Consulting`,
-    description: article.seoDescription || article.excerpt,
-    keywords: article.tags.join(", "),
+    title: `${article.title} | Thinko Consulting`,
+    description: article.excerpt,
     authors: article.author ? [{ name: article.author }] : undefined,
     alternates: {
-      canonical: article.canonicalUrl || url,
+      canonical: url,
     },
     openGraph: {
-      title: article.seoTitle || article.title,
-      description: article.seoDescription || article.excerpt,
+      title: article.title,
+      description: article.excerpt || "",
       type: "article",
       url,
-      publishedTime: article.publishedAt,
+      publishedTime: article.publishedAt?.toISOString(),
       authors: article.author ? [article.author] : undefined,
-      tags: article.tags,
-      images: article.coverImage ? [{ url: article.coverImage }] : undefined,
+      images: article.imageUrl ? [{ url: article.imageUrl }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: article.seoTitle || article.title,
-      description: article.seoDescription || article.excerpt,
-      images: article.coverImage ? [article.coverImage] : undefined,
+      title: article.title,
+      description: article.excerpt || "",
+      images: article.imageUrl ? [article.imageUrl] : undefined,
     },
   }
 }
 
-function formatDate(dateStr: string) {
-  if (!dateStr) return ""
-  const date = new Date(dateStr)
+function formatDate(date: Date | undefined) {
+  if (!date) return ""
   return date.toLocaleDateString("es-MX", {
     day: "2-digit",
     month: "long",
@@ -80,11 +69,7 @@ export default async function ArticlePage({ params }: PageProps) {
     notFound()
   }
 
-  const [blocks, allArticles] = await Promise.all([
-    getArticleBlocks(article.id),
-    getPublishedArticles(50),
-  ])
-
+  const allArticles = await getPublishedArticles()
   const related = allArticles
     .filter((a) => a.id !== article.id && a.category === article.category)
     .slice(0, 3)
@@ -96,10 +81,10 @@ export default async function ArticlePage({ params }: PageProps) {
     "@context": "https://schema.org",
     "@type": "Article",
     headline: article.title,
-    description: article.seoDescription || article.excerpt,
-    image: article.coverImage || undefined,
-    datePublished: article.publishedAt,
-    dateModified: article.publishedAt,
+    description: article.excerpt,
+    image: article.imageUrl || undefined,
+    datePublished: article.publishedAt?.toISOString(),
+    dateModified: article.updatedAt?.toISOString(),
     author: {
       "@type": "Person",
       name: article.author || "Thinko Consulting",
@@ -178,14 +163,13 @@ export default async function ArticlePage({ params }: PageProps) {
                   </span>
                 </div>
               )}
-              {article.readingTime && (
+              {article.sourceName && (
                 <div className="flex flex-col">
-                  <span className="text-[10px] tracking-[0.3em] text-on-surface-variant uppercase font-semibold mb-1 inline-flex items-center gap-1.5">
-                    <Clock className="w-3 h-3" />
-                    Lectura
+                  <span className="text-[10px] tracking-[0.3em] text-on-surface-variant uppercase font-semibold mb-1">
+                    Fuente
                   </span>
                   <span className="text-sm font-medium text-foreground">
-                    {article.readingTime} min
+                    {article.sourceName}
                   </span>
                 </div>
               )}
@@ -193,11 +177,11 @@ export default async function ArticlePage({ params }: PageProps) {
           </div>
 
           {/* Cover image */}
-          {article.coverImage && (
+          {article.imageUrl && (
             <div className="max-w-5xl mx-auto px-6 md:px-8 my-12">
               <div className="relative aspect-[16/9] bg-slate-100 overflow-hidden">
                 <Image
-                  src={article.coverImage || "/placeholder.svg"}
+                  src={article.imageUrl}
                   alt={article.title}
                   fill
                   priority
@@ -210,31 +194,33 @@ export default async function ArticlePage({ params }: PageProps) {
 
           {/* Body */}
           <div className="max-w-3xl mx-auto px-6 md:px-8 mt-12">
-            <div className="prose-custom">
-              <NotionBlocks blocks={blocks} />
-            </div>
-
-            {/* Tags */}
-            {article.tags.length > 0 && (
-              <div className="mt-16 pt-8 border-t border-slate-200">
-                <span className="text-[10px] tracking-[0.3em] text-on-surface-variant uppercase font-semibold mb-4 block">
-                  Etiquetas
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {article.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="text-xs uppercase tracking-widest font-semibold bg-slate-100 text-foreground px-3 py-1.5"
-                    >
-                      {tag}
-                    </span>
-                  ))}
+            {article.content ? (
+              <div className="prose-custom max-w-none">
+                <div className="text-base leading-relaxed text-on-surface-variant">
+                  {article.content}
                 </div>
+              </div>
+            ) : (
+              <div className="bg-slate-50 border border-slate-200 rounded-lg p-8 mb-8">
+                <p className="text-on-surface-variant font-medium mb-3">
+                  Este artículo proviene de una fuente externa.
+                </p>
+                {article.sourceUrl && (
+                  <Link
+                    href={article.sourceUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-[#00b8b4] hover:text-[#009899] font-medium transition-colors"
+                  >
+                    Leer artículo original en {article.sourceName}
+                    <ArrowUpRight className="w-4 h-4" />
+                  </Link>
+                )}
               </div>
             )}
 
             {/* Source attribution */}
-            {article.sourceUrl && article.source && (
+            {article.sourceUrl && article.sourceName && (
               <div className="mt-12 p-6 bg-slate-50 border-l-4 border-[#00b8b4]">
                 <span className="text-[10px] tracking-[0.3em] text-on-surface-variant uppercase font-semibold mb-2 block">
                   Publicado originalmente en
@@ -245,7 +231,7 @@ export default async function ArticlePage({ params }: PageProps) {
                   rel="noopener noreferrer"
                   className="text-foreground font-medium hover:text-[#00b8b4] transition-colors"
                 >
-                  {article.source}
+                  {article.sourceName}
                 </Link>
               </div>
             )}
@@ -270,9 +256,9 @@ export default async function ArticlePage({ params }: PageProps) {
                     className="group block"
                   >
                     <div className="relative aspect-[4/3] bg-white mb-6 overflow-hidden">
-                      {rel.coverImage ? (
+                      {rel.imageUrl ? (
                         <Image
-                          src={rel.coverImage || "/placeholder.svg"}
+                          src={rel.imageUrl}
                           alt={rel.title}
                           fill
                           className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"

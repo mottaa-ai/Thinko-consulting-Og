@@ -1,7 +1,7 @@
 import { redirect } from "next/navigation"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
-import { getAllArticlesForAdmin } from "@/lib/notion"
+import { getAllArticles } from "@/lib/articles"
 import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
@@ -10,7 +10,7 @@ export default async function AdminBlogPage() {
   const current = await getSessionUser()
   if (!current) redirect("/admin/login")
 
-  const articles = await getAllArticlesForAdmin()
+  const articles = await getAllArticles()
 
   return (
     <>
@@ -31,7 +31,7 @@ export default async function AdminBlogPage() {
           <div>
             <h1 className="font-headline text-3xl font-light text-white mb-2">Publicaciones</h1>
             <p className="text-slate-400 text-sm leading-relaxed">
-              Crea y edita artículos. Se sincronizan con Notion.
+              Crea y edita artículos para el blog.
             </p>
           </div>
           <Link
@@ -48,7 +48,7 @@ export default async function AdminBlogPage() {
           </p>
         ) : (
           <div className="border border-slate-800 divide-y divide-slate-800">
-            {articles.map((a) => (
+            {articles.map((a: any) => (
               <Link
                 key={a.id}
                 href={`/admin/blog/${a.id}`}
@@ -65,12 +65,12 @@ export default async function AdminBlogPage() {
                 </div>
                 <span
                   className={`text-xs uppercase tracking-wider px-3 py-1 whitespace-nowrap ${
-                    a.status === "Publicado" || a.status === "Published"
+                    a.isPublished
                       ? "bg-[#00b8b4]/15 text-[#00b8b4]"
                       : "bg-slate-700/40 text-slate-400"
                   }`}
                 >
-                  {a.status}
+                  {a.isPublished ? "Publicado" : "Borrador"}
                 </span>
               </Link>
             ))}

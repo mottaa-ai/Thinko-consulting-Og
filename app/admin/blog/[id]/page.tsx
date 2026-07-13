@@ -2,7 +2,9 @@ import { redirect, notFound } from "next/navigation"
 import Link from "next/link"
 import { AdminHeader } from "@/components/admin/admin-header"
 import { ArticleForm } from "@/components/admin/article-form"
-import { getAdminArticleById } from "@/lib/notion"
+import { db } from "@/lib/db"
+import { articles } from "@/lib/db/schema"
+import { eq } from "drizzle-orm"
 import { getSessionUser, canManageUsers, ROLE_LABELS } from "@/lib/permissions"
 
 export const dynamic = "force-dynamic"
@@ -17,7 +19,10 @@ export default async function EditArticlePage({
   const current = await getSessionUser()
   if (!current) redirect("/admin/login")
 
-  const article = await getAdminArticleById(id)
+  const [article] = await db
+    .select()
+    .from(articles)
+    .where(eq(articles.id, parseInt(id)))
   if (!article) notFound()
 
   return (
@@ -44,17 +49,17 @@ export default async function EditArticlePage({
           Ver en el sitio →
         </a>
         <ArticleForm
-          pageId={article.id}
+          pageId={article.id.toString()}
           initial={{
             title: article.title,
             slug: article.slug,
-            author: article.author,
-            category: article.category,
-            excerpt: article.excerpt,
-            coverImage: article.coverImage ?? "",
-            status: article.status,
-            seoTitle: article.seoTitle,
-            seoDescription: article.seoDescription,
+            author: article.author ?? "",
+            category: article.category ?? "",
+            excerpt: article.excerpt ?? "",
+            coverImage: article.imageUrl ?? "",
+            status: article.isPublished ? "Publicado" : "Draft",
+            seoTitle: "",
+            seoDescription: "",
           }}
         />
       </main>

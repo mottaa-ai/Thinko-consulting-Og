@@ -4,9 +4,9 @@ import Image from "next/image"
 import { ArrowUpRight } from "lucide-react"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { getPublishedArticles } from "@/lib/notion"
+import { getPublishedArticles } from "@/lib/articles"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export const metadata: Metadata = {
   title: "Publicaciones | Thinko Consulting",
@@ -35,9 +35,9 @@ function formatDate(dateStr: string) {
 }
 
 export default async function BlogPage() {
-  const articles = await getPublishedArticles(50)
-  const featured = articles.find((a) => a.featured) || articles[0]
-  const rest = articles.filter((a) => a.id !== featured?.id)
+  const articles = await getPublishedArticles()
+  const featured = articles[0]
+  const rest = articles.slice(1)
 
   return (
     <>
@@ -79,9 +79,9 @@ export default async function BlogPage() {
                     className="group grid grid-cols-1 lg:grid-cols-2 gap-12 items-center border-t border-b border-slate-200 py-12"
                   >
                     <div className="relative aspect-[4/3] bg-slate-100 overflow-hidden">
-                      {featured.coverImage ? (
+                      {featured.imageUrl ? (
                         <Image
-                          src={featured.coverImage || "/placeholder.svg"}
+                          src={featured.imageUrl}
                           alt={featured.title}
                           fill
                           className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
@@ -101,7 +101,7 @@ export default async function BlogPage() {
                           {featured.category || "Editorial"}
                         </span>
                         <span className="text-[10px] tracking-[0.3em] text-on-surface-variant uppercase font-semibold">
-                          {formatDate(featured.publishedAt)}
+                          {featured.publishedAt ? formatDate(featured.publishedAt.toString()) : ""}
                         </span>
                       </div>
                       <h2 className="font-headline text-3xl md:text-5xl font-medium text-foreground group-hover:text-[#00b8b4] transition-colors leading-tight tracking-tight mb-6">
@@ -156,9 +156,9 @@ function ArticleCard({
   return (
     <Link href={`/blog/${article.slug}`} className="group block">
       <div className="relative aspect-[4/3] bg-slate-100 mb-6 overflow-hidden">
-        {article.coverImage ? (
+        {article.imageUrl ? (
           <Image
-            src={article.coverImage || "/placeholder.svg"}
+            src={article.imageUrl}
             alt={article.title}
             fill
             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
@@ -174,7 +174,7 @@ function ArticleCard({
         </span>
         <span className="w-1 h-1 bg-on-surface-variant rounded-full" />
         <span className="text-[10px] tracking-[0.3em] text-on-surface-variant uppercase font-semibold">
-          {formatDate(article.publishedAt)}
+          {article.publishedAt ? formatDate(article.publishedAt.toString()) : ""}
         </span>
       </div>
       <h3 className="font-headline text-xl md:text-2xl font-medium text-foreground group-hover:text-[#00b8b4] transition-colors leading-snug tracking-tight mb-3">

@@ -1,6 +1,6 @@
 "use server"
 
-import { createArticle, updateArticle, type ArticleInput } from "@/lib/notion"
+import { createArticle, updateArticle } from "@/lib/articles"
 import { revalidatePath } from "next/cache"
 import { getSessionUser, canEditContent } from "@/lib/permissions"
 
@@ -10,32 +10,46 @@ async function requireUser() {
   return user
 }
 
-export async function createArticleAction(input: ArticleInput): Promise<{ ok: boolean; id?: string; error?: string }> {
+interface ArticleInput {
+  slug: string
+  title: string
+  excerpt?: string
+  content?: string
+  author?: string
+  category?: string
+  imageUrl?: string
+  sourceUrl?: string
+  sourceName?: string
+  publishedAt?: Date
+  isPublished?: boolean
+}
+
+export async function createArticleAction(input: ArticleInput): Promise<{ ok: boolean; id?: number; error?: string }> {
   try {
     await requireUser()
-    const page = await createArticle(input)
+    const article = await createArticle(input)
     revalidatePath("/")
     revalidatePath("/blog")
-    return { ok: true, id: page?.id }
+    return { ok: true, id: article?.id }
   } catch (e) {
-    console.log("[v0] createArticleAction error:", e)
+    console.error("[v0] createArticleAction error:", e)
     return { ok: false, error: e instanceof Error ? e.message : "Error al crear el artículo." }
   }
 }
 
 export async function updateArticleAction(
-  pageId: string,
-  input: ArticleInput,
+  articleId: number,
+  input: Partial<ArticleInput>,
 ): Promise<{ ok: boolean; error?: string }> {
   try {
     await requireUser()
-    await updateArticle(pageId, input)
+    await updateArticle(articleId, input)
     revalidatePath("/")
     revalidatePath("/blog")
-    revalidatePath(`/blog/${pageId}`)
+    revalidatePath(`/blog/${input.slug}`)
     return { ok: true }
   } catch (e) {
-    console.log("[v0] updateArticleAction error:", e)
+    console.error("[v0] updateArticleAction error:", e)
     return { ok: false, error: e instanceof Error ? e.message : "Error al actualizar el artículo." }
   }
 }

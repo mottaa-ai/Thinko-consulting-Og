@@ -1,4 +1,4 @@
-import { pgTable, text, timestamp, boolean, serial, jsonb, unique } from "drizzle-orm/pg-core"
+import { pgTable, text, timestamp, boolean, serial, jsonb, unique, integer } from "drizzle-orm/pg-core"
 
 // ---- Better Auth tables (do not rename columns) ----
 export const user = pgTable("user", {
@@ -69,3 +69,46 @@ export const siteContent = pgTable(
     sectionLocaleUnique: unique().on(t.section, t.locale),
   }),
 )
+
+// Blog articles from CMS (imported from CSV or managed manually)
+export const articles = pgTable("articles", {
+  id: serial("id").primaryKey(),
+  slug: text("slug").notNull().unique(),
+  title: text("title").notNull(),
+  excerpt: text("excerpt"),
+  content: text("content"), // Optional: full article body (can be left empty if using excerpt + source link)
+  author: text("author"),
+  category: text("category"),
+  imageUrl: text("imageUrl"),
+  sourceUrl: text("sourceUrl"), // Original article source
+  sourceName: text("sourceName"), // e.g., "La Razón", "ACE Prensa"
+  publishedAt: timestamp("publishedAt"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  updatedAt: timestamp("updatedAt").notNull().defaultNow(),
+  updatedBy: text("updatedBy"),
+  isPublished: boolean("isPublished").notNull().default(false),
+})
+
+// Contact form submissions
+export const contacts = pgTable("contacts", {
+  id: serial("id").primaryKey(),
+  name: text("name").notNull(),
+  email: text("email").notNull(),
+  subject: text("subject"),
+  message: text("message").notNull(),
+  phone: text("phone"),
+  company: text("company"),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+  read: boolean("read").notNull().default(false),
+})
+
+// Sync metadata for article imports (tracks CSV import state)
+export const articleSyncs = pgTable("article_syncs", {
+  id: serial("id").primaryKey(),
+  sourceFile: text("sourceFile").notNull(), // e.g., "csv_import_2026_01_13"
+  totalCount: integer("totalCount").notNull(),
+  importedCount: integer("importedCount").notNull().default(0),
+  failedCount: integer("failedCount").notNull().default(0),
+  syncedAt: timestamp("syncedAt").notNull().defaultNow(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+})

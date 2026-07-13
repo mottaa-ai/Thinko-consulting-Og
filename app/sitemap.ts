@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next"
-import { getPublishedArticles } from "@/lib/notion"
+import { getPublishedArticles } from "@/lib/articles"
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.thinkoconsulting.com"
@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     },
   ]
 
-  const articles = await getPublishedArticles(100)
+  const articles = await getPublishedArticles()
   const articleRoutes: MetadataRoute.Sitemap = articles.map((article) => ({
     url: `${baseUrl}/blog/${article.slug}`,
     lastModified: article.publishedAt ? new Date(article.publishedAt) : new Date(),

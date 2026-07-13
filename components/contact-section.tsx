@@ -5,8 +5,6 @@ import Link from "next/link"
 import { Send, CheckCircle, AlertCircle } from "lucide-react"
 import { useTranslation } from "@/lib/i18n"
 import { submitContactForm } from "@/actions/contact"
-import { db } from "@/lib/firebase"
-import { collection, addDoc } from "firebase/firestore"
 
 type FormStatus = "idle" | "submitting" | "success" | "error"
 
@@ -25,16 +23,13 @@ export function ContactSection() {
     setStatus("submitting")
     
     try {
-      // Save to Firebase Firestore
-      await addDoc(collection(db, "contacts"), {
-        ...formData,
-        timestamp: new Date().toISOString(),
-        createdAt: new Date(),
-        source: "thinko-consulting-website",
-      })
+      // Submit form - saves to Neon DB and sends email
+      const result = await submitContactForm(formData)
       
-      // Also send to webhook
-      await submitContactForm(formData)
+      if (!result.success) {
+        setStatus("error")
+        return
+      }
       
       setStatus("success")
       setFormData({ name: "", email: "", company: "", message: "" })

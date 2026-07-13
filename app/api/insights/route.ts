@@ -1,30 +1,11 @@
 import { NextResponse } from "next/server"
-import { getPublishedArticles } from "@/lib/notion"
+import { getFeaturedArticles } from "@/lib/articles"
 
-export const revalidate = 60
+export const revalidate = 3600
 
 export async function GET() {
-  const hasApiKey = !!process.env.NOTION_API_KEY
-  const hasDbId = !!process.env.NOTION_CMS_DB_ID
-
-  if (!hasApiKey || !hasDbId) {
-    return NextResponse.json(
-      {
-        articles: [],
-        source: "notion",
-        debug: {
-          ok: false,
-          error: "Missing environment variables",
-          NOTION_API_KEY: hasApiKey,
-          NOTION_CMS_DB_ID: hasDbId,
-        },
-      },
-      { status: 200 },
-    )
-  }
-
   try {
-    const articles = await getPublishedArticles(6)
+    const articles = await getFeaturedArticles(6)
 
     const formatted = articles.map((a) => ({
       id: a.id,
@@ -37,27 +18,19 @@ export async function GET() {
             month: "short",
             year: "numeric",
           })
-        : a.originalPublishedAt
-          ? new Date(a.originalPublishedAt).toLocaleDateString("es-MX", {
-              day: "2-digit",
-              month: "short",
-              year: "numeric",
-            })
-          : "",
-      rawDate: a.publishedAt || a.originalPublishedAt || null,
+        : "",
+      rawDate: a.publishedAt || null,
       category: a.category || "Editorial",
       author: a.author,
       excerpt: a.excerpt,
-      readTime: a.readingTime,
-      featured: a.featured,
-      imageUrl: a.coverImage,
-      coverImage: a.coverImage,
+      imageUrl: a.imageUrl,
+      sourceName: a.sourceName,
     }))
 
     return NextResponse.json(
       {
         articles: formatted,
-        source: "notion",
+        source: "neon",
         count: formatted.length,
         debug: {
           ok: true,
@@ -66,7 +39,7 @@ export async function GET() {
       },
       {
         headers: {
-          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=600",
+          "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=7200",
         },
       },
     )
@@ -74,7 +47,7 @@ export async function GET() {
     return NextResponse.json(
       {
         articles: [],
-        source: "notion",
+        source: "neon",
         count: 0,
         debug: {
           ok: false,

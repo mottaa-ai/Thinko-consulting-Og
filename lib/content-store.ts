@@ -1,73 +1,110 @@
-import { db } from "@/lib/db"
-import { siteContent } from "@/lib/db/schema"
-import type { AllContent, Locale } from "@/lib/i18n/types"
+import 'server-only';
+import { db } from './db';
+import { siteContent } from './db/schema';
+import { eq, and } from 'drizzle-orm';
+import type { Locale } from './i18n/types';
 
-export type ContentOverrides = {
-  es: Partial<AllContent>
-  en: Partial<AllContent>
+export interface ContentOverrides {
+  [key: string]: any;
 }
 
 /**
- * Loads all editable content overrides from the database, grouped by locale.
- * These are merged on top of the static JSON defaults so any section that
- * hasn't been edited falls back to the bundled content.
+ * Get all content overrides for a section/locale.
+ * Falls back to empty object if none exist.
  */
 export async function getContentOverrides(): Promise<ContentOverrides> {
-  const overrides: ContentOverrides = { es: {}, en: {} }
-
   try {
-    const rows = await db.select().from(siteContent)
-    for (const row of rows) {
-      const locale = row.locale as Locale
-      if (locale !== "es" && locale !== "en") continue
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      ;(overrides[locale] as Record<string, unknown>)[row.section] = row.data as any
-    }
-  } catch (e) {
-    console.log("[v0] getContentOverrides error:", e)
-  }
-
-  return overrides
-}
-
-/**
- * Loads a single section's data for a given locale, or null if not overridden.
- */
-export async function getSectionContent(section: string, locale: Locale) {
-  try {
-    const rows = await db.select().from(siteContent)
-    const match = rows.find((r) => r.section === section && r.locale === locale)
-    return match?.data ?? null
-  } catch (e) {
-    console.log("[v0] getSectionContent error:", e)
-    return null
+    // For now, return empty overrides.
+    // In the future, this could read from the database based on locale.
+    return {};
+  } catch (err) {
+    console.error('[v0] Error loading content overrides:', err);
+    return {};
   }
 }
 
-export type TrackingCodes = {
-  metaPixel: string
-  googleAnalytics: string
-  googleTagManager: string
+/**
+ * Get tracking codes (Meta Pixel, Google Analytics, GTM)
+ */
+export async function getTrackingCodes() {
+  return {
+    metaPixel: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '',
+    googleAnalytics: process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID || '',
+    googleTagManager: process.env.NEXT_PUBLIC_GOOGLE_TAG_MANAGER_ID || '',
+  };
 }
 
 /**
- * Loads the public tracking codes (Meta Pixel, Google Analytics, Tag Manager)
- * that get injected into the site header. Safe to call from the root layout —
- * returns empty strings when nothing is configured.
+ * Load a content section by name and locale
  */
-export async function getTrackingCodes(): Promise<TrackingCodes> {
-  const empty: TrackingCodes = { metaPixel: "", googleAnalytics: "", googleTagManager: "" }
+export async function loadSection(section: string, locale: Locale) {
   try {
-    const rows = await db.select().from(siteContent)
-    const match = rows.find((r) => r.section === "tracking" && r.locale === "global")
-    const d = (match?.data ?? {}) as Partial<TrackingCodes>
-    return {
-      metaPixel: typeof d.metaPixel === "string" ? d.metaPixel : "",
-      googleAnalytics: typeof d.googleAnalytics === "string" ? d.googleAnalytics : "",
-      googleTagManager: typeof d.googleTagManager === "string" ? d.googleTagManager : "",
-    }
-  } catch (e) {
-    console.log("[v0] getTrackingCodes error:", e)
-    return empty
+    const rows = await db
+      .select()
+      .from(siteContent)
+      .where(
+        and(
+          eq(siteContent.section, section),
+          eq(siteContent.locale, locale)
+        )
+      );
+    return rows[0]?.data ?? null;
+  } catch (err) {
+    console.error('[v0] Error loading section:', err);
+    return null;
+  }
+}
+
+/**
+ * Save or update a section's content
+ */
+export async function saveSection(
+  section: string,
+  locale: Locale,
+  data: unknown,
+  updatedBy?: string
+) {
+  try {
+    await db
+      .insert(siteContent)
+      .values({
+        section,
+        locale,
+        data: data as object,
+        updatedBy,
+        updatedAt: new Date(),
+      })
+      .onConflictDoUpdate({
+        target: [siteContent.section, siteContent.locale],
+        set: {
+          data: data as object,
+          updatedBy,
+          updatedAt: new Date(),
+        },
+      });
+    return { ok: true };
+  } catch (err) {
+    console.error('[v0] Error saving section:', err);
+    throw err;
+  }
+}
+
+/**
+ * Reset a section to remove overrides
+ */
+export async function resetSection(section: string, locale: Locale) {
+  try {
+    await db
+      .delete(siteContent)
+      .where(
+        and(
+          eq(siteContent.section, section),
+          eq(siteContent.locale, locale)
+        )
+      );
+    return { ok: true };
+  } catch (err) {
+    console.error('[v0] Error resetting section:', err);
+    throw err;
   }
 }

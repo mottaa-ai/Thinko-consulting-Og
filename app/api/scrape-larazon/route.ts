@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server"
 import * as cheerio from "cheerio"
-import { createDraftArticle, findArticleBySourceUrl } from "@/lib/notion"
+import { createArticle } from "@/lib/articles"
+import { getArticleBySlug } from "@/lib/articles"
 
 export const dynamic = "force-dynamic"
 export const maxDuration = 60
@@ -156,16 +157,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 })
   }
 
-  const apiKey = process.env.NOTION_API_KEY
-  const dbId = process.env.NOTION_CMS_DB_ID
-
-  if (!apiKey || !dbId) {
-    return NextResponse.json(
-      { error: "Missing NOTION_API_KEY or NOTION_CMS_DB_ID" },
-      { status: 500 },
-    )
-  }
-
   const url = new URL(request.url)
   const dryRun = url.searchParams.get("dry") === "1"
 
@@ -190,7 +181,12 @@ export async function GET(request: Request) {
 
     for (const article of scraped) {
       try {
-        const exists = await findArticleBySourceUrl(article.url)
+        // Generate slug from title
+        const baseSlug = slugify(article.title)
+        let slug = baseSlug
+        
+        // Check if article already exists
+        const exists = await getArticleBySlug(slug)
         if (exists) {
           results.push({
             title: article.title,
@@ -200,23 +196,24 @@ export async function GET(request: Request) {
           continue
         }
 
-        let isoDate: string | undefined
+        let publishDate: Date | undefined
         if (article.date) {
           try {
-            isoDate = new Date(article.date).toISOString()
+            publishDate = new Date(article.date)
           } catch {}
         }
 
-        await createDraftArticle({
+        // Create draft article in Neon
+        await createArticle({
           title: article.title.slice(0, 200),
-          slug: slugify(article.title),
+          slug,
           author: "Alejandro G. Motta",
-          source: "La Razón",
+          sourceName: "La Razón",
           sourceUrl: article.url,
-          canonicalUrl: article.url,
           excerpt: article.excerpt,
-          coverImage: article.image,
-          originalPublishedAt: isoDate,
+          imageUrl: article.image,
+          publishedAt: publishDate,
+          isPublished: false, // Save as draft
         })
 
         results.push({
