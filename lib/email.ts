@@ -6,6 +6,79 @@ const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "noreply@thinkoconsulting.co
 const ADMIN_EMAIL = "amotta@thinkoconsulting.com"
 const SITE_URL = "https://thinkoconsulting.com"
 
+// ── Password Reset ─────────────────────────────────────────────────────────────
+
+export async function sendPasswordResetEmail({
+  toEmail,
+  userName,
+  resetUrl,
+}: {
+  toEmail: string
+  userName: string
+  resetUrl: string
+}): Promise<{ success: boolean; error?: string }> {
+  const resend = new Resend(process.env.RESEND_API_KEY)
+  try {
+    const result = await resend.emails.send({
+      from: FROM_EMAIL,
+      to: toEmail,
+      subject: "Restablecer contraseña — Thinko Consulting",
+      html: buildResetPasswordHtml({ userName, resetUrl }),
+    })
+    if (result.error) {
+      console.error("[v0] Resend reset email error:", result.error)
+      return { success: false, error: "No se pudo enviar el email de recuperación." }
+    }
+    return { success: true }
+  } catch (e) {
+    const message = e instanceof Error ? e.message : "Error desconocido"
+    console.error("[v0] sendPasswordResetEmail error:", message)
+    return { success: false, error: message }
+  }
+}
+
+function buildResetPasswordHtml({ userName, resetUrl }: { userName: string; resetUrl: string }): string {
+  return `<!DOCTYPE html>
+<html lang="es">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"></head>
+<body style="margin:0;padding:0;background:#f1f5f9;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="padding:40px 16px">
+    <tr><td align="center">
+      <table width="600" cellpadding="0" cellspacing="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:4px;overflow:hidden">
+        <tr>
+          <td style="background:#0f172a;padding:28px 36px;border-bottom:3px solid #00b8b4">
+            <p style="margin:0;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#00b8b4;font-weight:600">Thinko Consulting</p>
+            <h1 style="margin:6px 0 0;font-size:20px;font-weight:700;color:#ffffff">Restablecer contraseña</h1>
+          </td>
+        </tr>
+        <tr>
+          <td style="padding:28px 36px">
+            <p style="margin:0 0 20px;color:#334155;font-size:14px;line-height:1.7">
+              Hola <strong>${userName}</strong>, recibimos una solicitud para restablecer la contraseña de tu cuenta.
+              Haz clic en el botón a continuación para elegir una nueva contraseña.
+            </p>
+            <a href="${resetUrl}" style="display:inline-block;background:#00b8b4;color:#0f172a;font-weight:700;font-size:13px;letter-spacing:.08em;text-transform:uppercase;padding:12px 28px;text-decoration:none;border-radius:2px">Cambiar contraseña</a>
+            <p style="margin:24px 0 0;font-size:12px;color:#94a3b8;line-height:1.6">
+              Si no solicitaste este cambio, puedes ignorar este correo. El enlace expira en 1 hora.<br>
+              Si el botón no funciona, copia este enlace en tu navegador:<br>
+              <a href="${resetUrl}" style="color:#00b8b4;word-break:break-all">${resetUrl}</a>
+            </p>
+          </td>
+        </tr>
+        <tr>
+          <td style="background:#f8fafc;padding:14px 36px;border-top:1px solid #e2e8f0">
+            <p style="margin:0;font-size:12px;color:#94a3b8"><a href="${SITE_URL}" style="color:#00b8b4;text-decoration:none">thinkoconsulting.com</a></p>
+          </td>
+        </tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`
+}
+
+// ── User Credentials ───────────────────────────────────────────────────────────
+
 export interface SendUserCredentialsEmailProps {
   toEmail: string
   userName: string

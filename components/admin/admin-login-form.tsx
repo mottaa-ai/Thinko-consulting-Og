@@ -67,9 +67,14 @@ export function AdminLoginForm() {
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="password" className="text-slate-300 text-xs uppercase tracking-wider">
-              Contraseña
-            </Label>
+            <div className="flex items-center justify-between">
+              <Label htmlFor="password" className="text-slate-300 text-xs uppercase tracking-wider">
+                Contraseña
+              </Label>
+              <Link href="/admin/olvide-contrasena" className="text-xs text-[#00b8b4] hover:underline">
+                ¿Olvidaste tu contraseña?
+              </Link>
+            </div>
             <Input
               id="password"
               type="password"
