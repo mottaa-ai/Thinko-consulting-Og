@@ -30,7 +30,7 @@ export function ServicesSection() {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-px bg-slate-200">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-0 bg-slate-200">
         {t.services.map((service, index) => (
           <Link
             key={service.id}
@@ -67,7 +67,7 @@ function ServiceCard({
   icon: React.ComponentType<{ className?: string }>
 }) {
   return (
-    <div className="group p-12 bg-white hover:bg-[#0f172a] transition-colors duration-500 min-h-[520px] flex flex-col justify-between relative overflow-hidden cursor-pointer">
+    <div className="group p-12 bg-white hover:bg-[#0f172a] transition-colors duration-500 h-full flex flex-col justify-between relative overflow-hidden cursor-pointer">
       {/* Icon */}
       <div className="absolute top-6 right-6 transition-all duration-500">
         <div className="w-12 h-12 flex items-center justify-center border border-slate-300 group-hover:border-[#00b8b4] group-hover:bg-[#00b8b4]/10 transition-all">
