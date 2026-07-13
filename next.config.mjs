@@ -1,3 +1,4 @@
+// Updated: CMS migration complete - Neon DB connected
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   typescript: {

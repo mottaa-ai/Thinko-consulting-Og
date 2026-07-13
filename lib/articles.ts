@@ -1,7 +1,7 @@
 import 'server-only';
 import { db } from './db/index';
 import { articles } from './db/schema';
-import { eq, desc, and, asc } from 'drizzle-orm';
+import { eq, desc, and } from 'drizzle-orm';
 
 export interface Article {
   id: number;
