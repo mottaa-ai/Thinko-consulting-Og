@@ -15,7 +15,7 @@ export interface AdminUserRow {
 export const ROLE_LABELS: Record<Role, string> = {
   superadmin: "Superadministrador",
   admin: "Administrador",
-  content_manager: "Gestor de contenido",
+  content_manager: "Editor de contenidos",
 }
 
 export const ALL_ROLES: Role[] = ["superadmin", "admin", "content_manager"]
