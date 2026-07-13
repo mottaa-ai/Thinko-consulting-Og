@@ -3,7 +3,9 @@
 import { Resend } from "resend"
 import { createContact } from "@/lib/contacts"
 
-const FROM_EMAIL = "formulario@thinkoconsulting.com"
+// Use the verified Resend domain. Until thinkoconsulting.com is verified in Resend,
+// change this to "onboarding@resend.dev" for testing (free Resend sandbox sender).
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"
 const CONTACT_EMAIL = "amotta@thinkoconsulting.com"
 const WEBHOOK_URL = "https://hook.us2.make.com/r8r6fwmz5z0421iyoazgcf8rlfxc105y"
 
