@@ -77,8 +77,8 @@ function generateEmailHTML(data: ContactFormData): string {
 
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
   try {
-    // Save to database first
-    await createContact({
+    // Save to database first (optional - continue even if this fails)
+    const contactResult = await createContact({
       name: data.name,
       email: data.email,
       company: data.company,
@@ -86,6 +86,10 @@ export async function submitContactForm(data: ContactFormData): Promise<{ succes
       phone: data.phone,
       subject: data.subject,
     })
+    
+    if (!contactResult) {
+      console.warn("[v0] Failed to save contact to database, continuing with email...")
+    }
 
     // Send email via Resend
     const emailResult = await resend.emails.send({

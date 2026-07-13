@@ -46,7 +46,9 @@ export async function updateArticleAction(
     await updateArticle(articleId, input)
     revalidatePath("/")
     revalidatePath("/blog")
-    revalidatePath(`/blog/${input.slug}`)
+    if (input.slug) {
+      revalidatePath(`/blog/${input.slug}`)
+    }
     return { ok: true }
   } catch (e) {
     console.error("[v0] updateArticleAction error:", e)
