@@ -2,9 +2,7 @@
 
 import { Resend } from "resend"
 
-// Use the verified Resend domain. Until thinkoconsulting.com is verified in Resend,
-// change this to "onboarding@resend.dev" for testing.
-const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "onboarding@resend.dev"
+const FROM_EMAIL = process.env.RESEND_FROM_EMAIL ?? "noreply@thinkoconsulting.com"
 const ADMIN_EMAIL = "amotta@thinkoconsulting.com"
 const SITE_URL = "https://thinkoconsulting.com"
 
