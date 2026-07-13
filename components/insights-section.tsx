@@ -15,8 +15,7 @@ interface Article {
   category: string
   author?: string
   excerpt?: string
-  coverImage?: string | null
-  imageUrl?: string
+  imageUrl?: string | null
 }
 
 const fetcher = (url: string) => fetch(url).then((r) => r.json())
@@ -87,9 +86,9 @@ function InsightCard({ article }: { article: Article }) {
       className="group block"
     >
       <div className="relative aspect-[16/10] bg-slate-100 mb-6 overflow-hidden">
-        {article.coverImage ? (
+        {article.imageUrl ? (
           <Image
-            src={article.coverImage || "/placeholder.svg"}
+            src={article.imageUrl}
             alt={article.title}
             fill
             className="object-cover grayscale group-hover:grayscale-0 transition-all duration-700"
