@@ -3,7 +3,6 @@
 import { Resend } from "resend"
 import { createContact } from "@/lib/contacts"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
 const WEBHOOK_URL = "https://hook.us2.make.com/r8r6fwmz5z0421iyoazgcf8rlfxc105y"
 const CONTACT_EMAIL = "amotta@thinkoconsulting.com"
 
@@ -76,6 +75,7 @@ function generateEmailHTML(data: ContactFormData): string {
 }
 
 export async function submitContactForm(data: ContactFormData): Promise<{ success: boolean; error?: string }> {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   try {
     // Save to database first (optional - continue even if this fails)
     const contactResult = await createContact({

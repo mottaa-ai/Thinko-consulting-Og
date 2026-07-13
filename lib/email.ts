@@ -4,8 +4,6 @@ import { Resend } from "resend"
 import { UserCredentialsEmail } from "@/lib/emails/user-credentials"
 import { render } from "@react-email/components"
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 export interface SendUserCredentialsEmailProps {
   toEmail: string
   userName: string
@@ -25,6 +23,7 @@ export async function sendUserCredentialsEmail({
   adminUrl,
   siteUrl,
 }: SendUserCredentialsEmailProps): Promise<{ success: boolean; error?: string }> {
+  const resend = new Resend(process.env.RESEND_API_KEY)
   try {
     const html = await render(
       UserCredentialsEmail({
